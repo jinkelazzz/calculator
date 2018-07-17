@@ -187,8 +187,6 @@ public abstract class BaseVolatilitySkew implements Serializable {
     private VolatilitySkewParams volatilitySkewParams;
     private RangeParams rangeParams;
 
-    private static final SingleOptionAnalysisCalculator CALCULATOR = new SingleOptionAnalysisCalculator();
-
     public BaseUnderlying getUnderlying() {
         return underlying;
     }
@@ -212,9 +210,10 @@ public abstract class BaseVolatilitySkew implements Serializable {
     }
 
     public void updateImpliedVolatility() {
+        SingleOptionAnalysisCalculator calculator = new SingleOptionAnalysisCalculator();
         for (BaseSingleOption option : optionList) {
-            CALCULATOR.setOption(option);
-            CALCULATOR.calculateImpliedVolatility();
+            calculator.setOption(option);
+            calculator.calculateImpliedVolatility();
         }
     }
 
@@ -247,8 +246,20 @@ public abstract class BaseVolatilitySkew implements Serializable {
         return underlying.getFutureValue(t);
     }
 
-    private double getSyntheticForwardPrice() {
+    double getSyntheticForwardPrice() {
         return syntheticForwardParams.syntheticForward(getAtmForward());
+    }
+
+    double getLogMoneyness(BaseSingleOption option) {
+        return Math.log(option.getVanillaOptionParams().getStrikePrice() / getSyntheticForwardPrice());
+    }
+
+    boolean isOutOfMoney(BaseSingleOption option) {
+        double syntheticForward = getSyntheticForwardPrice();
+        //(call && k > s) || (put && k < s)
+        return option.getVanillaOptionParams().isOptionTypeCall() ?
+                option.getVanillaOptionParams().getStrikePrice() > syntheticForward :
+                option.getVanillaOptionParams().getStrikePrice() < syntheticForward;
     }
 
     double getCurrentVolatility() {
@@ -262,16 +273,13 @@ public abstract class BaseVolatilitySkew implements Serializable {
     List<Double> transformStrike() {
         List<Double> logStrikeList = new ArrayList<>(optionList.size());
         double synPrice = getSyntheticForwardPrice();
-        double k;
         for (BaseSingleOption option : optionList) {
-            k = option.getVanillaOptionParams().getStrikePrice();
-            logStrikeList.add(Math.log(k / synPrice));
+            logStrikeList.add(Math.log(option.getVanillaOptionParams().getStrikePrice() / synPrice));
         }
         return logStrikeList;
     }
 
-
-    private boolean isAtMiddleRange(double logMoneyness) {
+    boolean isAtMiddleRange(double logMoneyness) {
         return logMoneyness <= rangeParams.getUpCutoff() && logMoneyness >= rangeParams.getDownCutoff();
     }
 
@@ -332,7 +340,6 @@ public abstract class BaseVolatilitySkew implements Serializable {
         double slopeAtCutoff = getSlopeInMiddle(downCutoff);
         return getRangeParams().volatilityAtDownAffineRange(logMoneyness, volAtCutoff, slopeAtCutoff);
     }
-
 
     double getVolatility(double logMoneyness) {
         if(isAtUpSmoothingRange(logMoneyness)) {
