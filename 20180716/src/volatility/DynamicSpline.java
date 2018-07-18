@@ -140,6 +140,7 @@ class SmoothSpline implements Serializable {
 }
 
 /**
+ * @reference ORC quant guide;
  * @author liangcy
  */
 public class DynamicSpline extends BaseVolatilitySkew implements Serializable {
@@ -157,8 +158,6 @@ public class DynamicSpline extends BaseVolatilitySkew implements Serializable {
         this.mu = mu;
     }
 
-    private static final String VOLATILITY = "volatility";
-    private static final String SLOPE = "slope";
     private double lambda() {
         return 1.0 / (1.5 * mu + 1);
     }
@@ -181,7 +180,6 @@ public class DynamicSpline extends BaseVolatilitySkew implements Serializable {
 
 
     /**
-     *
      * @return [0]: log moneyness, [1]: implied volatility, [2]: vega(weight)
      */
     private double[][] getSplinePoints() {
@@ -235,23 +233,17 @@ public class DynamicSpline extends BaseVolatilitySkew implements Serializable {
         return eps;
     }
 
-
-    /**
-     * @reference ORC quant guide;
-     * @param logMoneyness log(k/s)
-     * @return
-     */
     @Override
     double getVolatilityInMiddle(double logMoneyness) {
-        return spline(logMoneyness, VOLATILITY);
+        return spline(logMoneyness)[0];
     }
 
     @Override
     double getSlopeInMiddle(double logMoneyness) {
-        return spline(logMoneyness, SLOPE);
+        return spline(logMoneyness)[1];
     }
 
-    private double spline(double logMoneyness, String type) {
+    private double[] spline(double logMoneyness) {
         int maxIter = 20;
         double[][] splinePoints = getSplinePoints();
         double[] logMoneynessList = splinePoints[0];
@@ -279,10 +271,9 @@ public class DynamicSpline extends BaseVolatilitySkew implements Serializable {
             currentSlope = getCurrentSlope() + smoothSpline.getSplineSlope(0);
             eps = getEps(logMoneynessList, volatilityList, currentVolatility, currentSlope);
         }
-        if(VOLATILITY.equals(type)) {
-            return currentVolatility + currentSlope * logMoneyness + smoothSpline.getSplinePoint(logMoneyness);
-        } else {
-            return currentSlope + smoothSpline.getSplineSlope(logMoneyness);
-        }
+
+        double volatility = currentVolatility + currentSlope * logMoneyness + smoothSpline.getSplinePoint(logMoneyness);
+        double slope = currentSlope + smoothSpline.getSplineSlope(logMoneyness);
+        return new double[] {volatility, slope};
     }
 }
