@@ -246,7 +246,7 @@ public abstract class BaseVolatilitySkew implements Serializable {
         return underlying.getFutureValue(t);
     }
 
-    double getSyntheticForwardPrice() {
+    private double getSyntheticForwardPrice() {
         return syntheticForwardParams.syntheticForward(getAtmForward());
     }
 
