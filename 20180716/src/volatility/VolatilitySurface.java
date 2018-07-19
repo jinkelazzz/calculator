@@ -11,6 +11,8 @@ import java.io.Serializable;
 
 /**
  * @author liangcy
+ * volatility surface = [timeList.length][moneyness.length]
+ * 第一维坐标是时间 第二维是moneyness
  */
 public class VolatilitySurface implements Serializable {
     private double[][] volSurface;
@@ -63,9 +65,9 @@ public class VolatilitySurface implements Serializable {
     }
 
     public VolatilitySurface(double volatility) {
-        volSurface = new double[moneynessList.length][timeList.length];
-        for (int i = 0; i < moneynessList.length; i++) {
-            for (int j = 0; j < timeList.length; j++) {
+        volSurface = new double[timeList.length][moneynessList.length];
+        for (int i = 0; i < timeList.length; i++) {
+            for (int j = 0; j < moneynessList.length; j++) {
                 volSurface[i][j] = volatility;
             }
         }
@@ -93,33 +95,59 @@ public class VolatilitySurface implements Serializable {
         return calculator.getResult();
     }
 
-    public boolean isValidSurface() {
+    /**
+     * 检查任意一维有无null值
+     * @return
+     */
+    private boolean isNullSurface() {
         if(volSurface == null) {
-            return false;
+            return true;
         }
+        for (double[] moneyness : volSurface) {
+            if(moneyness == null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean hasEnoughPoints() {
         int minLength = 5;
-        if(timeList.length < minLength || moneynessList.length < minLength) {
+        return timeList.length >= minLength && moneynessList.length >= minLength;
+    }
+
+    private boolean isSurfaceMatch() {
+        if(isNullSurface()) {
             return false;
         }
-        if(volSurface.length != moneynessList.length || volSurface[0].length != timeList.length) {
+        if(volSurface.length != timeList.length) {
             return false;
+        }
+        for (double[] moneyness : volSurface) {
+            if(moneyness.length != moneynessList.length) {
+                return false;
+            }
         }
         return true;
     }
 
+    public boolean isValidSurface() {
+        return (!isNullSurface()) && hasEnoughPoints() && isSurfaceMatch();
+    }
+
     public VolatilitySurface hestonVolatilitySurface(Heston heston, BaseUnderlying underlying,
                                                      double initialVolatility) {
-        volSurface = new double[moneynessList.length][timeList.length];
+        volSurface = new double[timeList.length][moneynessList.length];
         EuropeanOption option = new EuropeanOption();
         option.setHestonParams(heston);
         option.setUnderlying(underlying);
         double s = underlying.getSpotPrice();
         option.getVanillaOptionParams().setVolatility(initialVolatility);
-        for (int i = 0; i < moneynessList.length; i++) {
-            double moneyness = moneynessList[i];
-            for (int j = 0; j < timeList.length; j++) {
+        for (int i = 0; i < timeList.length; i++) {
+            option.getVanillaOptionParams().setTargetPrice(timeList[i]);
+            for (int j = 0; j < moneynessList.length; j++) {
+                double moneyness = moneynessList[j];
                 option.getVanillaOptionParams().setStrikePrice(s * moneyness);
-                option.getVanillaOptionParams().setTargetPrice(timeList[j]);
                 volSurface[i][j] = hestonImpliedVolatility(option);
             }
         }
@@ -127,16 +155,16 @@ public class VolatilitySurface implements Serializable {
     }
 
     public VolatilitySurface sabrVolatilitySurface(Sabr sabr, BaseUnderlying underlying, double initialVolatility) {
-        volSurface = new double[moneynessList.length][timeList.length];
+        volSurface = new double[timeList.length][moneynessList.length];
         EuropeanOption option = new EuropeanOption();
         option.setUnderlying(underlying);
         option.getVanillaOptionParams().setVolatility(initialVolatility);
         double s = underlying.getSpotPrice();
-        for (int i = 0; i < moneynessList.length; i++) {
-            double moneyness = moneynessList[i];
-            for (int j = 0; j < timeList.length; j++) {
+        for (int i = 0; i < timeList.length; i++) {
+            option.getVanillaOptionParams().setTargetPrice(timeList[i]);
+            for (int j = 0; j < moneynessList.length; j++) {
+                double moneyness = moneynessList[j];
                 option.getVanillaOptionParams().setStrikePrice(s * moneyness);
-                option.getVanillaOptionParams().setTargetPrice(timeList[j]);
                 sabr.setOption(option);
                 volSurface[i][j] = sabr.sabrVolatility();
             }
