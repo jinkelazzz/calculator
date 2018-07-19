@@ -157,6 +157,9 @@ class BsCalculator {
     }
 }
 
+/**
+ * @author liangcy
+ */
 class BawCalculator implements RealRootDerivFunction {
     private AmericanOption option;
 
@@ -201,7 +204,7 @@ class BawCalculator implements RealRootDerivFunction {
         realRoot.setTolerance(iterationParams.getTol());
         realRoot.setIterMax(iterationParams.getIterations());
         realRoot.setEstimate(estimate());
-        return realRoot.newtonRaphson(this::function);
+        return realRoot.newtonRaphson(this);
     }
 
     private double a(double boundary) {
@@ -271,7 +274,6 @@ public class AmericanOption extends BaseSingleOption implements Serializable {
 
     /**
      * 其实这里是baw模型
-     *
      * @return baw()
      */
     @Override
@@ -296,20 +298,17 @@ public class AmericanOption extends BaseSingleOption implements Serializable {
     }
 
     /**
-     * Barone-Adesi and Whaley 1987
-     *
+     * @reference Barone-Adesi and Whaley 1987
      * @return price
      */
-    public double baw() {
+    private double baw() {
         //put -> call
         if (!getVanillaOptionParams().isOptionTypeCall()) {
-            AmericanOption option = callPutTransform();
-            return option.baw();
+            return callPutTransform().baw();
         }
         //无分红的call不应提前行权
         if (getUnderlying().getDividendRate() <= 0) {
-            EuropeanOption option = new EuropeanOption(this);
-            return option.bsm();
+            return europeanVanillaPrice();
         }
 
         BawCalculator calculator = new BawCalculator();
@@ -318,31 +317,22 @@ public class AmericanOption extends BaseSingleOption implements Serializable {
     }
 
     /**
-     * Bjerksund and Stensland 2002
-     *
+     * @reference Bjerksund and Stensland 2002
      * @return 美式期权的下界
      */
-    public double bs() {
+    private double bs() {
         //put -> call
         if (!getVanillaOptionParams().isOptionTypeCall()) {
-            AmericanOption option = callPutTransform();
-            return option.bs();
+            return callPutTransform().bs();
         }
         //无分红的call不应提前行权
         if (getUnderlying().getDividendRate() <= 0) {
-            EuropeanOption option = new EuropeanOption(this);
-            return option.bsm();
+            return europeanVanillaPrice();
         }
 
         BsCalculator calculator = new BsCalculator();
         calculator.setOption(this);
         return calculator.bsPrice();
-    }
-
-    @Override
-    public String toString() {
-        return getUnderlying().toString() + sep +
-                getVanillaOptionParams().toString();
     }
 
     private AmericanOption callPutTransform() {
@@ -353,6 +343,5 @@ public class AmericanOption extends BaseSingleOption implements Serializable {
         option.swapCallPut();
         return option;
     }
-
 
 }

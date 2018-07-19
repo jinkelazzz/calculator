@@ -68,8 +68,7 @@ public class CashOrNothingOption extends BaseSingleOption {
 
     @Override
     public String toString() {
-        return getUnderlying().toString() + sep +
-                getVanillaOptionParams().toString() + sep +
+        return super.toString() + sep +
                 "cash" + getCash();
     }
 }

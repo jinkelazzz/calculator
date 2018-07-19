@@ -68,7 +68,7 @@ public class VanillaOptionParams implements Serializable {
         return volatility * Math.sqrt(timeRemaining);
     }
 
-    boolean isOptionTypeCall() {
+    public boolean isOptionTypeCall() {
         return BaseOption.OPTION_TYPE_CALL.equals(optionType);
     }
 
@@ -84,16 +84,12 @@ public class VanillaOptionParams implements Serializable {
                 "method: " + getMethodName();
     }
 
-    public VanillaOptionParams copy() {
-        return (VanillaOptionParams) DeepCopy.copy(this);
-    }
-
+    /**
+     *
+     * @return call:1, put:-1;
+     */
     public int indexOfOptionType() {
-        if (isOptionTypeCall()) {
-            return 1;
-        } else {
-            return -1;
-        }
+        return isOptionTypeCall() ? 1 : -1;
     }
 
 

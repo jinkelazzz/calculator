@@ -27,7 +27,6 @@ public class EuropeanOption extends BaseSingleOption implements Serializable {
     }
 
     private Heston hestonParams = new Heston();
-
     private Sabr sabrParams = new Sabr();
 
     public Heston getHestonParams() {
@@ -70,11 +69,7 @@ public class EuropeanOption extends BaseSingleOption implements Serializable {
         double k = getVanillaOptionParams().getStrikePrice();
         double callPrice = s * getDiscountValueByDividendRate() * CalculateUtil.normalCDF(d1()) -
                 k * getDiscountValueByRiskFreeRate() * CalculateUtil.normalCDF(d2());
-        if (getVanillaOptionParams().isOptionTypeCall()) {
-            return callPrice;
-        } else {
-            return callPrice - callLowerLimit();
-        }
+        return getVanillaOptionParams().isOptionTypeCall() ? callPrice : (callPrice - callLowerLimit());
     }
 
     @Override
@@ -91,12 +86,6 @@ public class EuropeanOption extends BaseSingleOption implements Serializable {
             optionPrice[i] = Math.max(0, (spotPrice[i] - k) * index);
         }
         return optionPrice;
-    }
-
-    @Override
-    public String toString() {
-        return getUnderlying().toString() + sep +
-                getVanillaOptionParams().toString();
     }
 
     @Override
@@ -131,10 +120,6 @@ public class EuropeanOption extends BaseSingleOption implements Serializable {
             callPrice = bsm();
         }
 
-        if (getVanillaOptionParams().isOptionTypeCall()) {
-            return callPrice;
-        } else {
-            return callPrice - callLowerLimit();
-        }
+        return getVanillaOptionParams().isOptionTypeCall() ? callPrice : (callPrice - callLowerLimit());
     }
 }

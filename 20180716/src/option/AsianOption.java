@@ -4,12 +4,14 @@ import calculator.utility.CalculateUtil;
 import calculator.utility.MonteCarlo;
 import flanagan.analysis.Stat;
 import flanagan.interpolation.LinearInterpolation;
+import flanagan.math.DeepCopy;
 import flanagan.math.Maximisation;
 import flanagan.math.MaximisationFunction;
 import underlying.Future;
 import volatility.VolatilitySurface;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 class CurranCalculator implements MaximisationFunction {
 
@@ -214,7 +216,7 @@ public class AsianOption extends BaseSingleOption implements Serializable {
             aVol = Math.sqrt(Math.log(m) / t);
         }
 
-        VanillaOptionParams newVanillaOptionParams = getVanillaOptionParams().copy();
+        VanillaOptionParams newVanillaOptionParams = (VanillaOptionParams) DeepCopy.copy(getVanillaOptionParams());
         newVanillaOptionParams.setStrikePrice(k);
         newVanillaOptionParams.setVolatility(aVol);
         EuropeanOption europeanOption = new EuropeanOption();
@@ -285,7 +287,9 @@ public class AsianOption extends BaseSingleOption implements Serializable {
 
     @Override
     public String toString() {
-        return getUnderlying().toString() + sep +
-                getVanillaOptionParams().toString();
+        return super.toString() + sep +
+                "past average price:" + sep +
+                "past time:" + sep +
+                "observe time points:" + Arrays.toString(observeTimePoints);
     }
 }

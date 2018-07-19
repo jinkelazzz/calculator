@@ -15,7 +15,7 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
     private GreekPrecisionParams precision = new GreekPrecisionParams();
     private BaseUnderlying underlying;
     private VolatilitySurface volatilitySurface;
-    String sep = ConstantString.SEPARATOR;
+
 
     public BaseSingleOption() {
     }
@@ -135,6 +135,12 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
 
     public double[] finiteDifferencePrice(double[] spotPrice) {
         return new double[spotPrice.length];
+    }
+
+    @Override
+    public String toString() {
+        return getUnderlying().toString() + sep +
+                getVanillaOptionParams().toString();
     }
 }
 

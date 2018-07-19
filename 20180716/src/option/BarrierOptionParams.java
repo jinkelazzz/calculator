@@ -1,7 +1,6 @@
 package option;
 
 import calculator.utility.ConstantString;
-
 import java.io.Serializable;
 
 /**
@@ -127,18 +126,30 @@ public class BarrierOptionParams implements Serializable {
      * @return 是否触碰了障碍值
      */
     boolean isTouchSingleBarrier(double spotPrice) {
-        if (isUp()) {
-            return spotPrice > getBarrierPrice();
-        } else {
-            return spotPrice < getBarrierPrice();
-        }
+        return isUp() ? (spotPrice > barrierPrice) : (spotPrice < barrierPrice);
     }
 
-    @Override
-    public String toString() {
+    /**
+     *
+     * @param spotPrice 标的资产价格
+     * @return 是否触碰了双障碍的任一障碍值
+     */
+    boolean isTouchDoubleBarrier(double spotPrice) {
+        return spotPrice > upperBarrierPrice || spotPrice < lowerBarrierPrice;
+    }
+
+    String singleBarrierToString() {
         return "barrier price: " + barrierPrice + ConstantString.SEPARATOR +
                 "barrier type: " + barrierType + ConstantString.SEPARATOR +
                 "barrier direction: " + barrierDirection;
+    }
+
+    String doubleBarrierToString() {
+        return "upper barrier: " + upperBarrierPrice + ConstantString.SEPARATOR +
+                "lower barrier: " + lowerBarrierPrice + ConstantString.SEPARATOR +
+                "upper curve: " + upperCurve + ConstantString.SEPARATOR +
+                "lower curve: " + lowerCurve + ConstantString.SEPARATOR +
+                "barrier type: " + barrierType;
     }
 
 }

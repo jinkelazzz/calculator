@@ -191,17 +191,10 @@ public class BinaryBarrierOption extends BaseSingleOption implements Serializabl
     public double monteCarloPrice(double[] pricePath) {
         if (barrierOptionParams.isPayAtHit()) {
             double hitTime = hitBarrierTime(pricePath);
-            if (!isHit(pricePath)) {
-                return 0;
-            }
-            return cash * Math.exp(-hitTime * getUnderlying().getRiskFreeRate());
+            return isHit(pricePath) ? cash * Math.exp(-hitTime * getUnderlying().getRiskFreeRate()) : 0;
         } else {
             //如果敲入期权触碰障碍或者敲出期权未触碰障碍
-            if (isHit(pricePath) == barrierOptionParams.isIn()) {
-                return cash * getDiscountValueByRiskFreeRate();
-            } else {
-                return 0;
-            }
+            return isHit(pricePath) == barrierOptionParams.isIn() ? cash * getDiscountValueByRiskFreeRate() : 0;
         }
     }
 
@@ -223,9 +216,8 @@ public class BinaryBarrierOption extends BaseSingleOption implements Serializabl
 
     @Override
     public String toString() {
-        return getUnderlying().toString() + sep +
-                getVanillaOptionParams().toString() + sep +
-                getBarrierOptionParams().toString() + sep +
+        return super.toString() + sep +
+                getBarrierOptionParams().singleBarrierToString() + sep +
                 "cash: " + cash;
     }
 }

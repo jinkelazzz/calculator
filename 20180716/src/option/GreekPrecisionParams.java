@@ -23,7 +23,7 @@ public class GreekPrecisionParams implements Serializable {
     }
 
     public void setUnderlyingPricePrecision(double underlyingPricePrecision) {
-        this.underlyingPricePrecision = underlyingPricePrecision;
+        this.underlyingPricePrecision = Math.max(eps, underlyingPricePrecision);
     }
 
     public double getVolatilityPrecision() {
@@ -31,7 +31,7 @@ public class GreekPrecisionParams implements Serializable {
     }
 
     public void setVolatilityPrecision(double volatilityPrecision) {
-        this.volatilityPrecision = volatilityPrecision;
+        this.volatilityPrecision = Math.max(eps, volatilityPrecision);
     }
 
     public double getTimeRemainingPrecision() {
@@ -39,7 +39,7 @@ public class GreekPrecisionParams implements Serializable {
     }
 
     public void setTimeRemainingPrecision(double timeRemainingPrecision) {
-        this.timeRemainingPrecision = timeRemainingPrecision;
+        this.timeRemainingPrecision = Math.max(eps, timeRemainingPrecision);
     }
 
     public double getInterestRatePrecision() {
@@ -47,7 +47,7 @@ public class GreekPrecisionParams implements Serializable {
     }
 
     public void setInterestRatePrecision(double interestRatePrecision) {
-        this.interestRatePrecision = interestRatePrecision;
+        this.interestRatePrecision = Math.max(eps, interestRatePrecision);
     }
 
 }

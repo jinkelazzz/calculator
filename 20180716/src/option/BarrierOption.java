@@ -260,9 +260,8 @@ public class BarrierOption extends BaseSingleOption implements Serializable {
 
     @Override
     public String toString() {
-        return getUnderlying().toString() + sep +
-                getVanillaOptionParams().toString() + sep +
-                getBarrierOptionParams().toString() + sep +
+        return super.toString() + sep +
+                getBarrierOptionParams().singleBarrierToString() + sep +
                 "rebate: " + rebate;
     }
 }

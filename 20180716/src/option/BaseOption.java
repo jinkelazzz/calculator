@@ -1,5 +1,7 @@
 package option;
 
+import calculator.utility.ConstantString;
+
 import java.io.Serializable;
 
 /**
@@ -39,7 +41,7 @@ public abstract class BaseOption implements Serializable {
     public static final String PAYOFF_TYPE_HIT = "hit";
     public static final String PAYOFF_TYPE_EXPIRE = "expire";
 
-
+    String sep = ConstantString.SEPARATOR;
     /**
      * 最简单的解析解统称 bsm;
      *

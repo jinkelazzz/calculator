@@ -213,22 +213,18 @@ public class DoubleBarrierOption extends BaseSingleOption implements Serializabl
         }
     }
 
-    private boolean isTouchBarrier() {
-        return getUnderlying().getSpotPrice() > getBarrierOptionParams().getUpperBarrierPrice()
-                || getUnderlying().getSpotPrice() < getBarrierOptionParams().getLowerBarrierPrice();
-    }
-
     private double bsmOut() {
-        DoubleBarrierCalculator calculator = new DoubleBarrierCalculator();
-        calculator.setOption(this);
-        if (isTouchBarrier()) {
+        if (getBarrierOptionParams().isTouchDoubleBarrier(getUnderlying().getSpotPrice())) {
             return 0;
         }
+        DoubleBarrierCalculator calculator = new DoubleBarrierCalculator();
+        calculator.setOption(this);
         return calculator.outPrice();
     }
 
     @Override
     public String toString() {
-        return null;
+        return super.toString() + sep +
+                getBarrierOptionParams().doubleBarrierToString();
     }
 }
