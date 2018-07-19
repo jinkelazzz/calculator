@@ -2,6 +2,9 @@ package volatility;
 
 import java.io.Serializable;
 
+/**
+ * @author liangcy
+ */
 public class WingModel extends BaseVolatilitySkew implements Serializable{
     private double putCurvature;
     private double callCurvature;
@@ -32,16 +35,19 @@ public class WingModel extends BaseVolatilitySkew implements Serializable{
         return getSlopeAtWing(logMoneyness);
     }
 
+    private double getCurvature(double logMoneyness) {
+        return logMoneyness > 0 ? callCurvature : putCurvature;
+    }
 
     private double getVolatilityAtWing(double logMoneyness) {
-        double curvature = logMoneyness > 0 ? callCurvature : putCurvature;
+        double curvature = getCurvature(logMoneyness);
         double currentVol = getCurrentVolatility();
         double currentSlope = getCurrentSlope();
         return currentVol + currentSlope * logMoneyness + curvature * Math.pow(logMoneyness, 2);
     }
 
     private double getSlopeAtWing(double logMoneyness) {
-        double curvature = logMoneyness > 0 ? callCurvature : putCurvature;
+        double curvature = getCurvature(logMoneyness);
         double currentSlope = getCurrentSlope();
         return currentSlope + 2 * curvature * logMoneyness;
     }
