@@ -62,31 +62,30 @@ class HestonEstimation implements MaximisationFunction {
         vSeries[0] = initialVar;
 
         double[] logDiffPrice = logDifferencePrice();
-
+        double bt;
+        double b;
+        double c;
+        double logDt;
+        double diffPrice;
         for (int i = 0; i < logDiffPrice.length; i++) {
-            double diffPrice = logDiffPrice[i];
-            double b = -alpha * dt - rho * volVolatility * (diffPrice - mu * dt);
-            double c = Math.pow(alpha * dt, 2) * 2 * rho * volVolatility * alpha * dt * (diffPrice - mu * dt)
+            diffPrice = logDiffPrice[i];
+            b = -alpha * dt - rho * volVolatility * (diffPrice - mu * dt);
+            c = Math.pow(alpha * dt, 2) * 2 * rho * volVolatility * alpha * dt * (diffPrice - mu * dt)
                     + Math.pow(volVolatility * (diffPrice - mu * dt), 2) - 2 * vSeries[i] * vSeries[i] * alpha *
                     Math.pow(volVolatility, 2) * (1 - rho * rho) * dt;
 
-            double bt;
             if (b * b - c > 0) {
                 vSeries[i + 1] = Math.sqrt(b * b - c) - b;
             } else {
                 bt = Math.pow(vSeries[i] - alpha * dt, 2) - 2 * rho * volVolatility * (vSeries[i] - alpha * dt) *
                         (diffPrice - mu * dt) + Math.pow(volVolatility * (diffPrice - mu * dt), 2) / denominator;
-                if (bt / a > 0) {
-                    vSeries[i + 1] = Math.sqrt(bt / a);
-                } else {
-                    vSeries[i + 1] = vSeries[i];
-                }
+                vSeries[i + 1] = bt / a > 0 ? Math.sqrt(bt / a) : vSeries[i];
             }
 
             bt = Math.pow(vSeries[i + 1] - alpha * dt, 2) - 2 * rho * volVolatility * (vSeries[i + 1] - alpha * dt)
                     * (diffPrice - mu * dt) + Math.pow(volVolatility * (diffPrice - mu * dt), 2) / denominator;
 
-            double logDt = ((2 * kappa + rho * volVolatility * dt) * (vSeries[i + 1] - alpha * dt) -
+            logDt = ((2 * kappa + rho * volVolatility * dt) * (vSeries[i + 1] - alpha * dt) -
                     (2 * rho * volVolatility * kappa + Math.pow(volVolatility, 2) * dt) *
                             (diffPrice - mu * dt)) / denominator - Math.log(d);
 
