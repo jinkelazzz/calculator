@@ -89,6 +89,7 @@ public class SingleOptionAnalysisCalculator extends BaseSingleOptionCalculator {
      * @throws IllegalAccessException
      */
     private double getPrice(Method method) throws InvocationTargetException, IllegalAccessException {
+        method.setAccessible(true);
         return (double) method.invoke(option);
     }
 
