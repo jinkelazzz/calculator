@@ -1,5 +1,6 @@
 package option;
 
+import adjusted.european.option.CorradoSu;
 import adjusted.european.option.Heston;
 import adjusted.european.option.Sabr;
 import calculator.utility.CalculateUtil;
@@ -28,6 +29,15 @@ public class EuropeanOption extends BaseSingleOption implements Serializable {
 
     private Heston hestonParams = new Heston();
     private Sabr sabrParams = new Sabr();
+    private CorradoSu corradoSuParams = new CorradoSu();
+
+    public CorradoSu getCorradoSuParams() {
+        return corradoSuParams;
+    }
+
+    public void setCorradoSuParams(CorradoSu corradoSuParams) {
+        this.corradoSuParams = corradoSuParams;
+    }
 
     public Heston getHestonParams() {
         return hestonParams;
@@ -45,7 +55,7 @@ public class EuropeanOption extends BaseSingleOption implements Serializable {
         this.sabrParams = sabrParams;
     }
 
-    double d1() {
+    public double d1() {
         double k = getVanillaOptionParams().getStrikePrice();
         double t = getVanillaOptionParams().getTimeRemaining();
         double sigmaT = getVanillaOptionParams().sigmaT();
@@ -120,6 +130,13 @@ public class EuropeanOption extends BaseSingleOption implements Serializable {
             callPrice = bsm();
         }
 
+        return getVanillaOptionParams().isOptionTypeCall() ? callPrice : (callPrice - callLowerLimit());
+    }
+
+    public double corradoSu() {
+        corradoSuParams.setOption(this);
+        double addition = corradoSuParams.corradoSuAddition();
+        double callPrice = Math.max(bsm() + addition, callLowerLimit());
         return getVanillaOptionParams().isOptionTypeCall() ? callPrice : (callPrice - callLowerLimit());
     }
 }
