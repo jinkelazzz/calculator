@@ -39,8 +39,8 @@ public abstract class BaseSingleOptionCalculator extends BaseCalculator {
     }
 
     /**
-     *
-     * @return 是否存在计算的方法
+     * 检查是否存在计算的方法
+     * @return true:存在, false:不存在
      */
     public abstract boolean hasMethod();
 
@@ -161,7 +161,7 @@ public abstract class BaseSingleOptionCalculator extends BaseCalculator {
         setError(NORMAL);
     }
 
-    public  void calculateGamma() {
+    public void calculateGamma() {
         resetCalculator();
         if(!hasMethod()) {
             setError(UNSUPPORTED_METHOD);
@@ -229,6 +229,39 @@ public abstract class BaseSingleOptionCalculator extends BaseCalculator {
         setError(NORMAL);
     }
 
+    public void calculateRho2() {
+        resetCalculator();
+        if(!hasMethod()) {
+            setError(UNSUPPORTED_METHOD);
+            return;
+        }
+
+        BaseSingleOption[] options = shiftDividendRate();
+        BaseSingleOption lowerOption = options[0];
+        BaseSingleOption upperOption = options[1];
+
+        setOption(lowerOption);
+        calculatePrice();
+        if (!isNormal()) {
+            return;
+        }
+        double lowerPrice = getResult();
+
+        setOption(upperOption);
+        calculatePrice();
+        if (!isNormal()) {
+            return;
+        }
+        double upperPrice = getResult();
+
+        setOption(option);
+        double lowerRate = lowerOption.getUnderlying().getDividendRate();
+        double upperRate = upperOption.getUnderlying().getDividendRate();
+        double rho2 = (upperPrice - lowerPrice) / (upperRate - lowerRate) / 10000;
+        setResult(rho2);
+        setError(NORMAL);
+    }
+
     private boolean canUseVolatilitySurface() {
         return useVolatilitySurface && option.getVolatilitySurface().isValidSurface();
     }
@@ -259,7 +292,7 @@ public abstract class BaseSingleOptionCalculator extends BaseCalculator {
         return new BaseSingleOption[] {lowerOption, upperOption};
     }
 
-    BaseSingleOption[] shiftVolatility() {
+    private BaseSingleOption[] shiftVolatility() {
         BaseSingleOption lowerOption = (BaseSingleOption) DeepCopy.copy(option);
         BaseSingleOption upperOption = (BaseSingleOption) DeepCopy.copy(option);
 
@@ -273,7 +306,7 @@ public abstract class BaseSingleOptionCalculator extends BaseCalculator {
         return new BaseSingleOption[] {lowerOption, upperOption};
     }
 
-    BaseSingleOption[] shiftTimeRemaining() {
+    private BaseSingleOption[] shiftTimeRemaining() {
         BaseSingleOption lowerOption = (BaseSingleOption) DeepCopy.copy(option);
         BaseSingleOption upperOption = (BaseSingleOption) DeepCopy.copy(option);
 
@@ -293,7 +326,7 @@ public abstract class BaseSingleOptionCalculator extends BaseCalculator {
         return new BaseSingleOption[] {lowerOption, upperOption};
     }
 
-    BaseSingleOption[] shiftInterestRate() {
+    private BaseSingleOption[] shiftInterestRate() {
         BaseSingleOption lowerOption = (BaseSingleOption) DeepCopy.copy(option);
         BaseSingleOption upperOption = (BaseSingleOption) DeepCopy.copy(option);
 
@@ -305,6 +338,59 @@ public abstract class BaseSingleOptionCalculator extends BaseCalculator {
         upperOption.getUnderlying().setRiskFreeRate(diffRate[1]);
 
         return new BaseSingleOption[] {lowerOption, upperOption};
+    }
+
+    private BaseSingleOption[] shiftDividendRate() {
+        BaseSingleOption lowerOption = (BaseSingleOption) DeepCopy.copy(option);
+        BaseSingleOption upperOption = (BaseSingleOption) DeepCopy.copy(option);
+
+        double precision = option.getPrecision().getInterestRatePrecision();
+        double q = option.getUnderlying().getDividendRate();
+        double[] diffRate = CalculateUtil.midDiffValue(q, precision);
+
+        lowerOption.getUnderlying().setDividendRate(diffRate[0]);
+        upperOption.getUnderlying().setDividendRate(diffRate[1]);
+
+        return new BaseSingleOption[] {lowerOption, upperOption};
+    }
+
+    /**
+     * 计算spot price变动1%带来的delta value也就是delta * 1% * spot price
+     */
+    public void calculateDeltaValue() {
+        double deltaS = option.getUnderlying().getSpotPrice() * 0.01;
+        calculateDelta();
+        double deltaValue = getResult() * deltaS;
+        setResult(deltaValue);
+    }
+
+    /**
+     * 计算spot price变动1%带来的gamma value也就是0.5 * gamma * (1% * spot price) ^ 2
+     */
+    public void calculateGammaValue() {
+        double deltaS = option.getUnderlying().getSpotPrice();
+        calculateGamma();
+        double gammaValue = 0.5 * getResult() * Math.pow(deltaS, 2);
+        setResult(gammaValue);
+    }
+
+    /**
+     * 计算volatility 变动1%带来的vega value也就是vega(因为vega已经是1%的变动了)
+     */
+    public void calculateVegaValue() {
+        calculateVega();
+    }
+
+    public void calculateThetaValue() {
+        calculateTheta();
+    }
+
+    public void calculateRhoValue() {
+        calculateRho();
+    }
+
+    public void calculateRho2Value() {
+        calculateRho2();
     }
 
 }
