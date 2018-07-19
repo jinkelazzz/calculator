@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+
 class SyntheticForwardParams implements Serializable{
     SyntheticForwardParams(double refForwardPrice, double ssr) {
         this.refForwardPrice = refForwardPrice;
@@ -270,7 +271,7 @@ public abstract class BaseVolatilitySkew implements Serializable {
         return volatilitySkewParams.getCurrentSlope(syntheticForwardParams, getAtmForward());
     }
 
-    List<Double> transformStrike() {
+    private List<Double> transformStrike() {
         List<Double> logStrikeList = new ArrayList<>(optionList.size());
         double synPrice = getSyntheticForwardPrice();
         for (BaseSingleOption option : optionList) {
@@ -341,7 +342,7 @@ public abstract class BaseVolatilitySkew implements Serializable {
         return getRangeParams().volatilityAtDownAffineRange(logMoneyness, volAtCutoff, slopeAtCutoff);
     }
 
-    double getVolatility(double logMoneyness) {
+    private double getVolatility(double logMoneyness) {
         if(isAtUpSmoothingRange(logMoneyness)) {
             return getVolatilityAtUpSmoothingRange(logMoneyness);
         }
@@ -355,6 +356,35 @@ public abstract class BaseVolatilitySkew implements Serializable {
             return getVolatilityAtDownAffineRange(logMoneyness);
         }
         return getVolatilityInMiddle(logMoneyness);
+    }
+
+    private double getWeight(BaseSingleOption option) {
+        if(isOutOfMoney(option)) {
+            return 1;
+        }
+        double power = 2 * Math.sqrt(option.getVanillaOptionParams().getTimeRemaining());
+        double s = getAtmForward();
+        double k = option.getVanillaOptionParams().getStrikePrice();
+        return option.getVanillaOptionParams().isOptionTypeCall() ? Math.pow(k / s, power) : Math.pow(s / k, power);
+    }
+
+    double fitError() {
+        List<Double> logMoneynessList = transformStrike();
+        updateImpliedVolatility();
+        int n = logMoneynessList.size();
+        double sum = 0;
+        double fittingVolatility;
+        double impliedVolatility;
+        double weight;
+        BaseSingleOption option;
+        for (int i = 0; i < n; i++) {
+            option = optionList.get(i);
+            fittingVolatility = getVolatility(logMoneynessList.get(i));
+            impliedVolatility = option.getVanillaOptionParams().getVolatility();
+            weight = getWeight(option);
+            sum = sum + Math.pow(weight * (fittingVolatility - impliedVolatility), 2);
+        }
+        return sum;
     }
 
 
