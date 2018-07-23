@@ -1,17 +1,134 @@
 package calculator.derivatives;
 
 import calculator.utility.CalculateUtil;
-import calculator.utility.NewtonIterationParams;
 import flanagan.math.DeepCopy;
 import option.BaseSingleOption;
-import static calculator.utility.CalculatorError.*;
+import underlying.Future;
+
+import java.io.Serializable;
+
+import static calculator.utility.CalculatorError.NORMAL;
+import static calculator.utility.CalculatorError.UNSUPPORTED_METHOD;
+
+
+class ShiftSingleOption implements Serializable {
+    private BaseSingleOption option;
+    private BaseSingleOption[] options = new BaseSingleOption[2];
+    private double denominator = 0;
+
+    ShiftSingleOption() {}
+
+    ShiftSingleOption(BaseSingleOption option) {
+        setOption(option);
+    }
+
+    public void setOption(BaseSingleOption option) {
+        this.option = option;
+    }
+
+    public BaseSingleOption[] getOptions() {
+        return options;
+    }
+
+    public double getDenominator() {
+        return denominator;
+    }
+
+    private void setOptions(BaseSingleOption[] options) {
+        this.options = options;
+    }
+
+    private void setDenominator(double denominator) {
+        this.denominator = denominator;
+    }
+
+    private void initialOptions() {
+        options[0] = (BaseSingleOption) DeepCopy.copy(option);
+        options[1] = (BaseSingleOption) DeepCopy.copy(option);
+    }
+
+    void shiftUnderlyingPrice(boolean useVolatilitySurface) {
+        if(useVolatilitySurface) {
+            option.refreshVolSurface();
+        }
+        initialOptions();
+
+        double precision = option.getPrecision().getUnderlyingPricePrecision();
+        double s = option.getUnderlying().getSpotPrice();
+        double[] diffSpotPrice = CalculateUtil.midDiffValue(s, precision);
+        setDenominator(diffSpotPrice[1] - diffSpotPrice[0]);
+
+        options[0].getUnderlying().setSpotPrice(diffSpotPrice[0]);
+        options[1].getUnderlying().setSpotPrice(diffSpotPrice[1]);
+        if(useVolatilitySurface) {
+            double lowerVolatility = options[0].getVolatilityFromSurface();
+            double upperVolatility = options[1].getVolatilityFromSurface();
+            options[0].getVanillaOptionParams().setVolatility(lowerVolatility);
+            options[1].getVanillaOptionParams().setVolatility(upperVolatility);
+        }
+
+    }
+
+    void shiftVolatility() {
+        initialOptions();
+
+        double precision = option.getPrecision().getVolatilityPrecision();
+        double vol = option.getVanillaOptionParams().getVolatility();
+        double[] diffVol = CalculateUtil.midDiffValue(vol, precision);
+        setDenominator(diffVol[1] - diffVol[0]);
+        options[0].getVanillaOptionParams().setVolatility(diffVol[0]);
+        options[1].getVanillaOptionParams().setVolatility(diffVol[1]);
+    }
+
+    void shiftTimeRemaining(boolean useVolatilitySurface) {
+        if(useVolatilitySurface) {
+            option.refreshVolSurface();
+        }
+        initialOptions();
+
+        double precision = option.getPrecision().getTimeRemainingPrecision();
+        double t = option.getVanillaOptionParams().getTimeRemaining();
+        double[] diffTime = CalculateUtil.backwardDiffValue(t, precision);
+        setDenominator(diffTime[1] - diffTime[0]);
+
+        options[0].getVanillaOptionParams().setTimeRemaining(diffTime[0]);
+        if(useVolatilitySurface) {
+            double volatility = options[0].getVolatilityFromSurface();
+            options[0].getVanillaOptionParams().setVolatility(volatility);
+        }
+    }
+
+    void shiftInterestRate() {
+        initialOptions();
+
+        double precision = option.getPrecision().getInterestRatePrecision();
+        double r = option.getUnderlying().getRiskFreeRate();
+        double[] diffRate = CalculateUtil.midDiffValue(r, precision);
+        setDenominator(diffRate[1] - diffRate[0]);
+
+        options[0].getUnderlying().setRiskFreeRate(diffRate[0]);
+        options[1].getUnderlying().setRiskFreeRate(diffRate[1]);
+    }
+
+    void shiftDividendRate() {
+        initialOptions();
+
+        double precision = option.getPrecision().getInterestRatePrecision();
+        double q = option.getUnderlying().getDividendRate();
+        double[] diffRate = CalculateUtil.midDiffValue(q, precision);
+        setDenominator(diffRate[1] - diffRate[0]);
+
+        options[0].getUnderlying().setDividendRate(diffRate[0]);
+        options[1].getUnderlying().setDividendRate(diffRate[1]);
+    }
+
+}
 
 /**
  * @author liangcy
  */
 public abstract class BaseSingleOptionCalculator extends BaseCalculator {
     BaseSingleOption option;
-
     private boolean useVolatilitySurface = false;
 
     public BaseSingleOptionCalculator() {
@@ -55,6 +172,10 @@ public abstract class BaseSingleOptionCalculator extends BaseCalculator {
      */
     public abstract void calculateImpliedVolatility();
 
+    ShiftSingleOption shiftOption() {
+        return new ShiftSingleOption(option);
+    }
+
     /**
      * 计算Delta;
      */
@@ -65,28 +186,13 @@ public abstract class BaseSingleOptionCalculator extends BaseCalculator {
             return;
         }
 
-        BaseSingleOption[] options = shiftUnderlyingPrice();
-        BaseSingleOption lowerOption = options[0];
-        BaseSingleOption upperOption = options[1];
-
-        setOption(lowerOption);
-        calculatePrice();
-        if (!isNormal()) {
+        ShiftSingleOption shiftSingleOption = shiftOption();
+        shiftSingleOption.shiftUnderlyingPrice(canUseVolatilitySurface());
+        double diffPrice = getDiffPrice(shiftSingleOption.getOptions());
+        if(!isNormal()) {
             return;
         }
-        double lowerPrice = getResult();
-
-        setOption(upperOption);
-        calculatePrice();
-        if (!isNormal()) {
-            return;
-        }
-        double upperPrice = getResult();
-        //reset;
-        setOption(option);
-        double lowerSpotPrice = lowerOption.getUnderlying().getSpotPrice();
-        double upperSpotPrice = upperOption.getUnderlying().getSpotPrice();
-        double delta = (upperPrice - lowerPrice) / (upperSpotPrice - lowerSpotPrice);
+        double delta = diffPrice / shiftSingleOption.getDenominator();
         setResult(delta);
         setError(NORMAL);
     }
@@ -100,29 +206,13 @@ public abstract class BaseSingleOptionCalculator extends BaseCalculator {
             setError(UNSUPPORTED_METHOD);
             return;
         }
-
-        BaseSingleOption[] options = shiftVolatility();
-        BaseSingleOption lowerOption = options[0];
-        BaseSingleOption upperOption = options[1];
-
-        setOption(lowerOption);
-        calculatePrice();
-        if (!isNormal()) {
+        ShiftSingleOption shiftSingleOption = shiftOption();
+        shiftSingleOption.shiftVolatility();
+        double diffPrice = getDiffPrice(shiftSingleOption.getOptions());
+        if(!isNormal()) {
             return;
         }
-        double lowerPrice = getResult();
-
-        setOption(upperOption);
-        calculatePrice();
-        if (!isNormal()) {
-            return;
-        }
-        double upperPrice = getResult();
-
-        setOption(option);
-        double lowerVol = lowerOption.getVanillaOptionParams().getVolatility();
-        double upperVol = upperOption.getVanillaOptionParams().getVolatility();
-        double vega = (upperPrice - lowerPrice) / (upperVol - lowerVol) / 100;
+        double vega = diffPrice / shiftSingleOption.getDenominator() / 100;
         setResult(vega);
         setError(NORMAL);
     }
@@ -136,27 +226,13 @@ public abstract class BaseSingleOptionCalculator extends BaseCalculator {
             setError(UNSUPPORTED_METHOD);
             return;
         }
-        BaseSingleOption[] options = shiftTimeRemaining();
-        BaseSingleOption lowerOption = options[0];
-        BaseSingleOption upperOption = options[1];
-
-        setOption(lowerOption);
-        calculatePrice();
-        if (!isNormal()) {
+        ShiftSingleOption shiftSingleOption = shiftOption();
+        shiftSingleOption.shiftTimeRemaining(canUseVolatilitySurface());
+        double diffPrice = getDiffPrice(shiftSingleOption.getOptions());
+        if(!isNormal()) {
             return;
         }
-        double lowerPrice = getResult();
-
-        setOption(upperOption);
-        calculatePrice();
-        if (!isNormal()) {
-            return;
-        }
-        double price = getResult();
-        setOption(option);
-        double lowerT = lowerOption.getVanillaOptionParams().getTimeRemaining();
-        double upperT = upperOption.getVanillaOptionParams().getTimeRemaining();
-        double theta = (lowerPrice - price) / (upperT - lowerT) / 365;
+        double theta = -diffPrice / shiftSingleOption.getDenominator() / 365;
         setResult(theta);
         setError(NORMAL);
     }
@@ -167,28 +243,13 @@ public abstract class BaseSingleOptionCalculator extends BaseCalculator {
             setError(UNSUPPORTED_METHOD);
             return;
         }
-        BaseSingleOption[] options = shiftUnderlyingPrice();
-        BaseSingleOption lowerOption = options[0];
-        BaseSingleOption upperOption = options[1];
-
-        setOption(lowerOption);
-        calculateDelta();
-        if (!isNormal()) {
+        ShiftSingleOption shiftSingleOption = shiftOption();
+        shiftSingleOption.shiftUnderlyingPrice(canUseVolatilitySurface());
+        double diffDelta = getDiffDelta(shiftSingleOption.getOptions());
+        if(!isNormal()) {
             return;
         }
-        double lowerDelta = getResult();
-
-        setOption(upperOption);
-        calculateDelta();
-        if (!isNormal()) {
-            return;
-        }
-        double upperDelta = getResult();
-        //reset;
-        setOption(option);
-        double lowerSpotPrice = lowerOption.getUnderlying().getSpotPrice();
-        double upperSpotPrice = upperOption.getUnderlying().getSpotPrice();
-        double gamma = (upperDelta - lowerDelta) / (upperSpotPrice - lowerSpotPrice);
+        double gamma = diffDelta / shiftSingleOption.getDenominator();
         setResult(gamma);
         setError(NORMAL);
     }
@@ -203,28 +264,13 @@ public abstract class BaseSingleOptionCalculator extends BaseCalculator {
             return;
         }
 
-        BaseSingleOption[] options = shiftInterestRate();
-        BaseSingleOption lowerOption = options[0];
-        BaseSingleOption upperOption = options[1];
-
-        setOption(lowerOption);
-        calculatePrice();
-        if (!isNormal()) {
+        ShiftSingleOption shiftSingleOption = shiftOption();
+        shiftSingleOption.shiftInterestRate();
+        double diffPrice = getDiffPrice(shiftSingleOption.getOptions());
+        if(!isNormal()) {
             return;
         }
-        double lowerPrice = getResult();
-
-        setOption(upperOption);
-        calculatePrice();
-        if (!isNormal()) {
-            return;
-        }
-        double upperPrice = getResult();
-
-        setOption(option);
-        double lowerRate = lowerOption.getUnderlying().getRiskFreeRate();
-        double upperRate = upperOption.getUnderlying().getRiskFreeRate();
-        double rho = (upperPrice - lowerPrice) / (upperRate - lowerRate) / 10000;
+        double rho = diffPrice / shiftSingleOption.getDenominator() / 10000;
         setResult(rho);
         setError(NORMAL);
     }
@@ -236,122 +282,25 @@ public abstract class BaseSingleOptionCalculator extends BaseCalculator {
             return;
         }
 
-        BaseSingleOption[] options = shiftDividendRate();
-        BaseSingleOption lowerOption = options[0];
-        BaseSingleOption upperOption = options[1];
-
-        setOption(lowerOption);
-        calculatePrice();
-        if (!isNormal()) {
+        if(option.getUnderlying() instanceof Future) {
+            setResult(0);
+            setError(NORMAL);
             return;
         }
-        double lowerPrice = getResult();
 
-        setOption(upperOption);
-        calculatePrice();
-        if (!isNormal()) {
+        ShiftSingleOption shiftSingleOption = shiftOption();
+        shiftSingleOption.shiftDividendRate();
+        double diffPrice = getDiffPrice(shiftSingleOption.getOptions());
+        if(!isNormal()) {
             return;
         }
-        double upperPrice = getResult();
-
-        setOption(option);
-        double lowerRate = lowerOption.getUnderlying().getDividendRate();
-        double upperRate = upperOption.getUnderlying().getDividendRate();
-        double rho2 = (upperPrice - lowerPrice) / (upperRate - lowerRate) / 10000;
+        double rho2 = diffPrice / shiftSingleOption.getDenominator() / 10000;
         setResult(rho2);
         setError(NORMAL);
     }
 
-    private boolean canUseVolatilitySurface() {
+    boolean canUseVolatilitySurface() {
         return useVolatilitySurface && option.getVolatilitySurface().isValidSurface();
-    }
-
-    BaseSingleOption[] shiftUnderlyingPrice() {
-        BaseSingleOption lowerOption = (BaseSingleOption) DeepCopy.copy(option);
-        BaseSingleOption upperOption = (BaseSingleOption) DeepCopy.copy(option);
-
-        double precision = option.getPrecision().getUnderlyingPricePrecision();
-        double s = option.getUnderlying().getSpotPrice();
-        double[] diffSpotPrice = CalculateUtil.midDiffValue(s, precision);
-
-        double lowerSpotPrice = diffSpotPrice[0];
-        double upperSpotPrice = diffSpotPrice[1];
-
-        lowerOption.getUnderlying().setSpotPrice(lowerSpotPrice);
-        upperOption.getUnderlying().setSpotPrice(upperSpotPrice);
-
-        if(canUseVolatilitySurface()) {
-            double k = option.getVanillaOptionParams().getStrikePrice();
-            double t = option.getVanillaOptionParams().getTimeRemaining();
-            double lowerVolatility = option.getVolatilitySurface().getVolatility(k / lowerSpotPrice, t);
-            double upperVolatility = option.getVolatilitySurface().getVolatility(k / upperSpotPrice, t);
-            lowerOption.getVanillaOptionParams().setVolatility(lowerVolatility);
-            upperOption.getVanillaOptionParams().setVolatility(upperVolatility);
-        }
-
-        return new BaseSingleOption[] {lowerOption, upperOption};
-    }
-
-    private BaseSingleOption[] shiftVolatility() {
-        BaseSingleOption lowerOption = (BaseSingleOption) DeepCopy.copy(option);
-        BaseSingleOption upperOption = (BaseSingleOption) DeepCopy.copy(option);
-
-        double precision = option.getPrecision().getVolatilityPrecision();
-        double vol = option.getVanillaOptionParams().getVolatility();
-        double[] diffVol = CalculateUtil.midDiffValue(vol, precision);
-
-        lowerOption.getVanillaOptionParams().setVolatility(diffVol[0]);
-        upperOption.getVanillaOptionParams().setVolatility(diffVol[1]);
-
-        return new BaseSingleOption[] {lowerOption, upperOption};
-    }
-
-    private BaseSingleOption[] shiftTimeRemaining() {
-        BaseSingleOption lowerOption = (BaseSingleOption) DeepCopy.copy(option);
-        BaseSingleOption upperOption = (BaseSingleOption) DeepCopy.copy(option);
-
-        double precision = option.getPrecision().getTimeRemainingPrecision();
-        double t = option.getVanillaOptionParams().getTimeRemaining();
-        double[] diffTime = CalculateUtil.backwardDiffValue(t, precision);
-
-        double t1 = diffTime[0];
-        lowerOption.getVanillaOptionParams().setTimeRemaining(t1);
-
-        if(canUseVolatilitySurface()) {
-            double s = option.getUnderlying().getSpotPrice();
-            double k = option.getVanillaOptionParams().getStrikePrice();
-            double vol = lowerOption.getVolatilitySurface().getVolatility(k / s, t1);
-            lowerOption.getVanillaOptionParams().setVolatility(vol);
-        }
-        return new BaseSingleOption[] {lowerOption, upperOption};
-    }
-
-    private BaseSingleOption[] shiftInterestRate() {
-        BaseSingleOption lowerOption = (BaseSingleOption) DeepCopy.copy(option);
-        BaseSingleOption upperOption = (BaseSingleOption) DeepCopy.copy(option);
-
-        double precision = option.getPrecision().getInterestRatePrecision();
-        double r = option.getUnderlying().getRiskFreeRate();
-        double[] diffRate = CalculateUtil.midDiffValue(r, precision);
-
-        lowerOption.getUnderlying().setRiskFreeRate(diffRate[0]);
-        upperOption.getUnderlying().setRiskFreeRate(diffRate[1]);
-
-        return new BaseSingleOption[] {lowerOption, upperOption};
-    }
-
-    private BaseSingleOption[] shiftDividendRate() {
-        BaseSingleOption lowerOption = (BaseSingleOption) DeepCopy.copy(option);
-        BaseSingleOption upperOption = (BaseSingleOption) DeepCopy.copy(option);
-
-        double precision = option.getPrecision().getInterestRatePrecision();
-        double q = option.getUnderlying().getDividendRate();
-        double[] diffRate = CalculateUtil.midDiffValue(q, precision);
-
-        lowerOption.getUnderlying().setDividendRate(diffRate[0]);
-        upperOption.getUnderlying().setDividendRate(diffRate[1]);
-
-        return new BaseSingleOption[] {lowerOption, upperOption};
     }
 
     /**
@@ -391,6 +340,30 @@ public abstract class BaseSingleOptionCalculator extends BaseCalculator {
 
     public void calculateRho2Value() {
         calculateRho2();
+    }
+
+    private double getDiffPrice(BaseSingleOption[] options) {
+        setOption(options[0]);
+        calculatePrice();
+        double lowerPrice = getResult();
+        setOption(options[1]);
+        calculatePrice();
+        double upperPrice = getResult();
+        //reset;
+        setOption(option);
+        return upperPrice - lowerPrice;
+    }
+
+    private double getDiffDelta(BaseSingleOption[] options) {
+        setOption(options[0]);
+        calculateDelta();
+        double lowerDelta = getResult();
+        setOption(options[1]);
+        calculateDelta();
+        double upperDelta = getResult();
+        //reset;
+        setOption(option);
+        return upperDelta - lowerDelta;
     }
 
 }
