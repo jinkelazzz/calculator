@@ -4,6 +4,7 @@ import flanagan.math.Matrix;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.concurrent.*;
 
 /**
  * @author liangcy
@@ -12,24 +13,15 @@ import java.util.Random;
 public class CalculateUtil {
 
     public static double normalRandom() {
-        Random x = new Random();
-        return x.nextGaussian();
-    }
-
-    public static double normalRandomWithSeed(long seed) {
-        Random x = new Random();
-        x.setSeed(seed);
-        return x.nextGaussian();
+        return ThreadLocalRandom.current().nextGaussian();
     }
 
     /**
-     * 计算正态分布累计密度函数的子函数.
-     * (((an * x + a0) * x + a1)...) / ((b0 * x + b1)...)
-     *
+     * 计算正态分布累计密度函数的子函数
      * @param a 分子向量, 比分母向量长1;
      * @param b 分母向量;
      * @param x 乘数;
-     * @return
+     * @return (((an * x + a0) * x + a1)...) / ((b0 * x + b1)...)
      */
     private static double rollMultiplyDivide(double[] a, double[] b, double x) {
         int n = b.length;
@@ -44,7 +36,6 @@ public class CalculateUtil {
 
     /**
      * 计算正态分布累计密度函数的子函数
-     *
      * @param x
      * @return
      */
@@ -64,6 +55,14 @@ public class CalculateUtil {
      * ACM Transactions on Mathematical Software. 19, 22-32.
      */
     public static double normalCDF(double x) {
+        if(Double.isNaN(x)) {
+            return Double.NaN;
+        }
+
+        if(!Double.isFinite(x)) {
+            return (Math.signum(x) + 1) / 2;
+        }
+
         final double[] a = {2.2352520354606839287, 161.02823106855587881, 1067.6894854603709582, 18154.981253343561249,
                 0.065682337918207449113};
         final double[] b = {47.20258190468824187, 976.09855173777669322, 10260.932208618978205,
@@ -115,6 +114,10 @@ public class CalculateUtil {
         }
     }
 
+    /**
+     * @param x 实数
+     * @return 向"0"取整 e.g: fint(2.6) = 2, fint(-2.6) = -2;
+     */
     private static double fint(double x) {
         return (x >= 0.0) ? Math.floor(x) : -Math.floor(-x);
     }
@@ -250,11 +253,9 @@ public class CalculateUtil {
     }
 
     /**
-     * 对value进行相对宽度为diff的中间差分。
-     *
      * @param value 被差分的值
      * @param diff  宽度,正数
-     * @return
+     * @return 对value进行相对宽度为diff的中间差分。
      */
     public static double[] midDiffValue(double value, double diff) {
         double[] result = new double[2];
@@ -273,11 +274,9 @@ public class CalculateUtil {
     }
 
     /**
-     * 对value进行相对宽度为diff的向后差分。
-     *
      * @param value 被差分的值
      * @param diff  宽度,正数
-     * @return
+     * @return 对value进行相对宽度为diff的向后差分。
      */
     public static double[] backwardDiffValue(double value, double diff) {
         double[] result = new double[2];
@@ -294,6 +293,12 @@ public class CalculateUtil {
         return result;
     }
 
+    /**
+     * e.g: a = [1, 2, 3], b = [3, 2, 1] -> return [3, 2, 3]
+     * @param a 数组
+     * @param b 数组
+     * @return a, b中最大值组成的新数组
+     */
     public static double[] maxVector(double[] a, double[] b) {
         int n = a.length;
         double[] z = new double[n];
@@ -302,5 +307,35 @@ public class CalculateUtil {
         }
         return z;
     }
+
+    public static double quantile(double[] x, double q) {
+        int n = x.length;
+        Arrays.sort(x);
+        if(q <= 0) {
+            return x[0];
+        }
+        if(q >= 1) {
+            return x[n - 1];
+        }
+        double index = q * (n - 1);
+        if(index == (int) index) {
+            return x[(int) index];
+        }
+        int u = (int) Math.ceil(index);
+        int d = (int) Math.floor(index);
+        double weight = u - index;
+        return weight * x[d] + (1 - weight) * x[u];
+    }
+
+    public static ExecutorService createThreadPool(int threadNums) {
+        ThreadFactory factory = Executors.defaultThreadFactory();
+        return new ThreadPoolExecutor(threadNums, 2 * threadNums, 0, TimeUnit.NANOSECONDS,
+                new LinkedBlockingDeque<>(1024), factory, new ThreadPoolExecutor.AbortPolicy());
+    }
+
+    public static double getPastMillionSec(long startMillionSec) {
+        return System.currentTimeMillis() - startMillionSec;
+    }
+
 
 }
