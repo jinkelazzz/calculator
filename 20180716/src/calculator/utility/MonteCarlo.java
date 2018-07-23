@@ -18,13 +18,6 @@ public class MonteCarlo {
      * 蒙特卡洛模拟路径条数, [1 - 500,000]
      */
     private int pathSize = 10000;
-    /**
-     * 用来计算误差。默认三倍标准差。
-     */
-    private double monteCarloErrorMult = 3.0;
-
-
-
 
     public MonteCarlo() {
 
@@ -33,14 +26,6 @@ public class MonteCarlo {
     public MonteCarlo(int nodes, int pathSize) {
         this.setNodes(nodes);
         this.setPathSize(pathSize);
-    }
-
-    public double getMonteCarloErrorMult() {
-        return monteCarloErrorMult;
-    }
-
-    public void setMonteCarloErrorMult(double monteCarloErrorMult) {
-        this.monteCarloErrorMult = monteCarloErrorMult;
     }
 
     public int getNodes() {
