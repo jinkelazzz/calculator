@@ -1,5 +1,7 @@
 package underlying;
 
+import flanagan.math.DeepCopy;
+
 import java.io.Serializable;
 
 /**
@@ -19,11 +21,9 @@ public class Currency extends BaseUnderlying implements Serializable {
     }
 
     public Currency reverse() {
-        Currency currency = new Currency();
+        Currency currency = (Currency) DeepCopy.copy(this);
         currency.setSpotPrice(1.0 / getSpotPrice());
-        double r = getRiskFreeRate();
-        currency.setRiskFreeRate(getDividendRate());
-        currency.setDividendRate(r);
+        currency.swapRQ();
         return currency;
     }
 }

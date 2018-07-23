@@ -13,7 +13,6 @@ public class Future extends BaseUnderlying implements Serializable {
     public Future(double spot, double riskFreeRate) {
         this.setSpotPrice(spot);
         this.setRiskFreeRate(riskFreeRate);
-        this.setDividendRate(riskFreeRate);
     }
 
     private void doNothing() {

@@ -60,10 +60,22 @@ public abstract class BaseUnderlying implements Serializable {
         return getRiskFreeRate() - getDividendRate();
     }
 
-    @Override
+    public void swapRQ() {
+        double r = riskFreeRate;
+        double q = dividendRate;
+        setRiskFreeRate(q);
+        setDividendRate(r);
+    }
+
     /**
      * 打印参数
+     * @return 打印参数
      */
+    @Override
     public abstract String toString();
+
+    public boolean isValid() {
+        return spotPrice > 0;
+    }
 
 }
