@@ -1,9 +1,11 @@
 package option;
 
-
 import underlying.BaseUnderlying;
+import underlying.Future;
 import volatility.VolatilitySurface;
 import java.io.Serializable;
+
+
 
 /**
  * @author liangcy
@@ -11,19 +13,18 @@ import java.io.Serializable;
 public abstract class BaseSingleOption extends BaseOption implements Serializable {
 
     private VanillaOptionParams vanillaOptionParams = new VanillaOptionParams();
-    private GreekPrecisionParams precision = new GreekPrecisionParams();
+    private SingleOptionGreekParams precision = new SingleOptionGreekParams();
     private BaseUnderlying underlying;
     private VolatilitySurface volatilitySurface;
-
 
     public BaseSingleOption() {
     }
 
-    public GreekPrecisionParams getPrecision() {
+    public SingleOptionGreekParams getPrecision() {
         return precision;
     }
 
-    public void setPrecision(GreekPrecisionParams precision) {
+    public void setPrecision(SingleOptionGreekParams precision) {
         this.precision = precision;
     }
 
@@ -96,7 +97,7 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
      * 如果没有波动率曲面, 生成波动率平面;
      * 如果有波动率曲面, 以波动率为基准平移波动率曲面;
      */
-    public void refreshVolsurface() {
+    public void refreshVolSurface() {
         double vol = getVanillaOptionParams().getVolatility();
         if (volatilitySurface == null || !volatilitySurface.isValidSurface()) {
             setVolatilitySurface(new VolatilitySurface(vol));
@@ -138,6 +139,22 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
     public boolean isValid() {
         return underlying.isValid() && vanillaOptionParams.isValid();
     }
+
+    public double getVolatilityFromSurface() {
+        if(volatilitySurface.isValidSurface()) {
+            double s = underlying.getSpotPrice();
+            double k = vanillaOptionParams.getStrikePrice();
+            double t = vanillaOptionParams.getTimeRemaining();
+            return volatilitySurface.getVolatility(k / s, t);
+        }
+        return vanillaOptionParams.getVolatility();
+    }
+
+    public boolean isUnderlyingFuture() {
+        return underlying instanceof Future;
+    }
+
+
 
 }
 

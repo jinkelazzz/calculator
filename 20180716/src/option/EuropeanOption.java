@@ -24,7 +24,7 @@ public class EuropeanOption extends BaseSingleOption implements Serializable {
         this.setUnderlying((BaseUnderlying) DeepCopy.copy(option.getUnderlying()));
         this.setVanillaOptionParams((VanillaOptionParams) DeepCopy.copy(option.getVanillaOptionParams()));
         this.setVolatilitySurface((VolatilitySurface) DeepCopy.copy(option.getVolatilitySurface()));
-        this.setPrecision((GreekPrecisionParams) DeepCopy.copy(option.getPrecision()));
+        this.setPrecision((SingleOptionGreekParams) DeepCopy.copy(option.getPrecision()));
     }
 
     private Heston hestonParams = new Heston();

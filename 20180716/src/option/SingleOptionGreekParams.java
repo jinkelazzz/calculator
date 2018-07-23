@@ -10,13 +10,15 @@ import java.io.Serializable;
  *
  * @author liangcy
  */
-public class GreekPrecisionParams implements Serializable {
+public class SingleOptionGreekParams implements Serializable {
 
     private double underlyingPricePrecision = 1e-4;
     private double volatilityPrecision = 1e-4;
     private double timeRemainingPrecision = 1e-4;
     private double interestRatePrecision = 1e-4;
     private double eps = ConstantNumber.EPS * 2;
+
+
 
     public double getUnderlyingPricePrecision() {
         return underlyingPricePrecision;
@@ -49,5 +51,6 @@ public class GreekPrecisionParams implements Serializable {
     public void setInterestRatePrecision(double interestRatePrecision) {
         this.interestRatePrecision = Math.max(eps, interestRatePrecision);
     }
+
 
 }
