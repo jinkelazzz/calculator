@@ -192,10 +192,9 @@ public class BinaryBarrierOption extends BaseSingleOption implements Serializabl
         if (barrierOptionParams.isPayAtHit()) {
             double hitTime = hitBarrierTime(pricePath);
             return isHit(pricePath) ? cash * Math.exp(-hitTime * getUnderlying().getRiskFreeRate()) : 0;
-        } else {
-            //如果敲入期权触碰障碍或者敲出期权未触碰障碍
-            return isHit(pricePath) == barrierOptionParams.isIn() ? cash * getDiscountValueByRiskFreeRate() : 0;
         }
+        //如果敲入期权触碰障碍或者敲出期权未触碰障碍
+        return (isHit(pricePath) == barrierOptionParams.isIn()) ? cash * getDiscountValueByRiskFreeRate() : 0;
     }
 
     @Override
@@ -204,20 +203,24 @@ public class BinaryBarrierOption extends BaseSingleOption implements Serializabl
         calculator.setOption(this);
         if (barrierOptionParams.isPayAtHit()) {
             return calculator.a() * cash;
-        } else {
-            if (barrierOptionParams.isIn()) {
-                return (calculator.b2() + calculator.b4()) * cash;
-            } else {
-                return (getDiscountValueByDividendRate() - calculator.b2() - calculator.b4()) * cash;
-            }
         }
+        if (barrierOptionParams.isIn()) {
+            return (calculator.b2() + calculator.b4()) * cash;
+        }
+        return (getDiscountValueByDividendRate() - calculator.b2() - calculator.b4()) * cash;
     }
-
 
     @Override
     public String toString() {
         return super.toString() + sep +
                 getBarrierOptionParams().singleBarrierToString() + sep +
                 "cash: " + cash;
+    }
+
+    @Override
+    public boolean isValid() {
+        return super.isValid() &&
+                barrierOptionParams.isValidSingleBarrierParams() &&
+                cash > 0;
     }
 }

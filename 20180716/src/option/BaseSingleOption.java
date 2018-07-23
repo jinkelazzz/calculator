@@ -1,9 +1,8 @@
 package option;
 
-import calculator.utility.ConstantString;
+
 import underlying.BaseUnderlying;
 import volatility.VolatilitySurface;
-
 import java.io.Serializable;
 
 /**
@@ -76,22 +75,15 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
     }
 
     void swapRQ() {
-        double r = getUnderlying().getRiskFreeRate();
-        double q = getUnderlying().getDividendRate();
-        getUnderlying().setRiskFreeRate(q);
-        getUnderlying().setDividendRate(r);
+        underlying.swapRQ();
     }
 
     void swapCallPut() {
-        if (getVanillaOptionParams().isOptionTypeCall()) {
-            getVanillaOptionParams().setOptionType(OPTION_TYPE_PUT);
-        } else {
-            getVanillaOptionParams().setOptionType(OPTION_TYPE_CALL);
-        }
+        vanillaOptionParams.swapCallPut();
     }
 
     double getCostOfCarry() {
-        return getUnderlying().getCostOfCarry();
+        return underlying.getCostOfCarry();
     }
 
     double europeanVanillaPrice() {
@@ -106,11 +98,11 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
      */
     public void refreshVolsurface() {
         double vol = getVanillaOptionParams().getVolatility();
-        if (volatilitySurface == null) {
+        if (volatilitySurface == null || !volatilitySurface.isValidSurface()) {
             setVolatilitySurface(new VolatilitySurface(vol));
         } else {
-            double moneyness = getUnderlying().getSpotPrice() / getVanillaOptionParams().getStrikePrice();
-            double t = getVanillaOptionParams().getTimeRemaining();
+            double moneyness = underlying.getSpotPrice() / vanillaOptionParams.getStrikePrice();
+            double t = vanillaOptionParams.getTimeRemaining();
             double volFromSurface = volatilitySurface.getVolatility(moneyness, t);
             double diffVol = vol - volFromSurface;
             volatilitySurface.shiftVolatility(diffVol);
@@ -142,5 +134,10 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
         return getUnderlying().toString() + sep +
                 getVanillaOptionParams().toString();
     }
+
+    public boolean isValid() {
+        return underlying.isValid() && vanillaOptionParams.isValid();
+    }
+
 }
 

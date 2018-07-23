@@ -163,17 +163,20 @@ public class DoubleBinaryBarrierOption extends BaseSingleOption implements Seria
             return calculator.priceAtHit();
         }
         double outPrice = calculator.outPriceAtExpire();
-        if (barrierOptionParams.isIn()) {
-            return cash * getDiscountValueByRiskFreeRate() - outPrice;
-        } else {
-            return outPrice;
-        }
+        return barrierOptionParams.isIn() ? cash * getDiscountValueByRiskFreeRate() - outPrice : outPrice;
     }
 
     @Override
     public String toString() {
         return super.toString() + sep +
-                getBarrierOptionParams().doubleBarrierToString() + sep +
+                barrierOptionParams.doubleBarrierToString() + sep +
                 "cash: " + cash;
+    }
+
+    @Override
+    public boolean isValid() {
+        return super.isValid() &&
+                cash > 0 &&
+                barrierOptionParams.isValidDoubleBarrierParams(getVanillaOptionParams().getTimeRemaining());
     }
 }

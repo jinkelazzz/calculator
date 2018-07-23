@@ -62,16 +62,15 @@ class CurranCalculator implements MaximisationFunction {
             sum = sum + futurePricePoints[i] * CalculateUtil.normalCDF(x);
         }
         double x1 = (mu() - kappa) / volG();
-        double max = asianOption.getDiscountValueByRiskFreeRate() *
+        return asianOption.getDiscountValueByRiskFreeRate() *
                 (sum / n - asianOption.transformStrike() * CalculateUtil.normalCDF(x1));
-        return max;
     }
 
     public double curranPrice() {
         Maximisation maximisation = new Maximisation();
         double[] start = {asianOption.transformStrike()};
         double[] step = {0.001};
-        maximisation.nelderMead((MaximisationFunction) this::function, start, step);
+        maximisation.nelderMead(this, start, step);
         return maximisation.getMaximum();
     }
 }
@@ -288,8 +287,16 @@ public class AsianOption extends BaseSingleOption implements Serializable {
     @Override
     public String toString() {
         return super.toString() + sep +
-                "past average price:" + sep +
-                "past time:" + sep +
+                "past average price:" + pastAvgPrice + sep +
+                "past time:" + pastTime + sep +
                 "observe time points:" + Arrays.toString(observeTimePoints);
+    }
+
+    @Override
+    public boolean isValid() {
+        return super.isValid() &&
+                pastAvgPrice >= 0 &&
+                pastTime >= 0 &&
+                observeTimePoints.length > 0;
     }
 }

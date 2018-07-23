@@ -92,5 +92,19 @@ public class VanillaOptionParams implements Serializable {
         return isOptionTypeCall() ? 1 : -1;
     }
 
+    void swapCallPut() {
+        if(isOptionTypeCall()) {
+            setOptionType(BaseOption.OPTION_TYPE_PUT);
+        } else {
+            setOptionType(BaseOption.OPTION_TYPE_CALL);
+        }
+    }
+
+    public boolean isValid() {
+        return timeRemaining > 0 &&
+                volatility > 0 &&
+                targetPrice >= 0 &&
+                (BaseOption.OPTION_TYPE_CALL.equals(optionType) || BaseOption.OPTION_TYPE_PUT.equals(optionType));
+    }
 
 }

@@ -206,15 +206,11 @@ public class DoubleBarrierOption extends BaseSingleOption implements Serializabl
 
     @Override
     public double bsm() {
-        if (getBarrierOptionParams().isIn()) {
-            return europeanVanillaPrice() - bsmOut();
-        } else {
-            return bsmOut();
-        }
+        return barrierOptionParams.isIn() ? europeanVanillaPrice() - bsmOut() : bsmOut();
     }
 
     private double bsmOut() {
-        if (getBarrierOptionParams().isTouchDoubleBarrier(getUnderlying().getSpotPrice())) {
+        if (barrierOptionParams.isTouchDoubleBarrier(getUnderlying().getSpotPrice())) {
             return 0;
         }
         DoubleBarrierCalculator calculator = new DoubleBarrierCalculator();
@@ -225,6 +221,14 @@ public class DoubleBarrierOption extends BaseSingleOption implements Serializabl
     @Override
     public String toString() {
         return super.toString() + sep +
-                getBarrierOptionParams().doubleBarrierToString();
+                barrierOptionParams.doubleBarrierToString();
     }
+
+    @Override
+    public boolean isValid() {
+        return super.isValid() &&
+                barrierOptionParams.isValidDoubleBarrierParams(getVanillaOptionParams().getTimeRemaining());
+    }
+
+
 }

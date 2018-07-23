@@ -152,4 +152,19 @@ public class BarrierOptionParams implements Serializable {
                 "barrier type: " + barrierType;
     }
 
+    boolean isValidSingleBarrierParams() {
+        return barrierPrice > 0 &&
+                (BaseOption.BARRIER_TYPE_IN.equals(barrierType) || BaseOption.BARRIER_TYPE_OUT.equals(barrierType)) &&
+                (BaseOption.BARRIER_DIRECTION_UP.equals(barrierDirection) || BaseOption.BARRIER_DIRECTION_DOWN.equals(barrierDirection)) &&
+                (BaseOption.PAYOFF_TYPE_HIT.equals(payoffType) || BaseOption.PAYOFF_TYPE_EXPIRE.equals(payoffType));
+    }
+
+    boolean isValidDoubleBarrierParams(double timeRemaining) {
+        return lowerBarrierPrice > 0 &&
+                upperBarrierPrice > lowerBarrierPrice &&
+                upperBarrierPrice * Math.exp(upperCurve * timeRemaining) > lowerBarrierPrice * Math.exp(lowerCurve * timeRemaining) &&
+                (BaseOption.BARRIER_TYPE_IN.equals(barrierType) || BaseOption.BARRIER_TYPE_OUT.equals(barrierType)) &&
+                (BaseOption.PAYOFF_TYPE_HIT.equals(payoffType) || BaseOption.PAYOFF_TYPE_EXPIRE.equals(payoffType));
+    }
+
 }

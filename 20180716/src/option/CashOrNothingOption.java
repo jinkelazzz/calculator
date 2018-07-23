@@ -71,4 +71,10 @@ public class CashOrNothingOption extends BaseSingleOption {
         return super.toString() + sep +
                 "cash" + getCash();
     }
+
+    @Override
+    public boolean isValid() {
+        return super.isValid() &&
+                cash > 0;
+    }
 }

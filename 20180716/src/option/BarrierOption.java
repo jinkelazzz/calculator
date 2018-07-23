@@ -233,9 +233,8 @@ public class BarrierOption extends BaseSingleOption implements Serializable {
     public double bsm() {
         if (barrierOptionParams.isIn()) {
             return bsmIn() + getRealRebate();
-        } else {
-            return europeanVanillaPrice() - bsmIn() + getRealRebate();
         }
+        return europeanVanillaPrice() - bsmIn() + getRealRebate();
     }
 
     /**
@@ -245,7 +244,7 @@ public class BarrierOption extends BaseSingleOption implements Serializable {
      */
     private double bsmIn() {
         //敲入期权如果已敲入, 按普通欧式期权计算;
-        if (getBarrierOptionParams().isTouchSingleBarrier(getUnderlying().getSpotPrice())) {
+        if (barrierOptionParams.isTouchSingleBarrier(getUnderlying().getSpotPrice())) {
             return europeanVanillaPrice();
         }
         BarrierCalculator calculator = new BarrierCalculator();
@@ -253,9 +252,8 @@ public class BarrierOption extends BaseSingleOption implements Serializable {
         //(up&&call) || (down&&put)
         if (barrierOptionParams.isUp() == getVanillaOptionParams().isOptionTypeCall()) {
             return calculator.a() + calculator.d() * calculator.index();
-        } else {
-            return calculator.c() + calculator.b() * calculator.index();
         }
+        return calculator.c() + calculator.b() * calculator.index();
     }
 
     @Override
@@ -263,5 +261,11 @@ public class BarrierOption extends BaseSingleOption implements Serializable {
         return super.toString() + sep +
                 getBarrierOptionParams().singleBarrierToString() + sep +
                 "rebate: " + rebate;
+    }
+
+    @Override
+    public boolean isValid() {
+        return super.isValid() &&
+                barrierOptionParams.isValidSingleBarrierParams();
     }
 }
