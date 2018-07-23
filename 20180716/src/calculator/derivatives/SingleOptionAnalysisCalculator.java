@@ -4,8 +4,12 @@ import calculator.utility.NewtonIterationParams;
 import flanagan.roots.RealRoot;
 import flanagan.roots.RealRootDerivFunction;
 import option.BaseSingleOption;
+
+import javax.swing.text.html.Option;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Optional;
+
 import static calculator.utility.CalculatorError.*;
 
 /**
@@ -58,26 +62,24 @@ public class SingleOptionAnalysisCalculator extends BaseSingleOptionCalculator {
 
     /**
      * @return 获取对象的方法，先检查自身的方法，再检查继承来的方法
-     * @throws NoSuchMethodException
      */
-    private Method getMethod() throws NoSuchMethodException {
+    private Optional<Method> getMethod() {
         Class<?> c = option.getClass();
         String methodName = option.getVanillaOptionParams().getMethodName();
         try {
-            return c.getDeclaredMethod(methodName);
+            return Optional.of(c.getDeclaredMethod(methodName));
         } catch (NoSuchMethodException e) {
-            return c.getMethod(methodName);
+            try {
+                return Optional.of(c.getMethod(methodName));
+            } catch (NoSuchMethodException e1) {
+                return Optional.empty();
+            }
         }
     }
 
     @Override
     public boolean hasMethod() {
-        try {
-            getMethod();
-            return true;
-        } catch (NoSuchMethodException e) {
-            return false;
-        }
+        return getMethod().isPresent();
     }
 
     /**
@@ -85,8 +87,8 @@ public class SingleOptionAnalysisCalculator extends BaseSingleOptionCalculator {
      *
      * @param method 方法
      * @return 根据方法计算的价格。
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
+     * @throws InvocationTargetException 内部异常捕获
+     * @throws IllegalAccessException 非法访问方法
      */
     private double getPrice(Method method) throws InvocationTargetException, IllegalAccessException {
         method.setAccessible(true);
@@ -151,13 +153,12 @@ public class SingleOptionAnalysisCalculator extends BaseSingleOptionCalculator {
     public void calculatePrice() {
         resetCalculator();
 
-        Method method;
-        try {
-            method = getMethod();
-        } catch (NoSuchMethodException e) {
+        if(!hasMethod()) {
             setError(NOT_FOUND_METHOD);
             return;
         }
+
+        Method method = getMethod().get();
 
         try {
             double price = getPrice(method);
