@@ -5,6 +5,8 @@ import flanagan.math.Polynomial;
 import flanagan.math.VectorMaths;
 import option.EuropeanOption;
 
+import java.io.Serializable;
+
 /**
  * @author liangcy
  * @reference Hagan, Kumar, Lesniewski, Woodward (2002)
@@ -14,7 +16,7 @@ import option.EuropeanOption;
  * E[dz, dw] = rho * dt;
  * alpha is estimated by using ATM vol, see West (2005)
  */
-public class Sabr {
+public class Sabr implements Serializable{
     private EuropeanOption option;
     private double beta;
     private double volVolatility;
