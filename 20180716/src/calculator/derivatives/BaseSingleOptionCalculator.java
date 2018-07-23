@@ -282,7 +282,7 @@ public abstract class BaseSingleOptionCalculator extends BaseCalculator {
             return;
         }
 
-        if(option.getUnderlying() instanceof Future) {
+        if(option.isUnderlyingFuture()) {
             setResult(0);
             setError(NORMAL);
             return;

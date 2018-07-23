@@ -223,6 +223,9 @@ public class SingleOptionMonteCarloCalculator extends BaseSingleOptionCalculator
     }
 
     private double calculateRho2(List<double[]> randomNumbersList) {
+        if(option.isUnderlyingFuture()) {
+            return 0;
+        }
         ShiftSingleOption shiftSingleOption = shiftOption();
         shiftSingleOption.shiftDividendRate();
         double diffPrice = getDiffPrice(shiftSingleOption.getOptions(), randomNumbersList);
