@@ -1,10 +1,19 @@
 package calculator.derivatives;
 
+import calculator.utility.CalculateUtil;
+import calculator.utility.CalculatorError;
 import calculator.utility.MonteCarlo;
 import flanagan.analysis.Stat;
 import option.BaseSingleOption;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+
+
 import static calculator.utility.CalculatorError.*;
 
 /**
@@ -12,9 +21,8 @@ import static calculator.utility.CalculatorError.*;
  * 蒙特卡洛模拟可能会消耗大量时间和内存
  */
 public class SingleOptionMonteCarloCalculator extends BaseSingleOptionCalculator {
-
     private MonteCarlo monteCarloParams = new MonteCarlo();
-    private double monteCarloError = 0.0;
+    private static int nums = 50;
 
     public MonteCarlo getMonteCarloParams() {
         return monteCarloParams;
@@ -24,17 +32,22 @@ public class SingleOptionMonteCarloCalculator extends BaseSingleOptionCalculator
         this.monteCarloParams = monteCarloParams;
     }
 
-    public double getMonteCarloError() {
-        return monteCarloError;
-    }
-
-    private void setMonteCarloError(double monteCarloError) {
-        this.monteCarloError = monteCarloError;
-    }
-
     @Override
     public boolean hasMethod() {
         return option.hasMonteCarloMethod();
+    }
+
+    private MonteCarlo subMonteCarloParams() {
+        return new MonteCarlo(monteCarloParams.getNodes(), monteCarloParams.getPathSize() / nums);
+    }
+
+    private List<Future<Double>> createTask(Callable<Double> call) {
+        ExecutorService pool = CalculateUtil.createThreadPool(nums);
+        List<Future<Double>> futureList = new ArrayList<>(nums);
+        for (int i = 0; i < nums; i++) {
+            futureList.add(pool.submit(call));
+        }
+        return futureList;
     }
 
     @Override
@@ -44,8 +57,22 @@ public class SingleOptionMonteCarloCalculator extends BaseSingleOptionCalculator
             setError(UNSUPPORTED_METHOD);
             return;
         }
-        List<double[]> randomNumbersList = monteCarloParams.generateStandardNormalRandomNumberList();
-        calculatePrice(randomNumbersList);
+
+        Callable<Double> callPricePathList = () -> {
+            calculatePrice(subMonteCarloParams().generateStandardNormalRandomNumberList());
+            return getResult();
+        };
+        List<Future<Double>> futureList = createTask(callPricePathList);
+
+        double[] price = new double[nums];
+        try {
+            for (int i = 0; i < nums; i++) {
+                price[i] = futureList.get(i).get();
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            setError(CalculatorError.CALCULATE_FAILED);
+        }
+        setResult(Stat.mean(price));
     }
 
     private void calculatePrice(List<double[]> randomNumbersList) {
@@ -56,9 +83,6 @@ public class SingleOptionMonteCarloCalculator extends BaseSingleOptionCalculator
             resultList[i] = option.monteCarloPrice(pricePathList.get(i));
         }
         setResult(Stat.mean(resultList));
-        double sd = Stat.standardError(resultList);
-        setMonteCarloError(sd * monteCarloParams.getMonteCarloErrorMult() /
-                Math.sqrt(n));
         setError(NORMAL);
     }
 
@@ -124,9 +148,4 @@ public class SingleOptionMonteCarloCalculator extends BaseSingleOptionCalculator
 
     }
 
-    @Override
-    public void resetCalculator() {
-        super.resetCalculator();
-        setMonteCarloError(0.0);
-    }
 }
