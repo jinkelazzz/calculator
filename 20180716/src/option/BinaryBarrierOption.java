@@ -7,6 +7,7 @@ import underlying.BaseUnderlying;
 import volatility.VolatilitySurface;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 class BinaryBarrierCalculator {
     private BinaryBarrierOption option;
@@ -222,5 +223,26 @@ public class BinaryBarrierOption extends BaseSingleOption implements Serializabl
         return super.isValid() &&
                 barrierOptionParams.isValidSingleBarrierParams() &&
                 cash > 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        BinaryBarrierOption that = (BinaryBarrierOption) obj;
+        return Double.compare(that.cash, cash) == 0 &&
+                Objects.equals(barrierOptionParams, that.barrierOptionParams);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), cash, barrierOptionParams);
     }
 }

@@ -2,6 +2,8 @@ package option;
 
 import calculator.utility.CalculateUtil;
 
+import java.util.Objects;
+
 /**
  * 现金或空手期权
  *
@@ -46,7 +48,7 @@ public class CashOrNothingOption extends BaseSingleOption {
 
     @Override
     public double bsm() {
-        double d2 = new EuropeanOption(this).d2();
+        double d2 = europeanD2();
         return getDiscountValueByRiskFreeRate() * cash *
                 CalculateUtil.normalCDF(getVanillaOptionParams().indexOfOptionType() * d2);
     }
@@ -76,5 +78,26 @@ public class CashOrNothingOption extends BaseSingleOption {
     public boolean isValid() {
         return super.isValid() &&
                 cash > 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        CashOrNothingOption that = (CashOrNothingOption) obj;
+        return Double.compare(that.cash, cash) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), cash);
     }
 }

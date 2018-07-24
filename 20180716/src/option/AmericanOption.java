@@ -343,5 +343,4 @@ public class AmericanOption extends BaseSingleOption implements Serializable {
         option.swapCallPut();
         return option;
     }
-
 }

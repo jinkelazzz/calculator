@@ -4,6 +4,7 @@ import calculator.utility.CalculateUtil;
 import calculator.utility.MonteCarlo;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 class BarrierCalculator {
     private BarrierOption option;
@@ -31,13 +32,11 @@ class BarrierCalculator {
     }
 
     private double d1() {
-        EuropeanOption europeanOption = new EuropeanOption(option);
-        return europeanOption.d1();
+        return option.europeanD1();
     }
 
     private double d2() {
-        EuropeanOption europeanOption = new EuropeanOption(option);
-        return europeanOption.d2();
+        return option.europeanD2();
     }
 
     private double d3() {
@@ -61,7 +60,7 @@ class BarrierCalculator {
         EuropeanOption europeanOption = new EuropeanOption(option);
         europeanOption.getVanillaOptionParams().setStrikePrice(option.getBarrierOptionParams().getBarrierPrice());
         europeanOption.getVanillaOptionParams().setVolatility(option.volAtBarrier());
-        return -europeanOption.d2();
+        return -europeanOption.europeanD2();
     }
 
     private double e3() {
@@ -74,7 +73,7 @@ class BarrierCalculator {
         europeanOption.getVanillaOptionParams().setStrikePrice(option.getBarrierOptionParams().getBarrierPrice());
         europeanOption.getVanillaOptionParams().setVolatility(option.volAtBarrier());
         europeanOption.swapSpotStrike();
-        return -europeanOption.d2();
+        return -europeanOption.europeanD2();
     }
 
     /**
@@ -267,5 +266,26 @@ public class BarrierOption extends BaseSingleOption implements Serializable {
     public boolean isValid() {
         return super.isValid() &&
                 barrierOptionParams.isValidSingleBarrierParams();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        BarrierOption option = (BarrierOption) obj;
+        return Double.compare(option.rebate, rebate) == 0 &&
+                Objects.equals(barrierOptionParams, option.barrierOptionParams);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), barrierOptionParams, rebate);
     }
 }

@@ -9,6 +9,7 @@ import underlying.BaseUnderlying;
 import volatility.VolatilitySurface;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author liangcy
@@ -55,7 +56,7 @@ public class EuropeanOption extends BaseSingleOption implements Serializable {
         this.sabrParams = sabrParams;
     }
 
-    public double d1() {
+    double d1() {
         double k = getVanillaOptionParams().getStrikePrice();
         double t = getVanillaOptionParams().getTimeRemaining();
         double sigmaT = getVanillaOptionParams().sigmaT();
@@ -138,5 +139,28 @@ public class EuropeanOption extends BaseSingleOption implements Serializable {
         double addition = corradoSuParams.corradoSuAddition();
         double callPrice = Math.max(bsm() + addition, callLowerLimit());
         return getVanillaOptionParams().isOptionTypeCall() ? callPrice : (callPrice - callLowerLimit());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        EuropeanOption option = (EuropeanOption) obj;
+        return Objects.equals(hestonParams, option.hestonParams) &&
+                Objects.equals(sabrParams, option.sabrParams) &&
+                Objects.equals(corradoSuParams, option.corradoSuParams);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), hestonParams, sabrParams, corradoSuParams);
     }
 }

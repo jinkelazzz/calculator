@@ -12,6 +12,7 @@ import volatility.VolatilitySurface;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Objects;
 
 class CurranCalculator implements MaximisationFunction {
 
@@ -294,5 +295,30 @@ public class AsianOption extends BaseSingleOption implements Serializable {
                 pastAvgPrice >= 0 &&
                 pastTime >= 0 &&
                 observeTimePoints.length > 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        AsianOption that = (AsianOption) obj;
+        return Double.compare(that.pastTime, pastTime) == 0 &&
+                Double.compare(that.pastAvgPrice, pastAvgPrice) == 0 &&
+                Arrays.equals(observeTimePoints, that.observeTimePoints);
+    }
+
+    @Override
+    public int hashCode() {
+
+        int result = Objects.hash(super.hashCode(), pastTime, pastAvgPrice);
+        result = 31 * result + Arrays.hashCode(observeTimePoints);
+        return result;
     }
 }

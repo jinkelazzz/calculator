@@ -1,6 +1,7 @@
 package option;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 class DoubleBinaryBarrierOptionCalculator {
     private DoubleBinaryBarrierOption option;
@@ -178,5 +179,27 @@ public class DoubleBinaryBarrierOption extends BaseSingleOption implements Seria
         return super.isValid() &&
                 cash > 0 &&
                 barrierOptionParams.isValidDoubleBarrierParams(getVanillaOptionParams().getTimeRemaining());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        DoubleBinaryBarrierOption that = (DoubleBinaryBarrierOption) obj;
+        return Double.compare(that.cash, cash) == 0 &&
+                Objects.equals(barrierOptionParams, that.barrierOptionParams);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), cash, barrierOptionParams);
     }
 }

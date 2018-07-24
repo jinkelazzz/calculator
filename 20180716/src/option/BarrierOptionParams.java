@@ -2,6 +2,7 @@ package option;
 
 import calculator.utility.ConstantString;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author liangcy
@@ -167,4 +168,30 @@ public class BarrierOptionParams implements Serializable {
                 (BaseOption.PAYOFF_TYPE_HIT.equals(payoffType) || BaseOption.PAYOFF_TYPE_EXPIRE.equals(payoffType));
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        BarrierOptionParams that = (BarrierOptionParams) obj;
+        return Double.compare(that.barrierPrice, barrierPrice) == 0 &&
+                Double.compare(that.upperBarrierPrice, upperBarrierPrice) == 0 &&
+                Double.compare(that.lowerBarrierPrice, lowerBarrierPrice) == 0 &&
+                Double.compare(that.upperCurve, upperCurve) == 0 &&
+                Double.compare(that.lowerCurve, lowerCurve) == 0 &&
+                maxIterationTimes == that.maxIterationTimes &&
+                Double.compare(that.tolerance, tolerance) == 0 &&
+                Objects.equals(barrierType, that.barrierType) &&
+                Objects.equals(barrierDirection, that.barrierDirection) &&
+                Objects.equals(payoffType, that.payoffType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(barrierPrice, barrierType, barrierDirection, payoffType,
+                upperBarrierPrice, lowerBarrierPrice, upperCurve, lowerCurve, maxIterationTimes, tolerance);
+    }
 }

@@ -4,6 +4,7 @@ import calculator.utility.ConstantString;
 import flanagan.math.DeepCopy;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author liangcy
@@ -107,4 +108,25 @@ public class VanillaOptionParams implements Serializable {
                 (BaseOption.OPTION_TYPE_CALL.equals(optionType) || BaseOption.OPTION_TYPE_PUT.equals(optionType));
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        VanillaOptionParams that = (VanillaOptionParams) obj;
+        return Double.compare(that.strikePrice, strikePrice) == 0 &&
+                Double.compare(that.timeRemaining, timeRemaining) == 0 &&
+                Double.compare(that.volatility, volatility) == 0 &&
+                Double.compare(that.targetPrice, targetPrice) == 0 &&
+                Objects.equals(optionType, that.optionType) &&
+                Objects.equals(methodName, that.methodName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(strikePrice, timeRemaining, volatility, targetPrice, optionType, methodName);
+    }
 }

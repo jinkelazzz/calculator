@@ -4,7 +4,7 @@ import underlying.BaseUnderlying;
 import underlying.Future;
 import volatility.VolatilitySurface;
 import java.io.Serializable;
-
+import java.util.Objects;
 
 
 /**
@@ -166,7 +166,34 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
         return Math.sqrt(Math.abs(logMoneyness) * 2 / t) + 0.1;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        BaseSingleOption option = (BaseSingleOption) obj;
+        return Objects.equals(vanillaOptionParams, option.vanillaOptionParams) &&
+                Objects.equals(precision, option.precision) &&
+                Objects.equals(underlying, option.underlying) &&
+                Objects.equals(volatilitySurface, option.volatilitySurface);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(vanillaOptionParams, precision, underlying, volatilitySurface);
+    }
 
+    public double europeanD1() {
+        EuropeanOption option = new EuropeanOption(this);
+        return option.d1();
+    }
+
+    public double europeanD2() {
+        EuropeanOption option = new EuropeanOption(this);
+        return option.d2();
+    }
 }
 

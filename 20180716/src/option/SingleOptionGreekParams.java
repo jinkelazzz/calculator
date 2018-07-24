@@ -3,6 +3,7 @@ package option;
 import calculator.utility.ConstantNumber;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * 设置Greeks计算精度
@@ -52,5 +53,25 @@ public class SingleOptionGreekParams implements Serializable {
         this.interestRatePrecision = Math.max(eps, interestRatePrecision);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        SingleOptionGreekParams that = (SingleOptionGreekParams) obj;
+        return Double.compare(that.underlyingPricePrecision, underlyingPricePrecision) == 0 &&
+                Double.compare(that.volatilityPrecision, volatilityPrecision) == 0 &&
+                Double.compare(that.timeRemainingPrecision, timeRemainingPrecision) == 0 &&
+                Double.compare(that.interestRatePrecision, interestRatePrecision) == 0 &&
+                Double.compare(that.eps, eps) == 0;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(underlyingPricePrecision, volatilityPrecision, timeRemainingPrecision,
+                interestRatePrecision, eps);
+    }
 }
