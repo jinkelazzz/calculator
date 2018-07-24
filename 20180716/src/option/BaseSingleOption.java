@@ -154,6 +154,18 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
         return underlying instanceof Future;
     }
 
+    /**
+     * 用于计算隐含波动率构造初始波动率
+     * @return 初始波动率
+     */
+    public double getInitialVol() {
+        double t = vanillaOptionParams.getTimeRemaining();
+        double k = vanillaOptionParams.getStrikePrice();
+        double futureValue = underlying.getFutureValue(t);
+        double logMoneyness = Math.log(futureValue / k);
+        return Math.sqrt(Math.abs(logMoneyness) * 2 / t) + 0.1;
+    }
+
 
 
 }
