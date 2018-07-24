@@ -158,6 +158,7 @@ public class SingleOptionAnalysisCalculator extends BaseSingleOptionCalculator {
             return;
         }
 
+        //这里未做try-catch是因为前面已经return走了;
         Method method = getMethod().get();
 
         double price;
