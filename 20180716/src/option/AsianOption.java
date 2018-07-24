@@ -190,6 +190,15 @@ public class AsianOption extends BaseSingleOption implements Serializable {
     }
 
     /**
+     * 当K*<0 时,看涨期权肯定被行使; 看跌期权肯定不行使
+     * @return 将期权当成远期合约的定价
+     */
+    private double futurePrice() {
+        return getVanillaOptionParams().isOptionTypeCall() ?
+                multi() * (m1() - transformStrike()) * getDiscountValueByRiskFreeRate() : 0;
+    }
+
+    /**
      * Turnbull & Wakeman 1991;
      *
      * @return option price
@@ -198,22 +207,13 @@ public class AsianOption extends BaseSingleOption implements Serializable {
     public double bsm() {
         double k = transformStrike();
         if (k <= 0) {
-            if (getVanillaOptionParams().isOptionTypeCall()) {
-                return multi() * (m1() - k) * getDiscountValueByRiskFreeRate();
-            } else {
-                return 0;
-            }
+            return futurePrice();
         }
 
         double vol = getVanillaOptionParams().getVolatility();
         double t = getVanillaOptionParams().getTimeRemaining();
         double m = m2() / (m1() * m1());
-        double aVol;
-        if (m <= 1) {
-            aVol = vol / Math.sqrt(3.0);
-        } else {
-            aVol = Math.sqrt(Math.log(m) / t);
-        }
+        double aVol = m <= 1 ? vol / Math.sqrt(3.0) : Math.sqrt(Math.log(m) / t);
 
         VanillaOptionParams newVanillaOptionParams = (VanillaOptionParams) DeepCopy.copy(getVanillaOptionParams());
         newVanillaOptionParams.setStrikePrice(k);
@@ -232,11 +232,7 @@ public class AsianOption extends BaseSingleOption implements Serializable {
     public double curran() {
         double k = transformStrike();
         if (k <= 0) {
-            if (getVanillaOptionParams().isOptionTypeCall()) {
-                return multi() * (m1() - k) * getDiscountValueByRiskFreeRate();
-            } else {
-                return 0;
-            }
+            return futurePrice();
         }
 
         CurranCalculator curranCalculator = new CurranCalculator();
