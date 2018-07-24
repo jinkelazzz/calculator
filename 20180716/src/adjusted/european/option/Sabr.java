@@ -3,9 +3,11 @@ package adjusted.european.option;
 import flanagan.complex.Complex;
 import flanagan.math.Polynomial;
 import flanagan.math.VectorMaths;
+import option.BaseSingleOption;
 import option.EuropeanOption;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author liangcy
@@ -17,16 +19,16 @@ import java.io.Serializable;
  * alpha is estimated by using ATM vol, see West (2005)
  */
 public class Sabr implements Serializable{
-    private EuropeanOption option;
+    private BaseSingleOption option;
     private double beta;
     private double volVolatility;
     private double rho;
 
-    public EuropeanOption getOption() {
+    public BaseSingleOption getOption() {
         return option;
     }
 
-    public void setOption(EuropeanOption option) {
+    public void setOption(BaseSingleOption option) {
         this.option = option;
     }
 
@@ -135,4 +137,24 @@ public class Sabr implements Serializable{
         return multi() * (VectorMaths.dot(aVec, paramVec));
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Sabr sabr = (Sabr) obj;
+        return Double.compare(sabr.beta, beta) == 0 &&
+                Double.compare(sabr.volVolatility, volVolatility) == 0 &&
+                Double.compare(sabr.rho, rho) == 0 &&
+                Objects.equals(option, sabr.option);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(option, beta, volVolatility, rho);
+    }
 }

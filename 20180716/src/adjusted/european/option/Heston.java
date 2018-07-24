@@ -3,9 +3,11 @@ package adjusted.european.option;
 import flanagan.complex.Complex;
 import flanagan.integration.IntegralFunction;
 import flanagan.integration.Integration;
+import option.BaseSingleOption;
 import option.EuropeanOption;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author liangcy
@@ -17,14 +19,14 @@ import java.io.Serializable;
  */
 public class Heston implements IntegralFunction, Serializable {
 
-    private EuropeanOption option;
+    private BaseSingleOption option;
 
-    public void setOption(EuropeanOption option) {
-        this.option = option;
+    public BaseSingleOption getOption() {
+        return option;
     }
 
-    public EuropeanOption getOption() {
-        return option;
+    public void setOption(BaseSingleOption option) {
+        this.option = option;
     }
 
     private double beta;
@@ -198,4 +200,27 @@ public class Heston implements IntegralFunction, Serializable {
         return integration.trapezium(accuracy, blocks) / Math.PI;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Heston heston = (Heston) obj;
+        return Double.compare(heston.beta, beta) == 0 &&
+                Double.compare(heston.longVolatility, longVolatility) == 0 &&
+                Double.compare(heston.rho, rho) == 0 &&
+                Double.compare(heston.volVolatility, volVolatility) == 0 &&
+                blocks == heston.blocks &&
+                Double.compare(heston.accuracy, accuracy) == 0 &&
+                Objects.equals(option, heston.option);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(option, beta, longVolatility, rho, volVolatility, blocks, accuracy);
+    }
 }

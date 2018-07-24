@@ -1,9 +1,11 @@
 package adjusted.european.option;
 
 import calculator.utility.CalculateUtil;
+import option.BaseSingleOption;
 import option.EuropeanOption;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author liangcy
@@ -11,7 +13,7 @@ import java.io.Serializable;
 public class CorradoSu implements Serializable {
     private double skew = 0;
     private double kurtosis = 3;
-    private EuropeanOption option;
+    private BaseSingleOption option;
 
     public double getSkew() {
         return skew;
@@ -29,22 +31,41 @@ public class CorradoSu implements Serializable {
         this.kurtosis = kurtosis;
     }
 
-    public EuropeanOption getOption() {
+    public BaseSingleOption getOption() {
         return option;
     }
 
-    public void setOption(EuropeanOption option) {
+    public void setOption(BaseSingleOption option) {
         this.option = option;
     }
 
     public double corradoSuAddition() {
         double sigmaT = option.getVanillaOptionParams().sigmaT();
         double w = skew * Math.pow(sigmaT, 3) / 6 + kurtosis * Math.pow(sigmaT, 4) / 24;
-        double d = option.d1() - Math.log(1 + w) / sigmaT;
+        double d = option.europeanD1() - Math.log(1 + w) / sigmaT;
         double s = option.getUnderlying().getSpotPrice();
         double q3 = s * sigmaT * (2 * sigmaT - d) * CalculateUtil.normalPDF(d) / (6 * (1 + w));
         double q4 = s * sigmaT * (d * d - 3 * d * sigmaT + 3 * sigmaT * sigmaT - 1) *
                 CalculateUtil.normalPDF(d) / (24 * (1 + w));
         return skew * q3 + (kurtosis - 3) * q4;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        CorradoSu corradoSu = (CorradoSu) obj;
+        return Double.compare(corradoSu.skew, skew) == 0 &&
+                Double.compare(corradoSu.kurtosis, kurtosis) == 0 &&
+                Objects.equals(option, corradoSu.option);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(skew, kurtosis, option);
     }
 }
