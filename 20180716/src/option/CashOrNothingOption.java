@@ -78,6 +78,9 @@ public class CashOrNothingOption extends BaseSingleOption {
     public String toString() {
         return "CashOrNothingOption{" +
                 "cash=" + cash +
-                "} " + super.toString();
+                ", underlying=" + getUnderlying() +
+                ", vanillaOptionParams=" + getVanillaOptionParams() +
+                ", volatilitySurface=" + getVolatilitySurface() +
+                '}';
     }
 }

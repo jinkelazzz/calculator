@@ -1,7 +1,6 @@
 package option;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * @author liangcy

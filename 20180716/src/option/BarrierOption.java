@@ -261,11 +261,15 @@ public class BarrierOption extends BaseSingleOption implements Serializable {
                 barrierOptionParams.isValidSingleBarrierParams();
     }
 
+
     @Override
     public String toString() {
         return "BarrierOption{" +
                 "barrierOptionParams=" + barrierOptionParams.singleBarrierToString() +
                 ", rebate=" + rebate +
-                "} " + super.toString();
+                ", underlying=" + getUnderlying() +
+                ", vanillaOptionParams=" + getVanillaOptionParams() +
+                ", volatilitySurface=" + getVolatilitySurface() +
+                '}';
     }
 }

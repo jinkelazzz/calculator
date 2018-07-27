@@ -112,7 +112,7 @@ public class EuropeanOption extends BaseSingleOption implements Serializable {
         return getDiscountValueByRiskFreeRate() * Math.max(index * (st - k), 0);
     }
 
-    public double sabr() {
+    private double sabr() {
         sabrParams.setOption(this);
         double sabrVolatility = sabrParams.sabrVolatility();
         getVanillaOptionParams().setVolatility(sabrVolatility);
@@ -134,10 +134,23 @@ public class EuropeanOption extends BaseSingleOption implements Serializable {
         return getVanillaOptionParams().isOptionTypeCall() ? callPrice : (callPrice - callLowerLimit());
     }
 
-    public double corradoSu() {
+    private double corradoSu() {
         corradoSuParams.setOption(this);
         double addition = corradoSuParams.corradoSuAddition();
         double callPrice = Math.max(bsm() + addition, callLowerLimit());
         return getVanillaOptionParams().isOptionTypeCall() ? callPrice : (callPrice - callLowerLimit());
+    }
+
+
+    @Override
+    public String toString() {
+        return "EuropeanOption{" +
+                "hestonParams=" + hestonParams +
+                ", sabrParams=" + sabrParams +
+                ", corradoSuParams=" + corradoSuParams +
+                ", underlying=" + getUnderlying() +
+                ", vanillaOptionParams=" + getVanillaOptionParams() +
+                ", volatilitySurface=" + getVolatilitySurface() +
+                '}';
     }
 }

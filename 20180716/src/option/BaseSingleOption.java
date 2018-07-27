@@ -63,6 +63,10 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
         return this.getDiscountValue(q, t);
     }
 
+    double getMoneyness() {
+        return vanillaOptionParams.getStrikePrice() / underlying.getSpotPrice();
+    }
+
     private double getDiscountValue(double rate, double timeRemaining) {
         return Math.exp(-rate * timeRemaining);
     }
@@ -129,20 +133,14 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
         return new double[spotPrice.length];
     }
 
-
-
-
-
     public boolean isValid() {
         return underlying.isValid() && vanillaOptionParams.isValid();
     }
 
     public double getVolatilityFromSurface() {
         if(volatilitySurface.isValidSurface()) {
-            double s = underlying.getSpotPrice();
-            double k = vanillaOptionParams.getStrikePrice();
             double t = vanillaOptionParams.getTimeRemaining();
-            return volatilitySurface.getVolatility(k / s, t);
+            return volatilitySurface.getVolatility(getMoneyness(), t);
         }
         return vanillaOptionParams.getVolatility();
     }
@@ -173,13 +171,5 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
         return option.d2();
     }
 
-    @Override
-    public String toString() {
-        return "BaseSingleOption{" +
-                "vanillaOptionParams=" + vanillaOptionParams +
-                ", underlying=" + underlying +
-                ", volatilitySurface=" + volatilitySurface +
-                '}';
-    }
 }
 

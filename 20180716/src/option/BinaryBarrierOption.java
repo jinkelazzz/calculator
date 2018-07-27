@@ -223,6 +223,9 @@ public class BinaryBarrierOption extends BaseSingleOption implements Serializabl
         return "BinaryBarrierOption{" +
                 "cash=" + cash +
                 ", barrierOptionParams=" + barrierOptionParams.singleBarrierToString() +
-                "} " + super.toString();
+                ", underlying=" + getUnderlying() +
+                ", vanillaOptionParams=" + getVanillaOptionParams() +
+                ", volatilitySurface=" + getVolatilitySurface() +
+                '}';
     }
 }

@@ -343,4 +343,14 @@ public class AmericanOption extends BaseSingleOption implements Serializable {
         option.swapCallPut();
         return option;
     }
+
+
+    @Override
+    public String toString() {
+        return "AmericanOption{" +
+                "underlying=" + getUnderlying() +
+                ", vanillaOptionParams=" + getVanillaOptionParams() +
+                ", volatilitySurface=" + getVolatilitySurface() +
+                '}';
+    }
 }

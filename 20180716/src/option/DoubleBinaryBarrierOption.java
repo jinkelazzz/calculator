@@ -174,11 +174,15 @@ public class DoubleBinaryBarrierOption extends BaseSingleOption implements Seria
                 barrierOptionParams.isValidDoubleBarrierParams(getVanillaOptionParams().getTimeRemaining());
     }
 
+
     @Override
     public String toString() {
         return "DoubleBinaryBarrierOption{" +
                 "cash=" + cash +
                 ", barrierOptionParams=" + barrierOptionParams.doubleBarrierToString() +
-                "} " + super.toString();
+                ", underlying=" + getUnderlying() +
+                ", vanillaOptionParams=" + getVanillaOptionParams() +
+                ", volatilitySurface=" + getVolatilitySurface() +
+                '}';
     }
 }

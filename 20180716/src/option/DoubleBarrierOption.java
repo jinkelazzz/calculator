@@ -226,10 +226,14 @@ public class DoubleBarrierOption extends BaseSingleOption implements Serializabl
                 barrierOptionParams.isValidDoubleBarrierParams(getVanillaOptionParams().getTimeRemaining());
     }
 
+
     @Override
     public String toString() {
         return "DoubleBarrierOption{" +
                 "barrierOptionParams=" + barrierOptionParams.doubleBarrierToString() +
-                "} " + super.toString();
+                ", underlying=" + getUnderlying() +
+                ", vanillaOptionParams=" + getVanillaOptionParams() +
+                ", volatilitySurface=" + getVolatilitySurface() +
+                '}';
     }
 }

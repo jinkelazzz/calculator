@@ -94,8 +94,13 @@ public class SpreadOption extends BaseDoubleOption implements Serializable {
         return calculator.bsmPrice();
     }
 
+
     @Override
     public String toString() {
-        return null;
+        return "SpreadOption{" +
+                "option1=" + getOption1() +
+                ", option2=" + getOption2() +
+                ", rho=" + getRho() +
+                "} ";
     }
 }

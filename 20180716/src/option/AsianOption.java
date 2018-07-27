@@ -291,13 +291,15 @@ public class AsianOption extends BaseSingleOption implements Serializable {
                 observeTimePoints.length > 0;
     }
 
-
     @Override
     public String toString() {
         return "AsianOption{" +
                 "pastTime=" + pastTime +
                 ", pastAvgPrice=" + pastAvgPrice +
                 ", observeTimePoints=" + Arrays.toString(observeTimePoints) +
-                "} " + super.toString();
+                ", underlying=" + getUnderlying() +
+                ", vanillaOptionParams=" + getVanillaOptionParams() +
+                ", volatilitySurface=" + getVolatilitySurface() +
+                '}';
     }
 }
