@@ -1,82 +1,69 @@
 package portfolio;
 
 import calculator.derivatives.SingleOptionAnalysisCalculator;
-import flanagan.math.DeepCopy;
 import option.BaseSingleOption;
 import underlying.gbm.BaseUnderlying;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author liangcy
  */
 public class SingleOptionPortfolio implements Serializable {
-    private HashMap<BaseUnderlying, HashMap<BaseSingleOption, Integer>> optionPortfolio;
-    private HashMap<BaseUnderlying, Integer> underlyingPortfolio;
+    private List<BaseSingleOption> optionList;
+    private List<Double> optionPosition;
+    private double underlyingPosition;
+    private BaseUnderlying underlying;
+    private static SingleOptionAnalysisCalculator calculator = new SingleOptionAnalysisCalculator();
 
-    public HashMap<BaseUnderlying, HashMap<BaseSingleOption, Integer>> getOptionPortfolio() {
-        return optionPortfolio;
+    public List<BaseSingleOption> getOptionList() {
+        return optionList;
     }
 
-    public void setOptionPortfolio(HashMap<BaseUnderlying, HashMap<BaseSingleOption, Integer>> optionPortfolio) {
-        this.optionPortfolio = optionPortfolio;
+    public void setOptionList(List<BaseSingleOption> optionList) {
+        this.optionList = optionList;
     }
 
-    public HashMap<BaseUnderlying, Integer> getUnderlyingPortfolio() {
-        return underlyingPortfolio;
+    public List<Double> getOptionPosition() {
+        return optionPosition;
     }
 
-    public void setUnderlyingPortfolio(HashMap<BaseUnderlying, Integer> underlyingPortfolio) {
-        this.underlyingPortfolio = underlyingPortfolio;
+    public void setOptionPosition(List<Double> optionPosition) {
+        this.optionPosition = optionPosition;
     }
 
-    private double getSingleOptionPortfolioCost(HashMap<BaseSingleOption, Integer> portfolio) {
-        double[] cost = {0};
-        SingleOptionAnalysisCalculator calculator = new SingleOptionAnalysisCalculator();
-        portfolio.forEach((BaseSingleOption key, Integer value) -> {
-            calculator.setOption(key);
+    public double getUnderlyingPosition() {
+        return underlyingPosition;
+    }
+
+    public void setUnderlyingPosition(double underlyingPosition) {
+        this.underlyingPosition = underlyingPosition;
+    }
+
+    public BaseUnderlying getUnderlying() {
+        return underlying;
+    }
+
+    public void setUnderlying(BaseUnderlying underlying) {
+        this.underlying = underlying;
+    }
+
+
+
+    double getCost() {
+        int n = optionList.size();
+        double totalCost = 0;
+        for (int i = 0; i < n; i++) {
+            calculator.setOption(optionList.get(i));
             calculator.calculatePrice();
             if(calculator.isNormal()) {
-                //多仓的cost为负, 代表花费
-                cost[0] = cost[0] + calculator.getResult() * value * (-1);
+                totalCost = totalCost + calculator.getResult() * optionPosition.get(i) * (-1);
             }
-        });
-        return cost[0];
+        }
+        if(underlyingPosition != 0) {
+            totalCost = totalCost + underlying.getSpotPrice() * underlyingPosition * (-1);
+        }
+        return totalCost;
     }
-
-    private double getPortfolioCost() {
-        double[] cost = {0};
-        optionPortfolio.forEach((BaseUnderlying key, HashMap<BaseSingleOption, Integer> value) -> {
-            double sum = getSingleOptionPortfolioCost(value);
-            if(underlyingPortfolio.containsKey(key)) {
-                sum = sum + key.getSpotPrice() * underlyingPortfolio.get(key) * (-1);
-            }
-           cost[0] = cost[0] + sum;
-        });
-        return cost[0];
-    }
-
-    private void reverseUnderlyingPortfolio() {
-        underlyingPortfolio.forEach((key, value) -> underlyingPortfolio.put(key, -value));
-    }
-
-    private void reverseSingleOptionPortfolio(HashMap<BaseSingleOption, Integer> portfolio) {
-        portfolio.forEach((key, value) -> portfolio.put(key, -value));
-    }
-    private void reverseOptionPortfolio() {
-        optionPortfolio.forEach((key, value) -> reverseSingleOptionPortfolio(value));
-    }
-
-    public SingleOptionPortfolio reversePortfolio() {
-        SingleOptionPortfolio portfolioCopy = (SingleOptionPortfolio) DeepCopy.copy(this);
-        portfolioCopy.reverseOptionPortfolio();
-        portfolioCopy.reverseUnderlyingPortfolio();
-        return portfolioCopy;
-    }
-
-    private void updateOptionUnderlying(HashMap<BaseSingleOption, Integer> optionList, BaseUnderlying underlying) {
-        optionList.forEach((key, value) -> key.setUnderlying(underlying));
-    }
-
 }

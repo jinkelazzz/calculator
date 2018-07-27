@@ -1,10 +1,9 @@
 package option;
 
-import calculator.utility.ConstantString;
-
 import java.io.Serializable;
 
 /**
+ * 基础期权类 存放一些常数
  * @author liangcy
  */
 public abstract class BaseOption implements Serializable {
@@ -41,7 +40,6 @@ public abstract class BaseOption implements Serializable {
     public static final String PAYOFF_TYPE_HIT = "hit";
     public static final String PAYOFF_TYPE_EXPIRE = "expire";
 
-    String sep = ConstantString.SEPARATOR;
     /**
      * 最简单的解析解统称 bsm;
      *

@@ -168,13 +168,6 @@ public class DoubleBinaryBarrierOption extends BaseSingleOption implements Seria
     }
 
     @Override
-    public String toString() {
-        return super.toString() + sep +
-                barrierOptionParams.doubleBarrierToString() + sep +
-                "cash: " + cash;
-    }
-
-    @Override
     public boolean isValid() {
         return super.isValid() &&
                 cash > 0 &&
@@ -182,24 +175,10 @@ public class DoubleBinaryBarrierOption extends BaseSingleOption implements Seria
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        if (!super.equals(obj)) {
-            return false;
-        }
-        DoubleBinaryBarrierOption that = (DoubleBinaryBarrierOption) obj;
-        return Double.compare(that.cash, cash) == 0 &&
-                Objects.equals(barrierOptionParams, that.barrierOptionParams);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(super.hashCode(), cash, barrierOptionParams);
+    public String toString() {
+        return "DoubleBinaryBarrierOption{" +
+                "cash=" + cash +
+                ", barrierOptionParams=" + barrierOptionParams.doubleBarrierToString() +
+                "} " + super.toString();
     }
 }

@@ -13,8 +13,7 @@ public abstract class BaseUnderlying implements Serializable {
     private double riskFreeRate = 0.0;
     private double dividendRate = 0.0;
 
-    public BaseUnderlying() {
-    }
+    public BaseUnderlying() {}
 
     public double getSpotPrice() {
         return spotPrice;
@@ -70,22 +69,4 @@ public abstract class BaseUnderlying implements Serializable {
         return spotPrice > 0;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        BaseUnderlying that = (BaseUnderlying) obj;
-        return Double.compare(that.spotPrice, spotPrice) == 0 &&
-                Double.compare(that.riskFreeRate, riskFreeRate) == 0 &&
-                Double.compare(that.dividendRate, dividendRate) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(spotPrice, riskFreeRate, dividendRate);
-    }
 }

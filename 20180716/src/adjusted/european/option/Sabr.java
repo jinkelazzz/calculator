@@ -138,23 +138,11 @@ public class Sabr implements Serializable{
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        Sabr sabr = (Sabr) obj;
-        return Double.compare(sabr.beta, beta) == 0 &&
-                Double.compare(sabr.volVolatility, volVolatility) == 0 &&
-                Double.compare(sabr.rho, rho) == 0 &&
-                Objects.equals(option, sabr.option);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(option, beta, volVolatility, rho);
+    public String toString() {
+        return "Sabr{" +
+                "beta=" + beta +
+                ", volVolatility=" + volVolatility +
+                ", rho=" + rho +
+                '}';
     }
 }

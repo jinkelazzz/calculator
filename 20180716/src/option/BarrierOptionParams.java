@@ -1,6 +1,5 @@
 package option;
 
-import calculator.utility.ConstantString;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -139,18 +138,24 @@ public class BarrierOptionParams implements Serializable {
         return spotPrice > upperBarrierPrice || spotPrice < lowerBarrierPrice;
     }
 
+
+
     String singleBarrierToString() {
-        return "barrier price: " + barrierPrice + ConstantString.SEPARATOR +
-                "barrier type: " + barrierType + ConstantString.SEPARATOR +
-                "barrier direction: " + barrierDirection;
+        return "BarrierOptionParams{" +
+                "barrierPrice=" + barrierPrice +
+                ", barrierType='" + barrierType + '\'' +
+                ", barrierDirection='" + barrierDirection + '\'' +
+                '}';
     }
 
     String doubleBarrierToString() {
-        return "upper barrier: " + upperBarrierPrice + ConstantString.SEPARATOR +
-                "lower barrier: " + lowerBarrierPrice + ConstantString.SEPARATOR +
-                "upper curve: " + upperCurve + ConstantString.SEPARATOR +
-                "lower curve: " + lowerCurve + ConstantString.SEPARATOR +
-                "barrier type: " + barrierType;
+        return "BarrierOptionParams{" +
+                "barrierType='" + barrierType + '\'' +
+                ", upperBarrierPrice=" + upperBarrierPrice +
+                ", lowerBarrierPrice=" + lowerBarrierPrice +
+                ", upperCurve=" + upperCurve +
+                ", lowerCurve=" + lowerCurve +
+                '}';
     }
 
     boolean isValidSingleBarrierParams() {
@@ -166,32 +171,5 @@ public class BarrierOptionParams implements Serializable {
                 upperBarrierPrice * Math.exp(upperCurve * timeRemaining) > lowerBarrierPrice * Math.exp(lowerCurve * timeRemaining) &&
                 (BaseOption.BARRIER_TYPE_IN.equals(barrierType) || BaseOption.BARRIER_TYPE_OUT.equals(barrierType)) &&
                 (BaseOption.PAYOFF_TYPE_HIT.equals(payoffType) || BaseOption.PAYOFF_TYPE_EXPIRE.equals(payoffType));
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        BarrierOptionParams that = (BarrierOptionParams) obj;
-        return Double.compare(that.barrierPrice, barrierPrice) == 0 &&
-                Double.compare(that.upperBarrierPrice, upperBarrierPrice) == 0 &&
-                Double.compare(that.lowerBarrierPrice, lowerBarrierPrice) == 0 &&
-                Double.compare(that.upperCurve, upperCurve) == 0 &&
-                Double.compare(that.lowerCurve, lowerCurve) == 0 &&
-                maxIterationTimes == that.maxIterationTimes &&
-                Double.compare(that.tolerance, tolerance) == 0 &&
-                Objects.equals(barrierType, that.barrierType) &&
-                Objects.equals(barrierDirection, that.barrierDirection) &&
-                Objects.equals(payoffType, that.payoffType);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(barrierPrice, barrierType, barrierDirection, payoffType,
-                upperBarrierPrice, lowerBarrierPrice, upperCurve, lowerCurve, maxIterationTimes, tolerance);
     }
 }

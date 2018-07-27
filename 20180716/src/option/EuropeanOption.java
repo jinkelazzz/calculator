@@ -140,27 +140,4 @@ public class EuropeanOption extends BaseSingleOption implements Serializable {
         double callPrice = Math.max(bsm() + addition, callLowerLimit());
         return getVanillaOptionParams().isOptionTypeCall() ? callPrice : (callPrice - callLowerLimit());
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        if (!super.equals(obj)) {
-            return false;
-        }
-        EuropeanOption option = (EuropeanOption) obj;
-        return Objects.equals(hestonParams, option.hestonParams) &&
-                Objects.equals(sabrParams, option.sabrParams) &&
-                Objects.equals(corradoSuParams, option.corradoSuParams);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(super.hashCode(), hestonParams, sabrParams, corradoSuParams);
-    }
 }

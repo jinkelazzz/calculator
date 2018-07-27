@@ -3,6 +3,7 @@ package volatility;
 import adjusted.european.option.Heston;
 import adjusted.european.option.Sabr;
 import calculator.derivatives.SingleOptionAnalysisCalculator;
+import calculator.utility.CalculateUtil;
 import calculator.utility.Interpolation;
 import option.EuropeanOption;
 import underlying.gbm.BaseUnderlying;
@@ -190,34 +191,14 @@ public class VolatilitySurface implements Serializable {
         return this;
     }
 
-
-    /**
-     * 自动生成的equals方法
-     * @param obj
-     * @return 两个对象是否相等
-     */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        VolatilitySurface that = (VolatilitySurface) obj;
-        return Arrays.equals(volSurface, that.volSurface) &&
-                Arrays.equals(timeList, that.timeList) &&
-                Arrays.equals(moneynessList, that.moneynessList) &&
-                Objects.equals(interpolationMethod, that.interpolationMethod) &&
-                Objects.equals(extrapolationMethod, that.extrapolationMethod);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(interpolationMethod, extrapolationMethod);
-        result = 31 * result + Arrays.hashCode(volSurface);
-        result = 31 * result + Arrays.hashCode(timeList);
-        result = 31 * result + Arrays.hashCode(moneynessList);
-        return result;
+    public String toString() {
+        return "VolatilitySurface{" +
+                "volSurface=" + CalculateUtil.twoDArrayToString(volSurface) +
+                ", timeList=" + Arrays.toString(timeList) +
+                ", moneynessList=" + Arrays.toString(moneynessList) +
+                ", interpolationMethod='" + interpolationMethod + '\'' +
+                ", extrapolationMethod='" + extrapolationMethod + '\'' +
+                '}';
     }
 }

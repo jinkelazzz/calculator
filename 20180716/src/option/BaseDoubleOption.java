@@ -47,7 +47,10 @@ public abstract class BaseDoubleOption extends BaseOption implements Serializabl
 
     @Override
     public String toString() {
-        return "option1: " + option1.toString() + sep +
-                "option2: " + option2.toString();
+        return "BaseDoubleOption{" +
+                "option1=" + option1 +
+                ", option2=" + option2 +
+                ", rho=" + rho +
+                "} ";
     }
 }

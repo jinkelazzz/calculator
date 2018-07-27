@@ -1,8 +1,5 @@
 package option;
 
-import calculator.utility.ConstantString;
-import flanagan.math.DeepCopy;
-
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -73,18 +70,6 @@ public class VanillaOptionParams implements Serializable {
         return BaseOption.OPTION_TYPE_CALL.equals(optionType);
     }
 
-    @Override
-    public String toString() {
-        String sep = ConstantString.SEPARATOR;
-        return "vanilla parameters: " +
-                "option type: " + getOptionType() + sep +
-                "strike price: " + getStrikePrice() + sep +
-                "volatility: " + getVolatility() + sep +
-                "time remaining: " + getTimeRemaining() + sep +
-                "target price: " + getTargetPrice() + sep +
-                "method: " + getMethodName();
-    }
-
     /**
      *
      * @return call:1, put:-1;
@@ -109,24 +94,14 @@ public class VanillaOptionParams implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        VanillaOptionParams that = (VanillaOptionParams) obj;
-        return Double.compare(that.strikePrice, strikePrice) == 0 &&
-                Double.compare(that.timeRemaining, timeRemaining) == 0 &&
-                Double.compare(that.volatility, volatility) == 0 &&
-                Double.compare(that.targetPrice, targetPrice) == 0 &&
-                Objects.equals(optionType, that.optionType) &&
-                Objects.equals(methodName, that.methodName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(strikePrice, timeRemaining, volatility, targetPrice, optionType, methodName);
+    public String toString() {
+        return "VanillaOptionParams{" +
+                "strikePrice=" + strikePrice +
+                ", timeRemaining=" + timeRemaining +
+                ", volatility=" + volatility +
+                ", targetPrice=" + targetPrice +
+                ", optionType='" + optionType + '\'' +
+                ", methodName='" + methodName + '\'' +
+                '}';
     }
 }

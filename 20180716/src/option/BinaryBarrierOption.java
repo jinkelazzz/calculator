@@ -212,13 +212,6 @@ public class BinaryBarrierOption extends BaseSingleOption implements Serializabl
     }
 
     @Override
-    public String toString() {
-        return super.toString() + sep +
-                getBarrierOptionParams().singleBarrierToString() + sep +
-                "cash: " + cash;
-    }
-
-    @Override
     public boolean isValid() {
         return super.isValid() &&
                 barrierOptionParams.isValidSingleBarrierParams() &&
@@ -226,23 +219,10 @@ public class BinaryBarrierOption extends BaseSingleOption implements Serializabl
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        if (!super.equals(obj)) {
-            return false;
-        }
-        BinaryBarrierOption that = (BinaryBarrierOption) obj;
-        return Double.compare(that.cash, cash) == 0 &&
-                Objects.equals(barrierOptionParams, that.barrierOptionParams);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), cash, barrierOptionParams);
+    public String toString() {
+        return "BinaryBarrierOption{" +
+                "cash=" + cash +
+                ", barrierOptionParams=" + barrierOptionParams.singleBarrierToString() +
+                "} " + super.toString();
     }
 }

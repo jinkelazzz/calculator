@@ -69,35 +69,15 @@ public class CashOrNothingOption extends BaseSingleOption {
     }
 
     @Override
-    public String toString() {
-        return super.toString() + sep +
-                "cash" + getCash();
-    }
-
-    @Override
     public boolean isValid() {
         return super.isValid() &&
                 cash > 0;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        if (!super.equals(obj)) {
-            return false;
-        }
-        CashOrNothingOption that = (CashOrNothingOption) obj;
-        return Double.compare(that.cash, cash) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(super.hashCode(), cash);
+    public String toString() {
+        return "CashOrNothingOption{" +
+                "cash=" + cash +
+                "} " + super.toString();
     }
 }

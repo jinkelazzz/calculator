@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @author liangcy
  */
-public abstract class BaseVarCalculator implements Serializable{
+abstract class BaseVarCalculator implements Serializable{
 
 
 }

@@ -94,19 +94,4 @@ public class OptionTest {
         Assert.assertEquals((targetPrice - analysisCalculator.getResult())/ targetPrice, 0, 1e-14);
     }
 
-    @Test
-    public void testEquals() {
-        europeanOption.setUnderlying(createUnderlyingCase(spot, 100, 0.1, 0.1));
-        createVanillaOptionParams(105, 0.3, 1, BaseOption.OPTION_TYPE_PUT);
-        europeanOption.setVanillaOptionParams(vanillaOptionParams);
-        EuropeanOption option = (EuropeanOption) DeepCopy.copy(europeanOption);
-        Sabr sabr = new Sabr();
-        sabr.setBeta(1);
-        sabr.setRho(0.5);
-        option.setSabrParams(sabr);
-        BaseSingleOption option1 = (BaseSingleOption) option;
-        Assert.assertTrue(option1.equals(europeanOption));
-
-    }
-
 }

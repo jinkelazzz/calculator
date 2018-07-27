@@ -256,36 +256,16 @@ public class BarrierOption extends BaseSingleOption implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return super.toString() + sep +
-                getBarrierOptionParams().singleBarrierToString() + sep +
-                "rebate: " + rebate;
-    }
-
-    @Override
     public boolean isValid() {
         return super.isValid() &&
                 barrierOptionParams.isValidSingleBarrierParams();
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        if (!super.equals(obj)) {
-            return false;
-        }
-        BarrierOption option = (BarrierOption) obj;
-        return Double.compare(option.rebate, rebate) == 0 &&
-                Objects.equals(barrierOptionParams, option.barrierOptionParams);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), barrierOptionParams, rebate);
+    public String toString() {
+        return "BarrierOption{" +
+                "barrierOptionParams=" + barrierOptionParams.singleBarrierToString() +
+                ", rebate=" + rebate +
+                "} " + super.toString();
     }
 }

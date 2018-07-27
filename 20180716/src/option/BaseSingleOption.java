@@ -17,8 +17,7 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
     private BaseUnderlying underlying;
     private VolatilitySurface volatilitySurface;
 
-    public BaseSingleOption() {
-    }
+    BaseSingleOption() {}
 
     public SingleOptionGreekParams getPrecision() {
         return precision;
@@ -130,11 +129,8 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
         return new double[spotPrice.length];
     }
 
-    @Override
-    public String toString() {
-        return getUnderlying().toString() + sep +
-                getVanillaOptionParams().toString();
-    }
+
+
 
 
     public boolean isValid() {
@@ -167,26 +163,6 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
         return Math.sqrt(Math.abs(logMoneyness) * 2 / t) + 0.1;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        BaseSingleOption option = (BaseSingleOption) obj;
-        return Objects.equals(vanillaOptionParams, option.vanillaOptionParams) &&
-                Objects.equals(precision, option.precision) &&
-                Objects.equals(underlying, option.underlying) &&
-                Objects.equals(volatilitySurface, option.volatilitySurface);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(vanillaOptionParams, precision, underlying, volatilitySurface);
-    }
-
     public double europeanD1() {
         EuropeanOption option = new EuropeanOption(this);
         return option.d1();
@@ -195,6 +171,15 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
     public double europeanD2() {
         EuropeanOption option = new EuropeanOption(this);
         return option.d2();
+    }
+
+    @Override
+    public String toString() {
+        return "BaseSingleOption{" +
+                "vanillaOptionParams=" + vanillaOptionParams +
+                ", underlying=" + underlying +
+                ", volatilitySurface=" + volatilitySurface +
+                '}';
     }
 }
 

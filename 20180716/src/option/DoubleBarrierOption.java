@@ -221,35 +221,15 @@ public class DoubleBarrierOption extends BaseSingleOption implements Serializabl
 
 
     @Override
-    public String toString() {
-        return super.toString() + sep +
-                barrierOptionParams.doubleBarrierToString();
-    }
-
-    @Override
     public boolean isValid() {
         return super.isValid() &&
                 barrierOptionParams.isValidDoubleBarrierParams(getVanillaOptionParams().getTimeRemaining());
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        if (!super.equals(o)) {
-            return false;
-        }
-        DoubleBarrierOption that = (DoubleBarrierOption) o;
-        return Objects.equals(barrierOptionParams, that.barrierOptionParams);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(super.hashCode(), barrierOptionParams);
+    public String toString() {
+        return "DoubleBarrierOption{" +
+                "barrierOptionParams=" + barrierOptionParams.doubleBarrierToString() +
+                "} " + super.toString();
     }
 }

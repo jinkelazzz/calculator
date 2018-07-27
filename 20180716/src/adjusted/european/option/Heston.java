@@ -201,26 +201,12 @@ public class Heston implements IntegralFunction, Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        Heston heston = (Heston) obj;
-        return Double.compare(heston.beta, beta) == 0 &&
-                Double.compare(heston.longVolatility, longVolatility) == 0 &&
-                Double.compare(heston.rho, rho) == 0 &&
-                Double.compare(heston.volVolatility, volVolatility) == 0 &&
-                blocks == heston.blocks &&
-                Double.compare(heston.accuracy, accuracy) == 0 &&
-                Objects.equals(option, heston.option);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(option, beta, longVolatility, rho, volVolatility, blocks, accuracy);
+    public String toString() {
+        return "Heston{" +
+                "beta=" + beta +
+                ", longVolatility=" + longVolatility +
+                ", rho=" + rho +
+                ", volVolatility=" + volVolatility +
+                '}';
     }
 }

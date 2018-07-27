@@ -51,21 +51,10 @@ public class CorradoSu implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        CorradoSu corradoSu = (CorradoSu) obj;
-        return Double.compare(corradoSu.skew, skew) == 0 &&
-                Double.compare(corradoSu.kurtosis, kurtosis) == 0 &&
-                Objects.equals(option, corradoSu.option);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(skew, kurtosis, option);
+    public String toString() {
+        return "CorradoSu{" +
+                "skew=" + skew +
+                ", kurtosis=" + kurtosis +
+                '}';
     }
 }

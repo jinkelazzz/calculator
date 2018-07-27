@@ -281,13 +281,7 @@ public class AsianOption extends BaseSingleOption implements Serializable {
         }
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + sep +
-                "past average price:" + pastAvgPrice + sep +
-                "past time:" + pastTime + sep +
-                "observe time points:" + Arrays.toString(observeTimePoints);
-    }
+
 
     @Override
     public boolean isValid() {
@@ -297,28 +291,13 @@ public class AsianOption extends BaseSingleOption implements Serializable {
                 observeTimePoints.length > 0;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        if (!super.equals(obj)) {
-            return false;
-        }
-        AsianOption that = (AsianOption) obj;
-        return Double.compare(that.pastTime, pastTime) == 0 &&
-                Double.compare(that.pastAvgPrice, pastAvgPrice) == 0 &&
-                Arrays.equals(observeTimePoints, that.observeTimePoints);
-    }
 
     @Override
-    public int hashCode() {
-
-        int result = Objects.hash(super.hashCode(), pastTime, pastAvgPrice);
-        result = 31 * result + Arrays.hashCode(observeTimePoints);
-        return result;
+    public String toString() {
+        return "AsianOption{" +
+                "pastTime=" + pastTime +
+                ", pastAvgPrice=" + pastAvgPrice +
+                ", observeTimePoints=" + Arrays.toString(observeTimePoints) +
+                "} " + super.toString();
     }
 }

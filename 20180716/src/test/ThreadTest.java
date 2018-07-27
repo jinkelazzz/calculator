@@ -2,12 +2,14 @@ package test;
 
 import calculator.derivatives.SingleOptionAnalysisCalculator;
 import calculator.derivatives.SingleOptionMonteCarloCalculator;
+import calculator.utility.CalculateUtil;
 import calculator.utility.MonteCarlo;
 import option.EuropeanOption;
 import option.VanillaOptionParams;
 import org.junit.Assert;
 import org.junit.Test;
 
+import javax.xml.ws.RequestWrapper;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -70,6 +72,12 @@ public class ThreadTest {
         System.out.println(analysisCalculator.getResult());
         System.out.println(calculator.getResult());
         Assert.assertEquals(calculator.getError().getIndex(), 0);
+    }
+
+    @Test
+    public void test2() {
+        double[][] a = {{1, 2}, {3, 4}};
+        System.out.println(CalculateUtil.twoDArrayToString(a));
     }
 
 
