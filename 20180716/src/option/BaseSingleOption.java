@@ -1,7 +1,7 @@
 package option;
 
-import underlying.BaseUnderlying;
-import underlying.Future;
+import underlying.gbm.BaseUnderlying;
+import underlying.gbm.Future;
 import volatility.VolatilitySurface;
 import java.io.Serializable;
 import java.util.Objects;
@@ -135,6 +135,7 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
         return getUnderlying().toString() + sep +
                 getVanillaOptionParams().toString();
     }
+
 
     public boolean isValid() {
         return underlying.isValid() && vanillaOptionParams.isValid();

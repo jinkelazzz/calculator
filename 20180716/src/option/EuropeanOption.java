@@ -5,7 +5,7 @@ import adjusted.european.option.Heston;
 import adjusted.european.option.Sabr;
 import calculator.utility.CalculateUtil;
 import flanagan.math.DeepCopy;
-import underlying.BaseUnderlying;
+import underlying.gbm.BaseUnderlying;
 import volatility.VolatilitySurface;
 
 import java.io.Serializable;

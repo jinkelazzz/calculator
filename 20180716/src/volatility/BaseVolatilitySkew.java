@@ -3,7 +3,7 @@ package volatility;
 import calculator.derivatives.SingleOptionAnalysisCalculator;
 import flanagan.math.VectorMaths;
 import option.BaseSingleOption;
-import underlying.BaseUnderlying;
+import underlying.gbm.BaseUnderlying;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,6 +89,14 @@ class VolatilitySkewParams implements Serializable {
 class RangeParams implements Serializable {
     private double downCutoff;
     private double upCutoff;
+
+    public void setDownCutoff(double downCutoff) {
+        this.downCutoff = downCutoff;
+    }
+
+    public void setUpCutoff(double upCutoff) {
+        this.upCutoff = upCutoff;
+    }
 
     double getDownCutoff() {
         return downCutoff;

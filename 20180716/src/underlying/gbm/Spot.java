@@ -1,4 +1,4 @@
-package underlying;
+package underlying.gbm;
 
 import java.io.Serializable;
 
@@ -10,14 +10,6 @@ import java.io.Serializable;
 public class Spot extends BaseUnderlying implements Serializable {
     public Spot() {
 
-    }
-
-    @Override
-    public String toString() {
-        return "Underlying type: spot" + sep +
-                "spot price:" + getSpotPrice() + sep +
-                "risk-free rate:" + getRiskFreeRate() + sep +
-                "dividend rate:" + getDividendRate();
     }
 
     public Spot(double spotPrice, double riskFreeRate) {
@@ -32,4 +24,12 @@ public class Spot extends BaseUnderlying implements Serializable {
     }
 
 
+    @Override
+    public String toString() {
+        return "Spot{" +
+                "spotPrice=" + getSpotPrice() +
+                ", riskFreeRate=" + getRiskFreeRate() +
+                ", dividendRate=" + getDividendRate() +
+                '}';
+    }
 }

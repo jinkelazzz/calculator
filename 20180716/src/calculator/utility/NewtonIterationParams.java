@@ -1,9 +1,11 @@
 package calculator.utility;
 
+import java.io.Serializable;
+
 /**
  * @author liangcy
  */
-public class NewtonIterationParams {
+public class NewtonIterationParams implements Serializable {
     private int iterations = 1000;
     private double tol = 1e-12;
 
@@ -22,4 +24,6 @@ public class NewtonIterationParams {
     public void setTol(double tol) {
         this.tol = Math.max(1e-10, tol);
     }
+
+
 }

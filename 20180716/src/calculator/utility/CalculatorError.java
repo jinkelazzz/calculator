@@ -43,10 +43,6 @@ public enum CalculatorError {
         return index;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
     CalculatorError(int index) {
         this.index = index;
     }

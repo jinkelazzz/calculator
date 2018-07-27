@@ -1,4 +1,4 @@
-package underlying;
+package rate;
 
 import calculator.utility.Interpolation;
 

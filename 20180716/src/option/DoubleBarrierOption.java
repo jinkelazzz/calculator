@@ -219,6 +219,7 @@ public class DoubleBarrierOption extends BaseSingleOption implements Serializabl
         return calculator.outPrice();
     }
 
+
     @Override
     public String toString() {
         return super.toString() + sep +

@@ -1,4 +1,4 @@
-package underlying;
+package underlying.gbm;
 
 import java.io.Serializable;
 
@@ -36,9 +36,9 @@ public class Future extends BaseUnderlying implements Serializable {
 
     @Override
     public String toString() {
-        return "Underlying type: future" + sep +
-                "spot price: " + getSpotPrice() + sep +
-                "risk-free rate: " + getRiskFreeRate();
+        return "Future{" +
+                "spotPrice=" + getSpotPrice() +
+                ", riskFreeRate=" + getRiskFreeRate() +
+                '}';
     }
-
 }

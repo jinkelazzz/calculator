@@ -74,23 +74,21 @@ public class Interpolation {
         return CalculateUtil.transpose(removeRows(index, CalculateUtil.transpose(x)));
     }
 
-    public static HashMap<String, double[][]> ignoreNaN(double[] x, double[] y, double[][] z) {
+    private static HashMap<String, double[][]> ignoreNaN(double[] x, double[] y, double[][] z) {
         HashMap<String, double[][]> result = new HashMap<>(3);
         int n = x.length;
         int m = y.length;
         //记录含有NaN的行和列
         ArrayList<Integer> row = new ArrayList<>();
         ArrayList<Integer> col = new ArrayList<>();
-        for (int i = 0; i < m; ++i) {
-            for (int j = 0; j < n; ++j) {
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
                 if (Double.isNaN(z[i][j])) {
                     row.add(i);
                     col.add(j);
                 }
             }
         }
-        uniqueAndSort(row, false);
-        uniqueAndSort(col, false);
 
         int nRow = row.size();
         int nCol = col.size();
@@ -102,6 +100,8 @@ public class Interpolation {
             result.put("z", z);
             return result;
         }
+        uniqueAndSort(row, false);
+        uniqueAndSort(col, false);
         if (nRow <= nCol) {
             // remove row(s) with NaN;
             double[][] z1 = removeRows(row, z);
@@ -165,7 +165,7 @@ public class Interpolation {
             a[i] = (m[i + 1] - m[i]) / (6 * h[i]);
             c[i] = (y[i + 1] - y[i]) / h[i] - m[i] * h[i] / 2 - (m[i + 1] - m[i]) * h[i] / 6;
         }
-        HashMap<String, double[]> result = new HashMap<>(16);
+        HashMap<String, double[]> result = new HashMap<>(6);
         result.put("a", a);
         result.put("b", b);
         result.put("c", c);
@@ -204,7 +204,7 @@ public class Interpolation {
         return new Matrix(mat);
     }
 
-    private static double getSplinePoint(HashMap<String, double[]> cs, double x0, String method) {
+    public static double getSplinePoint(HashMap<String, double[]> cs, double x0, String method) {
         double[] x = cs.get("x");
         double[] a = cs.get("a");
         double[] b = cs.get("b");
@@ -247,10 +247,67 @@ public class Interpolation {
         }
     }
 
+    public static double getSplineSlope(HashMap<String, double[]> cs, double x0, String method) {
+        double[] x = cs.get("x");
+        double[] a = cs.get("a");
+        double[] b = cs.get("b");
+        double[] c = cs.get("c");
+        int n = x.length;
+        double y0 = Double.NaN;
+        if (x0 < x[0]) {
+            if (EXTRAPOLATION_METHOD_NATURE.equals(method)) {
+                double h = x0 - x[0];
+                y0 = 3 * a[0] * Math.pow(h, 2) + 2 * b[0] * h + c[0];
+            } else if (EXTRAPOLATION_METHOD_TANGENT.equals(method)) {
+                double h = x0 - x[0];
+                y0 = c[0];
+            } else {
+                y0 = 0;
+            }
+            return y0;
+        } else if (x0 > x[n - 1]) {
+            if (EXTRAPOLATION_METHOD_NATURE.equals(method)) {
+                double h = x0 - x[n - 2];
+                y0 = 3 * a[n - 2] * Math.pow(h, 2) + 2 * b[n - 2] * h + c[n - 2];
+            } else if (EXTRAPOLATION_METHOD_TANGENT.equals(method)) {
+                double h1 = x[n - 1] - x[n - 2];
+                y0 = (3 * a[n - 2] * h1 + 2 * b[n - 2]) * h1 + c[n - 2];
+            } else {
+                y0 = 0;
+            }
+            return y0;
+        } else {
+            for (int i = 0; i < n - 1; ++i) {
+                if (x0 >= x[i] && x0 <= x[i + 1]) {
+                    double h = x0 - x[i];
+                    y0 = 3 * a[i] * (Math.pow(h, 2)) + 2 * b[i] * h + c[i];
+                    return y0;
+                }
+            }
+            return y0;
+        }
+    }
+
     public static double interp1(double[] x, double[] y, double x0, String csMethod, String exMethod) {
         return getSplinePoint(cubicSplineParameter(x, y, csMethod), x0, exMethod);
     }
 
+    public static double interp1Slope(double[] x, double[] y, double x0, String csMethod, String exMethod) {
+        return getSplineSlope(cubicSplineParameter(x, y, csMethod), x0, exMethod);
+    }
+
+
+    /**
+     *
+     * @param x n维数组
+     * @param y m维数组
+     * @param z m * n维数组(m行 n列)
+     * @param x0 插值的x点
+     * @param y0 插值的y点
+     * @param csMethod 内插法
+     * @param exMethod 外插法
+     * @return 曲面z上插值的结果
+     */
     public static double interp2(double[] x, double[] y, double[][] z, double x0, double y0,
                                  String csMethod, String exMethod) {
         //first ignore NaN and create a new surface;

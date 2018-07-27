@@ -1,4 +1,6 @@
-package underlying;
+package underlying.bond;
+
+import rate.InterestRateCurve;
 
 import java.io.Serializable;
 import java.util.Calendar;

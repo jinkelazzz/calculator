@@ -3,7 +3,7 @@ package option;
 import calculator.utility.CalculateUtil;
 import calculator.utility.MonteCarlo;
 import flanagan.math.DeepCopy;
-import underlying.BaseUnderlying;
+import underlying.gbm.BaseUnderlying;
 import volatility.VolatilitySurface;
 
 import java.io.Serializable;

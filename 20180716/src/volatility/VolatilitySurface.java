@@ -5,9 +5,11 @@ import adjusted.european.option.Sabr;
 import calculator.derivatives.SingleOptionAnalysisCalculator;
 import calculator.utility.Interpolation;
 import option.EuropeanOption;
-import underlying.BaseUnderlying;
+import underlying.gbm.BaseUnderlying;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * @author liangcy
@@ -78,6 +80,22 @@ public class VolatilitySurface implements Serializable {
                 interpolationMethod, extrapolationMethod);
     }
 
+    public double[] getVolatilitySkew(double timeRemaining) {
+        double[] volatilitySkew = new double[moneynessList.length];
+        for (int i = 0; i < moneynessList.length; i++) {
+            volatilitySkew[i] = getVolatility(moneynessList[i], timeRemaining);
+        }
+        return volatilitySkew;
+    }
+
+    public double[] getVolatilityTermStructure(double moneyness) {
+        double[] volTermStructure = new double[timeList.length];
+        for (int i = 0; i < timeList.length; i++) {
+            volTermStructure[i] = getVolatility(moneyness, timeList[i]);
+        }
+        return volTermStructure;
+    }
+
     public void shiftVolatility(double diffVol) {
         for (int i = 0; i < volSurface.length; i++) {
             for (int j = 0; j < volSurface[0].length; j++) {
@@ -96,8 +114,8 @@ public class VolatilitySurface implements Serializable {
     }
 
     /**
-     * 检查任意一维有无null值
-     * @return
+     *
+     * @return 检查任意一维有无null值
      */
     private boolean isNullSurface() {
         if(volSurface == null) {
@@ -172,4 +190,34 @@ public class VolatilitySurface implements Serializable {
         return this;
     }
 
+
+    /**
+     * 自动生成的equals方法
+     * @param obj
+     * @return 两个对象是否相等
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        VolatilitySurface that = (VolatilitySurface) obj;
+        return Arrays.equals(volSurface, that.volSurface) &&
+                Arrays.equals(timeList, that.timeList) &&
+                Arrays.equals(moneynessList, that.moneynessList) &&
+                Objects.equals(interpolationMethod, that.interpolationMethod) &&
+                Objects.equals(extrapolationMethod, that.extrapolationMethod);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(interpolationMethod, extrapolationMethod);
+        result = 31 * result + Arrays.hashCode(volSurface);
+        result = 31 * result + Arrays.hashCode(timeList);
+        result = 31 * result + Arrays.hashCode(moneynessList);
+        return result;
+    }
 }

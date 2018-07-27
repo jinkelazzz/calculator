@@ -337,5 +337,16 @@ public class CalculateUtil {
         return System.currentTimeMillis() - startMillionSec;
     }
 
+    public static double[] getLogReturn(double[] priceList) {
+        int n = priceList.length;
+        if(n <= 1) {
+            return new double[] {0};
+        }
+        double[] logReturn = new double[n - 1];
+        for (int i = 0; i < n - 1; i++) {
+            logReturn[i] = Math.log(priceList[i + 1] / priceList[i]);
+        }
+        return logReturn;
+    }
 
 }

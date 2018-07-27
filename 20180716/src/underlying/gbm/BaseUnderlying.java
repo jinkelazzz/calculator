@@ -1,8 +1,7 @@
-package underlying;
-
-import calculator.utility.ConstantString;
+package underlying.gbm;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * 这里的underlying要服从几何布朗运动;例如现货、期货等
@@ -13,7 +12,6 @@ public abstract class BaseUnderlying implements Serializable {
     private double spotPrice;
     private double riskFreeRate = 0.0;
     private double dividendRate = 0.0;
-    String sep = ConstantString.SEPARATOR;
 
     public BaseUnderlying() {
     }
@@ -43,21 +41,15 @@ public abstract class BaseUnderlying implements Serializable {
     }
 
     public double getFutureValue(double timeRemaining) {
-        double r = this.getRiskFreeRate();
-        double q = this.getDividendRate();
-        double s = this.getSpotPrice();
-        return s * Math.exp((r - q) * timeRemaining);
+        return spotPrice * Math.exp(getCostOfCarry() * timeRemaining);
     }
 
     public double getPresentValue(double timeRemaining) {
-        double r = this.getRiskFreeRate();
-        double q = this.getDividendRate();
-        double s = this.getSpotPrice();
-        return s * Math.exp(-(r - q) * timeRemaining);
+        return spotPrice * Math.exp(-getCostOfCarry() * timeRemaining);
     }
 
     public double getCostOfCarry() {
-        return getRiskFreeRate() - getDividendRate();
+        return riskFreeRate - dividendRate;
     }
 
     public void swapRQ() {
@@ -78,4 +70,22 @@ public abstract class BaseUnderlying implements Serializable {
         return spotPrice > 0;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        BaseUnderlying that = (BaseUnderlying) obj;
+        return Double.compare(that.spotPrice, spotPrice) == 0 &&
+                Double.compare(that.riskFreeRate, riskFreeRate) == 0 &&
+                Double.compare(that.dividendRate, dividendRate) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(spotPrice, riskFreeRate, dividendRate);
+    }
 }

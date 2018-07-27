@@ -1,17 +1,21 @@
 package test;
 
+import adjusted.european.option.Sabr;
 import calculator.derivatives.SingleOptionAnalysisCalculator;
 import calculator.derivatives.SingleOptionFiniteDifferenceCalculator;
 import calculator.derivatives.SingleOptionMonteCarloCalculator;
+import flanagan.math.DeepCopy;
 import option.*;
 import org.junit.Assert;
 import org.junit.Test;
-import underlying.BaseUnderlying;
-import underlying.Future;
-import underlying.Spot;
+import underlying.gbm.BaseUnderlying;
+import underlying.gbm.Future;
+import underlying.gbm.Spot;
 
+import static test.CalculatorCase.analysisCalculator;
 import static test.CalculatorCase.finiteDifferenceCalculator;
 import static test.SingleOptionCase.americanOption;
+import static test.SingleOptionCase.europeanOption;
 import static test.UnderlyingCase.spot;
 
 class CalculatorCase {
@@ -72,6 +76,37 @@ public class OptionTest {
         System.out.println(finiteDifferenceCalculator.getResult() + error);
         System.out.println(finiteDifferenceCalculator.getResult());
         Assert.assertEquals(0, finiteDifferenceCalculator.getError().getIndex());
+    }
+
+    @Test
+    public void test() {
+        double targetPrice = 30;
+        americanOption.setUnderlying(createUnderlyingCase(spot, 100, 0.1, 0.1));
+        createVanillaOptionParams(105, 0.3, 1, BaseOption.OPTION_TYPE_PUT);
+        americanOption.setVanillaOptionParams(vanillaOptionParams);
+        americanOption.getVanillaOptionParams().setTargetPrice(targetPrice);
+        analysisCalculator.setOption(americanOption);
+        analysisCalculator.calculateImpliedVolatility();
+        System.out.println(americanOption.getVanillaOptionParams().getVolatility());
+        analysisCalculator.calculatePrice();
+        System.out.println((targetPrice - analysisCalculator.getResult())/ targetPrice);
+        System.out.println(analysisCalculator.getError().getIndex());
+        Assert.assertEquals((targetPrice - analysisCalculator.getResult())/ targetPrice, 0, 1e-14);
+    }
+
+    @Test
+    public void testEquals() {
+        europeanOption.setUnderlying(createUnderlyingCase(spot, 100, 0.1, 0.1));
+        createVanillaOptionParams(105, 0.3, 1, BaseOption.OPTION_TYPE_PUT);
+        europeanOption.setVanillaOptionParams(vanillaOptionParams);
+        EuropeanOption option = (EuropeanOption) DeepCopy.copy(europeanOption);
+        Sabr sabr = new Sabr();
+        sabr.setBeta(1);
+        sabr.setRho(0.5);
+        option.setSabrParams(sabr);
+        BaseSingleOption option1 = (BaseSingleOption) option;
+        Assert.assertTrue(option1.equals(europeanOption));
+
     }
 
 }

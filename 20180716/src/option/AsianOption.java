@@ -7,7 +7,7 @@ import flanagan.interpolation.LinearInterpolation;
 import flanagan.math.DeepCopy;
 import flanagan.math.Maximisation;
 import flanagan.math.MaximisationFunction;
-import underlying.Future;
+import underlying.gbm.Future;
 import volatility.VolatilitySurface;
 
 import java.io.Serializable;
