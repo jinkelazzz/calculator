@@ -49,8 +49,6 @@ public class SingleOptionPortfolio implements Serializable {
         this.underlying = underlying;
     }
 
-
-
     double getCost() {
         int n = optionList.size();
         double totalCost = 0;

@@ -95,7 +95,7 @@ public class FiniteDifference implements Serializable {
     }
 
     /**
-     * @param option
+     * @param option BaseSingleOption
      * @return 差分系数矩阵, 该矩阵求逆计算速度较慢;
      * 是一个三对角矩阵,形如[[b0,c0,0,...,0],[a1,b1,c1,...,0],...,[0,...,0,an,bn]];
      */

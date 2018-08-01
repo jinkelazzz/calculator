@@ -11,11 +11,10 @@ import java.util.List;
 public class MonteCarlo {
     /**
      * nodes 不包含初始的 s0, 实际上 price path 的长度是 nodes+1;
-     * [1 - 10,000]
      */
     private int nodes = 500;
     /**
-     * 蒙特卡洛模拟路径条数, [1 - 500,000]
+     * 蒙特卡洛模拟路径条数
      */
     private int pathSize = 10000;
 
@@ -34,7 +33,6 @@ public class MonteCarlo {
 
     public void setNodes(int nodes) {
         nodes = Math.max(1, nodes);
-        nodes = Math.min(10000, nodes);
         this.nodes = nodes;
     }
 
@@ -44,7 +42,6 @@ public class MonteCarlo {
 
     public void setPathSize(int pathSize) {
         pathSize = Math.max(1, pathSize);
-        pathSize = Math.min(500000, pathSize);
         this.pathSize = pathSize;
     }
 

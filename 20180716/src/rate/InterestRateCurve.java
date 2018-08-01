@@ -1,6 +1,9 @@
 package rate;
 
 import calculator.utility.Interpolation;
+import underlying.bond.Bond;
+
+import java.util.ArrayList;
 
 /**
  * 利率曲线类
@@ -42,5 +45,13 @@ public class InterestRateCurve {
 
     public double getDiscountValue(double time) {
         return Math.exp(-getInterestRate(time) * time);
+    }
+
+    public InterestRateCurve constructRateCurve(ArrayList<Bond> bonds) {
+        /*TODO;
+        利用bonds list构造利率曲线
+        bootstrap method
+         */
+        return this;
     }
 }
