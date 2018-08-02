@@ -348,25 +348,4 @@ public class CalculateUtil {
         }
         return logReturn;
     }
-
-    public static String twoDArrayToString(double[][] array) {
-        if (array == null) {
-            return "null";
-        }
-        int iMax = array.length - 1;
-        if (iMax == -1) {
-            return "[]";
-        }
-
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append('[');
-        for (int i = 0; true; i++) {
-            stringBuilder.append(Arrays.toString(array[i]));
-            if (i == iMax) {
-                return stringBuilder.append(']').toString();
-            }
-            stringBuilder.append(", ");
-        }
-    }
-
 }
