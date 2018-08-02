@@ -194,7 +194,7 @@ public class VolatilitySurface implements Serializable {
     @Override
     public String toString() {
         return "VolatilitySurface{" +
-                "volSurface=" + CalculateUtil.twoDArrayToString(volSurface) +
+                "volSurface=" + Arrays.deepToString(volSurface) +
                 ", timeList=" + Arrays.toString(timeList) +
                 ", moneynessList=" + Arrays.toString(moneynessList) +
                 ", interpolationMethod='" + interpolationMethod + '\'' +
