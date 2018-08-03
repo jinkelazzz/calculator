@@ -11,7 +11,7 @@ import java.time.LocalDate;
  * @author liangcy
  */
 public class JriUtil {
-    private static Rengine engine = RengineUtil.getRengineInstance();
+    private static Rengine engine = RengineSingleton.INSTANCE.getRengineInstance();
 
     public HistoryPrice getHistoryPrice(String underlyingName, LocalDate startDate, LocalDate endDate) {
         String rFileName = "getWindData.R";
