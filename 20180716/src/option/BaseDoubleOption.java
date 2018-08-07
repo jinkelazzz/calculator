@@ -44,4 +44,5 @@ public abstract class BaseDoubleOption extends BaseOption implements Serializabl
         option2 = (BaseSingleOption) DeepCopy.copy(option1);
         option1 = (BaseSingleOption) DeepCopy.copy(optionTmp);
     }
+
 }

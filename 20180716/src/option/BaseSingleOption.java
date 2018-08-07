@@ -63,7 +63,11 @@ public abstract class BaseSingleOption extends BaseOption implements Serializabl
         return this.getDiscountValue(q, t);
     }
 
-    double getMoneyness() {
+    double getForwardPrice() {
+        return underlying.getFutureValue(vanillaOptionParams.getTimeRemaining());
+    }
+
+    private double getMoneyness() {
         return vanillaOptionParams.getStrikePrice() / underlying.getSpotPrice();
     }
 

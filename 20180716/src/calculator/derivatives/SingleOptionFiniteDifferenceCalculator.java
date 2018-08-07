@@ -50,7 +50,7 @@ public class SingleOptionFiniteDifferenceCalculator extends BaseSingleOptionCalc
         Matrix params = finiteDifference.paramsMatrix(option).inverse();
         //递推求解option price矩阵;
         for (int i = 1; i < n; i++) {
-            optionPriceMat = CalculateUtil.generateOneColMatrix(result[n - i]);
+            optionPriceMat = Matrix.columnMatrix(result[n - i]);
             result[n - i - 1] = params.times(optionPriceMat).getColumnCopy(0);
             if (option.isEarlyExercise()) {
                 result[n - i - 1] = CalculateUtil.maxVector(result[n - i - 1], exercisePrice);

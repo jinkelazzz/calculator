@@ -12,7 +12,6 @@ import volatility.VolatilitySurface;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Objects;
 
 class CurranCalculator implements MaximisationFunction {
 
@@ -67,7 +66,7 @@ class CurranCalculator implements MaximisationFunction {
                 (sum / n - asianOption.transformStrike() * CalculateUtil.normalCDF(x1));
     }
 
-    public double curranPrice() {
+    double curranPrice() {
         Maximisation maximisation = new Maximisation();
         double[] start = {asianOption.transformStrike()};
         double[] step = {0.001};

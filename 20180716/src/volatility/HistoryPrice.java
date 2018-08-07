@@ -323,15 +323,14 @@ public class HistoryPrice implements Serializable {
 
     /**
      * 利用收盘价估计GARCH volatility;
-     *
      * @param initialVol 即期波动率估计;
-     * @param t          这里的t不用年化;
+     * @param days          这里的t不用年化;
      * @return garch volatility, 其中long variance是历史方差
      */
-    public double garchVolatility(double initialVol, double t) {
+    public double garchVolatility(double initialVol, double days) {
         Garch garch = new Garch();
         garch.setPrice(close);
-        double dailyVolatility = garch.garchVol(initialVol * initialVol, t);
+        double dailyVolatility = garch.garchVol(initialVol * initialVol, days);
         return annualizedVolatility(dailyVolatility);
     }
 
@@ -349,6 +348,7 @@ public class HistoryPrice implements Serializable {
         estimation.setOption(option);
         return estimation.hestonEstimate();
     }
+
 
 
 }

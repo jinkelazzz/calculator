@@ -203,6 +203,13 @@ public class DynamicSpline extends BaseVolatilitySkew implements Serializable {
         return sort(logMoneynessList, impliedVolatilityList, vegaList);
     }
 
+    /**
+     *
+     * @param logMoneynessList
+     * @param volatilityList
+     * @param vegaList
+     * @return 将log Moneyness 排序
+     */
     private double[][] sort(double[] logMoneynessList, double[] volatilityList, double[] vegaList) {
         int n = logMoneynessList.length;
         ArrayMaths copyLogMoneynessList = new ArrayMaths(DeepCopy.copy(logMoneynessList));

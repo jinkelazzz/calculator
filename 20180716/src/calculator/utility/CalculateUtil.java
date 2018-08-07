@@ -1,5 +1,6 @@
 package calculator.utility;
 
+import flanagan.analysis.Stat;
 import flanagan.math.Matrix;
 
 import java.util.Arrays;
@@ -11,6 +12,8 @@ import java.util.concurrent.*;
  */
 
 public class CalculateUtil {
+
+    private CalculateUtil() {}
 
     public static double normalRandom() {
         return ThreadLocalRandom.current().nextGaussian();
@@ -135,20 +138,19 @@ public class CalculateUtil {
      */
     public static double binormalCDF(double x, double y, double rho) {
         //Gauss Legendre Points and Weights, n = 3, 6, 10;
-        double[] p0 = {-0.9324695142031522, -0.6612093864662647, -0.2386191860831970};
-        double[] p1 = {-0.9815606342467191, -0.9041172563704750, -0.7699026741943050, -0.5873179542866171,
+        final double[] p0 = {-0.9324695142031522, -0.6612093864662647, -0.2386191860831970};
+        final double[] p1 = {-0.9815606342467191, -0.9041172563704750, -0.7699026741943050, -0.5873179542866171,
                 -0.3678314989981802, -0.1252334085114692};
-        double[] p2 = {-0.9931285991850949, -0.9639719272779138, -0.9122344282513259, -0.8391169718222188,
+        final double[] p2 = {-0.9931285991850949, -0.9639719272779138, -0.9122344282513259, -0.8391169718222188,
                 -0.7463319064601508, -0.6360536807265150, -0.5108670019508271, -0.3737060887154196,
                 -0.2277858511416451, -0.07652652113349733};
 
-        double[] w0 = {0.1713244923791705, 0.3607615730481384, 0.4679139345726904};
-        double[] w1 = {0.04717533638651177, 0.1069393259953183, 0.1600783285433464, 0.2031674267230659,
+        final double[] w0 = {0.1713244923791705, 0.3607615730481384, 0.4679139345726904};
+        final double[] w1 = {0.04717533638651177, 0.1069393259953183, 0.1600783285433464, 0.2031674267230659,
                 0.2334925365383547, 0.2491470458134029};
-        double[] w2 = {0.01761400713915212, 0.04060142980038694, 0.06267204833410906, 0.08327674157670475,
+        final double[] w2 = {0.01761400713915212, 0.04060142980038694, 0.06267204833410906, 0.08327674157670475,
                 0.1019301198172404, 0.1181945319615184, 0.1316886384491766, 0.1420961093183821,
                 0.1491729864726037, 0.1527533871307259};
-
 
         double absR = Math.abs(rho);
         double threshold1 = 0.3;
@@ -239,17 +241,14 @@ public class CalculateUtil {
         return bvn;
     }
 
+    /**
+     *
+     * @param x 二维数组
+     * @return 二维数组的转置
+     */
     public static double[][] transpose(double[][] x) {
         Matrix y = new Matrix(x);
         return y.transpose().getArrayCopy();
-    }
-
-    /**
-     * @param x 向量
-     * @return 以x为列向量的矩阵
-     */
-    public static Matrix generateOneColMatrix(double[] x) {
-        return new Matrix(new double[][]{x}).transpose();
     }
 
     /**
@@ -280,15 +279,12 @@ public class CalculateUtil {
      */
     public static double[] backwardDiffValue(double value, double diff) {
         double[] result = new double[2];
-
         if (value == 0) {
             result[0] = -diff;
-            result[1] = value;
         } else {
             result[0] = value * (1 - diff);
-            result[1] = value;
         }
-
+        result[1] = value;
         Arrays.sort(result);
         return result;
     }
@@ -308,6 +304,12 @@ public class CalculateUtil {
         return z;
     }
 
+    /**
+     *
+     * @param x 一维数组
+     * @param q
+     * @return 一维数组的q分位数
+     */
     public static double quantile(double[] x, double q) {
         int n = x.length;
         Arrays.sort(x);
@@ -327,16 +329,31 @@ public class CalculateUtil {
         return weight * x[d] + (1 - weight) * x[u];
     }
 
+    /**
+     *
+     * @param threadNums 线程个数
+     * @return 线程池
+     */
     public static ExecutorService createThreadPool(int threadNums) {
         ThreadFactory factory = Executors.defaultThreadFactory();
         return new ThreadPoolExecutor(threadNums, 2 * threadNums, 0, TimeUnit.NANOSECONDS,
                 new LinkedBlockingDeque<>(1024), factory, new ThreadPoolExecutor.AbortPolicy());
     }
 
+    /**
+     *
+     * @param startMillionSec 起始时间
+     * @return 总用时（以毫秒计）
+     */
     public static double getPastMillionSec(long startMillionSec) {
         return System.currentTimeMillis() - startMillionSec;
     }
 
+    /**
+     *
+     * @param priceList 价格
+     * @return 对数收益率
+     */
     public static double[] getLogReturn(double[] priceList) {
         int n = priceList.length;
         if(n <= 1) {
@@ -348,4 +365,17 @@ public class CalculateUtil {
         }
         return logReturn;
     }
+
+    /**
+     *
+     * @param xPriceList
+     * @param yPriceList
+     * @return 对数收益相关系数
+     */
+    public static double getLogReturnCorrelation(double[] xPriceList, double[] yPriceList) {
+        double[] xLogReturn = getLogReturn(xPriceList);
+        double[] yLogReturn = getLogReturn(yPriceList);
+        return Stat.corrCoeff(xLogReturn, yLogReturn);
+    }
+
 }

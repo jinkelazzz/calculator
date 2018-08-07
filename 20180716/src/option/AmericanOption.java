@@ -1,6 +1,5 @@
 package option;
 
-
 import calculator.utility.CalculateUtil;
 import calculator.utility.NewtonIterationParams;
 import flanagan.math.DeepCopy;

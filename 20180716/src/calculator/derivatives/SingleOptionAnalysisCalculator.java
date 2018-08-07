@@ -91,7 +91,9 @@ public class SingleOptionAnalysisCalculator extends BaseSingleOptionCalculator {
      * @throws IllegalAccessException    非法访问方法
      */
     private double getPrice(Method method) throws InvocationTargetException, IllegalAccessException {
-        method.setAccessible(true);
+        if(!method.isAccessible()) {
+            method.setAccessible(true);
+        }
         return (double) method.invoke(option);
     }
 
@@ -142,11 +144,9 @@ public class SingleOptionAnalysisCalculator extends BaseSingleOptionCalculator {
             return;
         }
         //计算成功
-        {
-            option.getVanillaOptionParams().setVolatility(root);
-            setResult(root);
-            setError(NORMAL);
-        }
+        option.getVanillaOptionParams().setVolatility(root);
+        setResult(root);
+        setError(NORMAL);
     }
 
     @Override

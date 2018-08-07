@@ -9,6 +9,7 @@ import option.BaseSingleOption;
 public class SingleOptionPosition {
     private BaseSingleOption option;
     private double openInterest = 0;
+    private String underlyingName;
 
     private static SingleOptionAnalysisCalculator calculator = new SingleOptionAnalysisCalculator();
 
@@ -26,6 +27,14 @@ public class SingleOptionPosition {
 
     public void setOpenInterest(double openInterest) {
         this.openInterest = openInterest;
+    }
+
+    public String getUnderlyingName() {
+        return underlyingName;
+    }
+
+    public void setUnderlyingName(String underlyingName) {
+        this.underlyingName = underlyingName;
     }
 
     public void closePosition() {

@@ -40,4 +40,7 @@ public class JriUtil {
         return historyPrice;
     }
 
+    public boolean hasLibrary(String libraryName) {
+        return engine.eval("require" + "(" + libraryName + ")").asBool().isTRUE();
+    }
 }

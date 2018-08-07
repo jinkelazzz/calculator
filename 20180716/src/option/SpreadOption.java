@@ -11,7 +11,7 @@ import java.io.Serializable;
 class SpreadOptionCalculator implements MaximisationFunction {
     private SpreadOption spreadOption;
 
-    public void setSpreadOption(SpreadOption spreadOption) {
+    void setSpreadOption(SpreadOption spreadOption) {
         this.spreadOption = spreadOption;
     }
 

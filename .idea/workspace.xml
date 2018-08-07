@@ -1,117 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="GROUP_BY_SEVERITY" value="true" />
+    <option name="ANALYZE_TEST_SOURCES" value="false" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="bcfb80fe-6ae6-4210-944d-4af67c5b7482" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/20180716/src/volatility/BaseVolatilitySkew.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/20180716/src/volatility/WingModel.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/20180716/src/calculator/derivatives/SingleOptionAnalysisCalculator.java" afterPath="$PROJECT_DIR$/20180716/src/calculator/derivatives/SingleOptionAnalysisCalculator.java" />
-      <change beforePath="$PROJECT_DIR$/20180716/src/calculator/utility/CalculateUtil.java" afterPath="$PROJECT_DIR$/20180716/src/calculator/utility/CalculateUtil.java" />
-      <change beforePath="$PROJECT_DIR$/20180716/src/option/AmericanOption.java" afterPath="$PROJECT_DIR$/20180716/src/option/AmericanOption.java" />
-      <change beforePath="$PROJECT_DIR$/20180716/src/test/OptionTest.java" afterPath="$PROJECT_DIR$/20180716/src/test/OptionTest.java" />
-      <change beforePath="$PROJECT_DIR$/20180716/src/volatility/VolatilitySkew.java" afterPath="" />
+    <list default="true" id="bcfb80fe-6ae6-4210-944d-4af67c5b7482" name="Default" comment=" 将计算初始波动率移到该类下面">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/liangcy.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/20180716/src/option/BasketOption.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/20180716/src/option/quotientOption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/20180716.iml" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/20180716.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/calculator/derivatives/SingleOptionAnalysisCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/calculator/derivatives/SingleOptionAnalysisCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/calculator/derivatives/SingleOptionFiniteDifferenceCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/calculator/derivatives/SingleOptionFiniteDifferenceCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/calculator/portfolio/HistoryVarCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/calculator/portfolio/HistoryVarCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/calculator/portfolio/MonteCarloVarCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/calculator/portfolio/MonteCarloVarCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/calculator/utility/CalculateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/calculator/utility/CalculateUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/jri/JriUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/jri/JriUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/jri/RengineSingleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/jri/RengineSingleton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/option/AmericanOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/option/AmericanOption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/option/AsianOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/option/AsianOption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/option/BarrierOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/option/BarrierOption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/option/BaseDoubleOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/option/BaseDoubleOption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/option/BaseSingleOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/option/BaseSingleOption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/option/SpreadOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/option/SpreadOption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/portfolio/SingleOptionPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/portfolio/SingleOptionPosition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/test/CommonTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/test/CommonTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/test/JriTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/test/JriTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/test/ThreadTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/test/ThreadTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/volatility/DynamicSpline.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/volatility/DynamicSpline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/20180716/src/volatility/HistoryPrice.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/volatility/HistoryPrice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calculator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/calculator.iml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="20180716/src/test/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+    <option name="PARALLEL_COMPILATION" value="true" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1393590805">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.25" value="1" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="R" value="7" />
+          <entry key="class" value="1" />
+          <entry key="iml" value="3" />
+          <entry key="java" value="66" />
+          <entry key="xml" value="7" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CLASS" value="1" />
+          <entry key="IDEA_MODULE" value="3" />
+          <entry key="JAVA" value="66" />
+          <entry key="PLAIN_TEXT" value="7" />
+          <entry key="XML" value="7" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="R Console" value="4" />
+          <entry key="java" value="2452" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="2452" />
+          <entry key="R" value="4" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OptionTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/20180716/src/test/OptionTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="79" column="30" lean-forward="true" selection-start-line="79" selection-start-column="30" selection-end-line="79" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BaseVolatilitySkew.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/20180716/src/volatility/BaseVolatilitySkew.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2275">
-              <caret line="5" column="33" lean-forward="false" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
-              <folding>
-                <element signature="class#SyntheticForwardParams#0" expanded="false" />
-                <element signature="e#793#794#0" expanded="true" />
-                <element signature="e#831#832#0" expanded="true" />
-                <element signature="e#861#862#0" expanded="true" />
-                <element signature="e#887#888#0" expanded="true" />
-                <element signature="class#VolatilitySkewParams#0" expanded="false" />
-                <element signature="e#1365#1366#0" expanded="true" />
-                <element signature="e#1415#1416#0" expanded="true" />
-                <element signature="e#1463#1464#0" expanded="true" />
-                <element signature="e#1503#1504#0" expanded="true" />
-                <element signature="e#1541#1542#0" expanded="true" />
-                <element signature="e#1571#1572#0" expanded="true" />
-                <element signature="e#1609#1610#0" expanded="true" />
-                <element signature="e#1639#1640#0" expanded="true" />
-                <element signature="class#RangeParams#0" expanded="false" />
-                <element signature="e#2501#2502#0" expanded="true" />
-                <element signature="e#2534#2535#0" expanded="true" />
-                <element signature="e#2562#2563#0" expanded="true" />
-                <element signature="e#2593#2594#0" expanded="true" />
-                <element signature="e#2834#2835#0" expanded="true" />
-                <element signature="e#2864#2865#0" expanded="true" />
-                <element signature="e#2902#2903#0" expanded="true" />
-                <element signature="e#2932#2933#0" expanded="true" />
-                <element signature="e#2976#2977#0" expanded="true" />
-                <element signature="e#3012#3013#0" expanded="true" />
-                <element signature="e#3056#3057#0" expanded="true" />
-                <element signature="e#3092#3093#0" expanded="true" />
-                <element signature="e#3125#3126#0" expanded="true" />
-                <element signature="e#3170#3171#0" expanded="true" />
-                <element signature="e#3201#3202#0" expanded="true" />
-                <element signature="e#3244#3245#0" expanded="true" />
-                <element signature="method#updateOptionPrice#0;class#BaseVolatilitySkew#0" expanded="false" />
-                <element signature="method#updateImpliedVolatility#0;class#BaseVolatilitySkew#0" expanded="false" />
-                <element signature="method#setSyntheticForwardParams#0;class#BaseVolatilitySkew#0" expanded="false" />
-                <element signature="e#7382#7383#0" expanded="true" />
-                <element signature="e#7425#7426#0" expanded="true" />
-                <element signature="e#7618#7619#0" expanded="true" />
-                <element signature="e#7652#7653#0" expanded="true" />
-                <element signature="e#7711#7712#0" expanded="true" />
-                <element signature="e#7757#7758#0" expanded="true" />
-                <element signature="method#getAtmForward#0;class#BaseVolatilitySkew#0" expanded="false" />
-                <element signature="e#7977#7978#0" expanded="true" />
-                <element signature="e#8056#8057#0" expanded="true" />
-                <element signature="e#8230#8231#0" expanded="true" />
-                <element signature="e#8330#8331#0" expanded="true" />
-                <element signature="method#transformStrike#0;class#BaseVolatilitySkew#0" expanded="false" />
-                <element signature="e#9325#9326#0" expanded="true" />
-                <element signature="e#9391#9392#0" expanded="true" />
-                <element signature="e#9455#9456#0" expanded="true" />
-                <element signature="e#9523#9524#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="package-info" />
+        <option value="Enum" />
+        <option value="JUnit4 Test Class" />
         <option value="Class" />
+        <option value="Singleton" />
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>hash</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
   </component>
   <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
     <option name="projectSyncType">
       <map>
         <entry key="D:/quantdo" value="PREVIEW" />
@@ -122,40 +133,100 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/20180716/src/calculator/derivatives/SingleOptionAnalysisCalculator.java" />
-        <option value="$PROJECT_DIR$/20180716/src/option/AmericanOption.java" />
+        <option value="$PROJECT_DIR$/20180716/src/portfolio/SingleOptionPortfolioMap.java" />
+        <option value="$PROJECT_DIR$/20180716/src/test/MapTest.java" />
+        <option value="$PROJECT_DIR$/20180716/src/adjusted/european/option/CorradoSu.java" />
+        <option value="$PROJECT_DIR$/20180716/src/adjusted/european/option/Heston.java" />
+        <option value="$PROJECT_DIR$/20180716/src/adjusted/european/option/Sabr.java" />
+        <option value="$PROJECT_DIR$/20180716/src/underlying/gbm/BaseUnderlying.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/VanillaOptionParams.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/SingleOptionGreekParams.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/BarrierOptionParams.java" />
+        <option value="$PROJECT_DIR$/20180716/src/calculator/utility/MonteCarlo.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/BaseOption.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/EuropeanOption.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/DoubleBinaryBarrierOption.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/CashOrNothingOption.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/DoubleBarrierOption.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/BinaryBarrierOption.java" />
         <option value="$PROJECT_DIR$/20180716/src/test/OptionTest.java" />
+        <option value="$PROJECT_DIR$/20180716/src/calculator/utility/FiniteDifference.java" />
+        <option value="$PROJECT_DIR$/20180716/src/package-info.java" />
+        <option value="$PROJECT_DIR$/20180716/src/rate/InterestRateCurve.java" />
+        <option value="$PROJECT_DIR$/20180716/src/jri/rtest2.java" />
+        <option value="$PROJECT_DIR$/20180716/src/jri/WindData.java" />
+        <option value="$PROJECT_DIR$/20180716/src/jri/RengineInstance.java" />
+        <option value="$PROJECT_DIR$/20180716/getWindData.R" />
+        <option value="$PROJECT_DIR$/20180716/src/volatility/VolatilitySurface.java" />
+        <option value="$PROJECT_DIR$/20180716/src/test/ThreadTest.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/AmericanOption.java" />
+        <option value="$PROJECT_DIR$/20180716/src/jri/RengineUtil.java" />
+        <option value="$PROJECT_DIR$/20180716/src/portfolio/OptionPortfolio.java" />
+        <option value="$PROJECT_DIR$/20180716/src/portfolio/SingleOptionPortfolio.java" />
+        <option value="$PROJECT_DIR$/20180716/src/test/JriTest.java" />
+        <option value="$PROJECT_DIR$/20180716/src/jri/RengineSingleton.java" />
+        <option value="$PROJECT_DIR$/20180716/src/calculator/portfolio/MonteCarloVarCalculator.java" />
+        <option value="$PROJECT_DIR$/20180716/src/calculator/portfolio/HistoryVarCalculator.java" />
+        <option value="$PROJECT_DIR$/20180716/src/jri/JriUtil.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/EuropeanOptionTest.java" />
+        <option value="$PROJECT_DIR$/20180716/src/test/EuropeanOptionTest.java" />
+        <option value="$PROJECT_DIR$/20180716/src/portfolio/SingleOptionPosition.java" />
+        <option value="$PROJECT_DIR$/20180716/src/calculator/derivatives/SingleOptionAnalysisCalculator.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/SpreadOption.java" />
+        <option value="$PROJECT_DIR$/20180716/src/volatility/HistoryPrice.java" />
+        <option value="$PROJECT_DIR$/20180716/src/volatility/DynamicSpline.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/BaseDoubleOption.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/BaseSingleOption.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/quotientOption.java" />
+        <option value="$PROJECT_DIR$/20180716/src/test/CommonTest.java" />
+        <option value="$PROJECT_DIR$/20180716/src/calculator/derivatives/SingleOptionFiniteDifferenceCalculator.java" />
         <option value="$PROJECT_DIR$/20180716/src/calculator/utility/CalculateUtil.java" />
-        <option value="$PROJECT_DIR$/20180716/src/volatility/VolatilitySkew.java" />
-        <option value="$PROJECT_DIR$/20180716/src/volatility/WingModel.java" />
-        <option value="$PROJECT_DIR$/20180716/src/volatility/BaseVolatilitySkew.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/BasketOption.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/AsianOption.java" />
+        <option value="$PROJECT_DIR$/20180716/src/option/BarrierOption.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-64" />
-    <option name="y" value="244" />
+    <option name="x" value="520" />
+    <option name="y" value="266" />
     <option name="width" value="1936" />
-    <option name="height" value="1100" />
+    <option name="height" value="880" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
+    <navigator proportions="" version="1">
+      <sortByType ProjectPane="false" />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="calculator" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="20180716" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+            <path>
+              <item name="calculator" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="20180716" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="calculator" type="58d84e3e:PackageViewProjectNode" />
+              <item name="20180716" type="616d4139:PackageViewModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -174,40 +245,36 @@
               <item name="20180716" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="calculator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="calculator" type="462c0819:PsiDirectoryNode" />
-              <item name="20180716" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="option" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="calculator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="calculator" type="462c0819:PsiDirectoryNode" />
-              <item name="20180716" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="underlying" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="calculator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="calculator" type="462c0819:PsiDirectoryNode" />
-              <item name="20180716" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="volatility" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SearchEverywhereHistoryKey" value="forward&#9;PSI&#9;JAVA://volatility.BaseVolatilitySkew#getAtmForward&#10;Ha&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_152/src.zip!/java/util/HashMap.java&#10;moneyness&#9;PSI&#9;JAVA://volatility.VolatilitySurface#moneynessList&#10;k/s&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_152/src.zip!/com/sun/org/apache/xml/internal/security/keys/storage&#10;equals&#9;PSI&#9;JAVA://test.OptionTest#testEquals&#10;hashcode&#9;PSI&#9;JAVA://option.DoubleBarrierOption#hashCode&#10;hashCode&#9;PSI&#9;JAVA://volatility.VolatilitySurface#hashCode" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1533627806595" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/20180716/src/test" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="D:/JavaLib/flanagan.jar!/" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Ignored.Files" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="test" />
+      <recent name="option" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\calculator\calculator\20180716" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -221,150 +288,148 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.OptionTest.testZero">
+  <component name="RunManager" selected="JUnit.CommonTest.stringTest">
     <configuration default="true" type="Applet" factoryName="Applet">
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <module />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="OptionTest.testFD" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+    <configuration name="CommonTest.stringTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="20180716" />
+      <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <module name="20180716" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.OptionTest" />
-      <option name="METHOD_NAME" value="testFD" />
+      <option name="MAIN_CLASS_NAME" value="test.CommonTest" />
+      <option name="METHOD_NAME" value="stringTest" />
       <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="OptionTest.testZero" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+    <configuration name="CommonTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="20180716" />
+      <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <module name="20180716" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.OptionTest" />
-      <option name="METHOD_NAME" value="testZero" />
+      <option name="MAIN_CLASS_NAME" value="test.CommonTest" />
+      <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JriTest.test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="20180716" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.JriTest" />
+      <option name="METHOD_NAME" value="test2" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JriTest.testJri" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="20180716" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.JriTest" />
+      <option name="METHOD_NAME" value="testJri" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-Djava.library.path=&quot;C:\Users\liangcy\Documents\R\win-library\3.5\rJava\jri&quot; -ea" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://%MODULE_WORKING_DIR%" />
+      <envs>
+        <env name="PATH" value="D:\R\R-3.5.0\bin\x64" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ThreadTest.test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="20180716" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.ThreadTest" />
+      <option name="METHOD_NAME" value="test2" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
       <properties />
       <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file id="idea.log" enabled="true" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.OptionTest.testFD" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.OptionTest.testZero" />
+    <list>
+      <item itemvalue="JUnit.CommonTest.test" />
+      <item itemvalue="JUnit.JriTest.testJri" />
+      <item itemvalue="JUnit.JriTest.test2" />
+      <item itemvalue="JUnit.ThreadTest.test2" />
+      <item itemvalue="JUnit.CommonTest.stringTest" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.OptionTest.testZero" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.OptionTest.testFD" />
+      <list>
+        <item itemvalue="JUnit.CommonTest.stringTest" />
+        <item itemvalue="JUnit.CommonTest.test" />
+        <item itemvalue="JUnit.JriTest.test2" />
+        <item itemvalue="JUnit.JriTest.testJri" />
+        <item itemvalue="JUnit.ThreadTest.test2" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -398,339 +463,781 @@
       <option name="project" value="LOCAL" />
       <updated>1531734354470</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="新增波动率微笑类">
+      <created>1531812984482</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1531812984482</updated>
+    </task>
+    <task id="LOCAL-00005" summary="修改波动率微笑类，新增dynamic spline">
+      <created>1531822660678</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1531822660678</updated>
+    </task>
+    <task id="LOCAL-00006" summary="完善了smoothing spline">
+      <created>1531891792591</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1531891792591</updated>
+    </task>
+    <task id="LOCAL-00007" summary="完善了smoothing spline">
+      <created>1531893237225</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1531893237225</updated>
+    </task>
+    <task id="LOCAL-00008" summary="修改了部分逻辑嵌套 把toString方法抽取到父类">
+      <created>1531966554558</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1531966554558</updated>
+    </task>
+    <task id="LOCAL-00009" summary="完善了波动率微笑类">
+      <created>1531966849957</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1531966849957</updated>
+    </task>
+    <task id="LOCAL-00010" summary="修改了波动率曲面维度的错误">
+      <created>1531979944942</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1531979944942</updated>
+    </task>
+    <task id="LOCAL-00011" summary="增加了corrado su模型">
+      <created>1531981418688</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1531981418688</updated>
+    </task>
+    <task id="LOCAL-00012" summary="补充提交">
+      <created>1531981646186</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1531981646186</updated>
+    </task>
+    <task id="LOCAL-00013" summary="增加rho2计算 增加greeks value计算">
+      <created>1531981695953</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1531981695953</updated>
+    </task>
+    <task id="LOCAL-00014" summary="新增corrado su模型">
+      <created>1531982146609</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1531982146609</updated>
+    </task>
+    <task id="LOCAL-00015" summary="优化了wing model">
+      <created>1531982760647</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1531982760647</updated>
+    </task>
+    <task id="LOCAL-00016" summary="优化了heston model">
+      <created>1531984383212</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1531984383212</updated>
+    </task>
+    <task id="LOCAL-00017" summary="优化了部分注释；修改了随机数的算法（多线程）；新增线程池；新增分位数算法；正态分布可以积分到正负无穷了。">
+      <created>1532305452992</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1532305452992</updated>
+    </task>
+    <task id="LOCAL-00018" summary="增加了多线程算法 提高计算速度">
+      <created>1532307816330</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1532307816330</updated>
+    </task>
+    <task id="LOCAL-00019" summary="修改了has method的算法，减少了try catch">
+      <created>1532307958952</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1532307958952</updated>
+    </task>
+    <task id="LOCAL-00020" summary="删除了蒙特卡洛的计算误差">
+      <created>1532308055930</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1532308055930</updated>
+    </task>
+    <task id="LOCAL-00021" summary="优化了部分代码， 增加了isValid 检验参数有效性">
+      <created>1532313761017</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1532313761017</updated>
+    </task>
+    <task id="LOCAL-00022" summary="优化了部分代码， 增加了isValid 检验参数有效性">
+      <created>1532313825002</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1532313825002</updated>
+    </task>
+    <task id="LOCAL-00023" summary="优化了计算Greeks，补全了蒙特卡洛模拟计算">
+      <created>1532334006001</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1532334006001</updated>
+    </task>
+    <task id="LOCAL-00024" summary="实现了序列化以便深拷贝">
+      <created>1532334244431</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1532334244432</updated>
+    </task>
+    <task id="LOCAL-00025" summary="重命名了Greeks precision类，新增从波动率曲面取波动率，判断是不是期货的方法">
+      <created>1532334357846</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1532334357846</updated>
+    </task>
+    <task id="LOCAL-00026" summary="优化了try catch 块，将判断是不是期货提成方法">
+      <created>1532339554185</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1532339554185</updated>
+    </task>
+    <task id="LOCAL-00027" summary="将k*&lt;0时，变成期货定价提取了方法">
+      <created>1532392656064</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1532392656064</updated>
+    </task>
+    <task id="LOCAL-00028" summary=" 将计算初始波动率移到该类下面">
+      <created>1532392734824</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1532392734824</updated>
+    </task>
+    <task id="LOCAL-00029" summary="新增部分注释">
+      <created>1532392807430</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1532392807430</updated>
+    </task>
+    <task id="LOCAL-00030" summary="重写了single option 的equals 和 hash code">
+      <created>1532401803131</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1532401803131</updated>
+    </task>
+    <task id="LOCAL-00031" summary="重写了equals和hashcode 把European option改为base single option">
+      <created>1532401866152</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1532401866152</updated>
+    </task>
+    <task id="LOCAL-00032" summary="外汇">
+      <created>1532657392934</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1532657392934</updated>
+    </task>
+    <task id="LOCAL-00033" summary="重构了部分代码">
+      <created>1532657495941</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1532657495941</updated>
+    </task>
+    <task id="LOCAL-00034" summary="删除了hashcode 和 equals的复写 删除1个constant string类">
+      <created>1532675516879</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1532675516879</updated>
+    </task>
+    <task id="LOCAL-00035" summary="修改了toString方法">
+      <created>1532679029257</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1532679029257</updated>
+    </task>
+    <task id="LOCAL-00036" summary="增加jri">
+      <created>1533093547840</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1533093547840</updated>
+    </task>
+    <task id="LOCAL-00037" summary="删除二维数组转字符串 改为deeptoString">
+      <created>1533177135059</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1533177135059</updated>
+    </task>
+    <task id="LOCAL-00038" summary="修改打印数组字符">
+      <created>1533177182265</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1533177182265</updated>
+    </task>
+    <task id="LOCAL-00039" summary="去掉portfolio 新增 position">
+      <created>1533282129762</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1533282129762</updated>
+    </task>
+    <task id="LOCAL-00040" summary="利用枚举类实现单例">
+      <created>1533286344182</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1533286344182</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="OptionTest_testFD - 2018.07.16 at 16h 51m 33s.xml">
-      <configuration name="OptionTest.testFD" configurationId="JUnit" />
+    <history-entry file="CommonTest_test - 2018.08.06 at 14h 12m 19s.xml">
+      <configuration name="CommonTest.test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OptionTest_testZero - 2018.07.16 at 18h 04m 10s.xml">
-      <configuration name="OptionTest.testZero" configurationId="JUnit" />
+    <history-entry file="CommonTest_test - 2018.08.07 at 14h 03m 44s.xml">
+      <configuration name="CommonTest.test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OptionTest_testZero - 2018.07.16 at 18h 04m 49s.xml">
-      <configuration name="OptionTest.testZero" configurationId="JUnit" />
+    <history-entry file="CommonTest_test - 2018.08.07 at 14h 05m 07s.xml">
+      <configuration name="CommonTest.test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OptionTest_testZero - 2018.07.16 at 18h 05m 13s.xml">
-      <configuration name="OptionTest.testZero" configurationId="JUnit" />
+    <history-entry file="CommonTest_stringTest - 2018.08.07 at 14h 34m 32s.xml">
+      <configuration name="CommonTest.stringTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OptionTest_testZero - 2018.07.16 at 18h 06m 32s.xml">
-      <configuration name="OptionTest.testZero" configurationId="JUnit" />
+    <history-entry file="CommonTest_stringTest - 2018.08.07 at 14h 34m 57s.xml">
+      <configuration name="CommonTest.stringTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OptionTest_testZero - 2018.07.16 at 18h 06m 50s.xml">
-      <configuration name="OptionTest.testZero" configurationId="JUnit" />
+    <history-entry file="CommonTest_stringTest - 2018.08.07 at 14h 35m 15s.xml">
+      <configuration name="CommonTest.stringTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OptionTest_testZero - 2018.07.16 at 18h 07m 12s.xml">
-      <configuration name="OptionTest.testZero" configurationId="JUnit" />
+    <history-entry file="CommonTest_stringTest - 2018.08.07 at 14h 35m 23s.xml">
+      <configuration name="CommonTest.stringTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="CommonTest_stringTest - 2018.08.07 at 14h 35m 55s.xml">
+      <configuration name="CommonTest.stringTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CommonTest_stringTest - 2018.08.07 at 14h 36m 28s.xml">
+      <configuration name="CommonTest.stringTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CommonTest_stringTest - 2018.08.07 at 14h 36m 44s.xml">
+      <configuration name="CommonTest.stringTest" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TodoView" selected-index="3">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1673774" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info active="true" content_ui="combo" x="771" y="177" width="377" height="686" id="Project" order="0" visible="true" weight="0.22049356" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info id="Image Layers" order="6" />
+      <window_info anchor="bottom" id="Problems" order="0" sideWeight="0.49517167" weight="0.32830626" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Find" order="2" sideWeight="0.4946352" weight="0.32946634" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.68937767" visible="true" weight="0.35614848" />
+      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.6023454" weight="0.39165702" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="7" sideWeight="0.49248928" weight="0.32714617" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.3106223" side_tool="true" visible="true" weight="0.35614848" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49785408" weight="0.32830626" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4254292" weight="0.31670535" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4967811" weight="0.32830626" />
+      <window_info anchor="bottom" id="Inspection Results" order="12" sideWeight="0.4946352" weight="0.3549884" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven Projects" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="R Packages" order="8" />
+      <window_info anchor="right" id="R Graphics" order="9" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="重新提交计算器" />
-    <MESSAGE value="新增波动率微笑类" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增波动率微笑类" />
+    <MESSAGE value="优化了wing model" />
+    <MESSAGE value="优化了heston model" />
+    <MESSAGE value="优化了部分注释；修改了随机数的算法（多线程）；新增线程池；新增分位数算法；正态分布可以积分到正负无穷了。" />
+    <MESSAGE value="增加了多线程算法 提高计算速度" />
+    <MESSAGE value="修改了has method的算法，减少了try catch" />
+    <MESSAGE value="删除了蒙特卡洛的计算误差" />
+    <MESSAGE value="优化了部分代码， 增加了isValid 检验参数有效性" />
+    <MESSAGE value="优化了计算Greeks，补全了蒙特卡洛模拟计算" />
+    <MESSAGE value="实现了序列化以便深拷贝" />
+    <MESSAGE value="重命名了Greeks precision类，新增从波动率曲面取波动率，判断是不是期货的方法" />
+    <MESSAGE value="优化了try catch 块，将判断是不是期货提成方法" />
+    <MESSAGE value="将k*&lt;0时，变成期货定价提取了方法" />
+    <MESSAGE value=" 将计算初始波动率移到该类下面" />
+    <MESSAGE value="新增部分注释" />
+    <MESSAGE value="重写了single option 的equals 和 hash code" />
+    <MESSAGE value="重写了equals和hashcode 把European option改为base single option" />
+    <MESSAGE value="外汇" />
+    <MESSAGE value="重构了部分代码" />
+    <MESSAGE value="删除了hashcode 和 equals的复写 删除1个constant string类" />
+    <MESSAGE value="修改了toString方法" />
+    <MESSAGE value="增加jri" />
+    <MESSAGE value="删除二维数组转字符串 改为deeptoString" />
+    <MESSAGE value="修改打印数组字符" />
+    <MESSAGE value="去掉portfolio 新增 position" />
+    <MESSAGE value="利用枚举类实现单例" />
+    <option name="LAST_COMMIT_MESSAGE" value="利用枚举类实现单例" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="3" />
-    </breakpoint-manager>
-    <watches-manager />
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>engine.isAlive()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>rList.at(keys[1]).asList().at(1).asDoubleArray()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>rList.at(keys[1]).asList().at(1)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>rList.at(keys[1]).asList().at(0)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>rList.at(keys[1]).asList()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>rList.at(keys[1]).asList().at(keys[1])</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>key.hashCode()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>Objects.hash(b, value)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>map.containsKey(key)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/20180716/src/test/OptionTest.java">
+    <entry file="file://$PROJECT_DIR$/20180716/src/calculator/portfolio/MonteCarloVarCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2574">
-          <caret line="79" column="20" lean-forward="false" selection-start-line="79" selection-start-column="20" selection-end-line="79" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="117">
+          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/underlying/InterestRateCurve.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_152/src.zip!/java/sql/DriverManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1408">
+          <caret line="631" column="30" selection-start-line="631" selection-start-column="30" selection-end-line="631" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/jri/RengineSingleton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/jri/JriUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-468">
+          <caret line="23" column="52" lean-forward="true" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/option/EuropeanOptionTest.java" />
+    <entry file="file://$PROJECT_DIR$/20180716/src/test/EuropeanOptionTest.java" />
+    <entry file="file://$PROJECT_DIR$/20180716/src/option/EuropeanOption.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-408">
+          <caret line="68" column="5" lean-forward="true" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_152/src.zip!/java/lang/Math.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="120" column="16" lean-forward="true" selection-start-line="120" selection-start-column="16" selection-end-line="120" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/calculator/utility/FiniteDifference.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2149">
+          <caret line="77" column="54" lean-forward="true" selection-start-line="77" selection-start-column="54" selection-end-line="77" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/calculator/utility/NewtonIterationParams.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/calculator/utility/MonteCarlo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2890">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/calculator/derivatives/BaseSingleOptionCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="39">
+          <caret line="128" column="22" selection-start-line="128" selection-start-column="22" selection-end-line="128" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/calculator.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/test/JriTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/calculator/portfolio/HistoryVarCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/rate/InterestRateCurve.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="52" column="24" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/option/AmericanOption.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1131">
-          <caret line="37" column="4" lean-forward="false" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/underlying/Bond.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7137">
-          <caret line="228" column="13" lean-forward="true" selection-start-line="228" selection-start-column="13" selection-end-line="228" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/option/GreekPrecisionParams.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/option/EuropeanOption.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
+          <caret line="344" lean-forward="true" selection-start-line="344" selection-end-line="344" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/20180716/src/calculator/derivatives/SingleOptionAnalysisCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3003">
-          <caret line="91" column="33" lean-forward="false" selection-start-line="91" selection-start-column="33" selection-end-line="91" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/option/AmericanOption.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="160" column="18" lean-forward="true" selection-start-line="160" selection-start-column="18" selection-end-line="160" selection-end-column="18" />
+        <state relative-caret-position="293">
+          <caret line="158" column="9" lean-forward="true" selection-start-line="158" selection-start-column="9" selection-end-line="158" selection-end-column="9" />
           <folding>
-            <element signature="class#BsCalculator#0" expanded="false" />
-            <element signature="method#finiteDifferencePrice#0;class#AmericanOption#0" expanded="false" />
-            <element signature="docComment;method#baw#0;class#AmericanOption#0" expanded="false" />
-            <element signature="method#baw#0;class#AmericanOption#0" expanded="false" />
-            <element signature="docComment;method#bs#0;class#AmericanOption#0" expanded="false" />
-            <element signature="method#bs#0;class#AmericanOption#0" expanded="false" />
-            <element signature="method#toString#0;class#AmericanOption#0" expanded="false" />
-            <element signature="method#callPutTransform#0;class#AmericanOption#0" expanded="false" />
+            <element signature="e#2231#2232#0" expanded="true" />
+            <element signature="e#2277#2278#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/calculator/utility/CalculateUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11505">
-          <caret line="295" column="9" lean-forward="true" selection-start-line="295" selection-start-column="9" selection-end-line="295" selection-end-column="9" />
-          <folding>
-            <element signature="e#4251#4252#0" expanded="false" />
-            <element signature="e#4318#4319#0" expanded="false" />
-            <element signature="e#4366#4367#0" expanded="false" />
-            <element signature="e#4444#4445#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/.idea/encodings.xml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/test/OptionTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/.idea/kotlinc.xml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/adjusted/european/option/Heston.java">
+    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/getWindData.R">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
-          <caret line="9" column="3" lean-forward="true" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/calculator/derivatives/SingleOptionAnalysisCalculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3003">
-          <caret line="91" column="33" lean-forward="false" selection-start-line="91" selection-start-column="33" selection-end-line="91" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/.idea/vcs.xml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/option/AmericanOption.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="160" column="18" lean-forward="false" selection-start-line="160" selection-start-column="18" selection-end-line="160" selection-end-column="18" />
-          <folding>
-            <element signature="class#BsCalculator#0" expanded="false" />
-            <element signature="method#finiteDifferencePrice#0;class#AmericanOption#0" expanded="false" />
-            <element signature="docComment;method#baw#0;class#AmericanOption#0" expanded="false" />
-            <element signature="method#baw#0;class#AmericanOption#0" expanded="false" />
-            <element signature="docComment;method#bs#0;class#AmericanOption#0" expanded="false" />
-            <element signature="method#bs#0;class#AmericanOption#0" expanded="false" />
-            <element signature="method#toString#0;class#AmericanOption#0" expanded="false" />
-            <element signature="method#callPutTransform#0;class#AmericanOption#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/option/EuropeanOption.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="39">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/option/GreekPrecisionParams.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-598">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/underlying/Bond.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="39">
-          <caret line="228" column="13" lean-forward="false" selection-start-line="228" selection-start-column="13" selection-end-line="228" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/underlying/InterestRateCurve.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="37" column="4" lean-forward="false" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/calculator/utility/CalculateUtil.java">
+    <entry file="file://$PROJECT_DIR$/.idea/libraries/R_User_Library.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
-          <caret line="295" column="9" lean-forward="false" selection-start-line="295" selection-start-column="9" selection-end-line="295" selection-end-column="9" />
-          <folding>
-            <element signature="e#4251#4252#0" expanded="false" />
-            <element signature="e#4318#4319#0" expanded="false" />
-            <element signature="e#4366#4367#0" expanded="false" />
-            <element signature="e#4444#4445#0" expanded="false" />
-          </folding>
+          <caret line="4" column="15" lean-forward="true" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/test/OptionTest.java">
+    <entry file="file://$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="79" column="30" lean-forward="true" selection-start-line="79" selection-start-column="30" selection-end-line="79" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="-1053" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/volatility/VolatilitySurface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="196" column="65" lean-forward="true" selection-start-line="196" selection-start-column="65" selection-end-line="196" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/calculator/utility/ConstantNumber.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="8" column="65" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/20180716/src/adjusted/european/option/Sabr.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="126" column="32" lean-forward="true" selection-start-line="126" selection-start-column="32" selection-end-line="126" selection-end-column="32" />
-          <folding />
+        <state relative-caret-position="186">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/adjusted/european/option/Heston.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5625">
+          <caret line="24" column="21" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/adjusted/european/option/CorradoSu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="15" column="35" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/JavaLib/flanagan.jar!/flanagan/math/ArrayMaths.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="59">
+          <caret line="20548" column="16" selection-start-line="20548" selection-start-column="16" selection-end-line="20548" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/volatility/DynamicSpline.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-565">
+          <caret line="216" column="38" lean-forward="true" selection-start-line="216" selection-start-column="38" selection-end-line="216" selection-end-column="38" />
+          <folding>
+            <element signature="e#8560#8561#0" expanded="true" />
+            <element signature="e#8606#8607#0" expanded="true" />
+            <element signature="e#8672#8673#0" expanded="true" />
+            <element signature="e#8718#8719#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/20180716/src/volatility/WingModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2223">
-          <caret line="57" column="66" lean-forward="false" selection-start-line="57" selection-start-column="66" selection-end-line="57" selection-end-column="66" />
-          <folding>
-            <element signature="e#230#231#0" expanded="true" />
-            <element signature="e#265#266#0" expanded="true" />
-            <element signature="e#321#322#0" expanded="true" />
-            <element signature="e#369#370#0" expanded="true" />
-            <element signature="e#409#410#0" expanded="true" />
-            <element signature="e#445#446#0" expanded="true" />
-            <element signature="e#503#504#0" expanded="true" />
-            <element signature="e#553#554#0" expanded="true" />
-            <element signature="e#624#625#0" expanded="true" />
-            <element signature="e#680#681#0" expanded="true" />
-            <element signature="e#746#747#0" expanded="true" />
-            <element signature="e#797#798#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-1335">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/option/VanillaOptionParams.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2154">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/20180716/src/volatility/BaseVolatilitySkew.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2275">
-          <caret line="5" column="33" lean-forward="false" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+        <state relative-caret-position="186">
+          <caret line="252" column="19" selection-start-line="252" selection-start-column="19" selection-end-line="252" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/option/SpreadOption.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1911">
+          <caret line="24" column="31" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/option/BaseSingleOption.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="941">
+          <caret line="66" column="81" selection-start-line="66" selection-start-column="81" selection-end-line="66" selection-end-column="81" />
           <folding>
-            <element signature="class#SyntheticForwardParams#0" expanded="false" />
-            <element signature="e#793#794#0" expanded="true" />
-            <element signature="e#831#832#0" expanded="true" />
-            <element signature="e#861#862#0" expanded="true" />
-            <element signature="e#887#888#0" expanded="true" />
-            <element signature="class#VolatilitySkewParams#0" expanded="false" />
-            <element signature="e#1365#1366#0" expanded="true" />
-            <element signature="e#1415#1416#0" expanded="true" />
-            <element signature="e#1463#1464#0" expanded="true" />
-            <element signature="e#1503#1504#0" expanded="true" />
-            <element signature="e#1541#1542#0" expanded="true" />
-            <element signature="e#1571#1572#0" expanded="true" />
-            <element signature="e#1609#1610#0" expanded="true" />
-            <element signature="e#1639#1640#0" expanded="true" />
-            <element signature="class#RangeParams#0" expanded="false" />
-            <element signature="e#2501#2502#0" expanded="true" />
-            <element signature="e#2534#2535#0" expanded="true" />
-            <element signature="e#2562#2563#0" expanded="true" />
-            <element signature="e#2593#2594#0" expanded="true" />
-            <element signature="e#2834#2835#0" expanded="true" />
-            <element signature="e#2864#2865#0" expanded="true" />
-            <element signature="e#2902#2903#0" expanded="true" />
-            <element signature="e#2932#2933#0" expanded="true" />
-            <element signature="e#2976#2977#0" expanded="true" />
-            <element signature="e#3012#3013#0" expanded="true" />
-            <element signature="e#3056#3057#0" expanded="true" />
-            <element signature="e#3092#3093#0" expanded="true" />
-            <element signature="e#3125#3126#0" expanded="true" />
-            <element signature="e#3170#3171#0" expanded="true" />
-            <element signature="e#3201#3202#0" expanded="true" />
-            <element signature="e#3244#3245#0" expanded="true" />
-            <element signature="method#updateOptionPrice#0;class#BaseVolatilitySkew#0" expanded="false" />
-            <element signature="method#updateImpliedVolatility#0;class#BaseVolatilitySkew#0" expanded="false" />
-            <element signature="method#setSyntheticForwardParams#0;class#BaseVolatilitySkew#0" expanded="false" />
-            <element signature="e#7382#7383#0" expanded="true" />
-            <element signature="e#7425#7426#0" expanded="true" />
-            <element signature="e#7618#7619#0" expanded="true" />
-            <element signature="e#7652#7653#0" expanded="true" />
-            <element signature="e#7711#7712#0" expanded="true" />
-            <element signature="e#7757#7758#0" expanded="true" />
-            <element signature="method#getAtmForward#0;class#BaseVolatilitySkew#0" expanded="false" />
-            <element signature="e#7977#7978#0" expanded="true" />
-            <element signature="e#8056#8057#0" expanded="true" />
-            <element signature="e#8230#8231#0" expanded="true" />
-            <element signature="e#8330#8331#0" expanded="true" />
-            <element signature="method#transformStrike#0;class#BaseVolatilitySkew#0" expanded="false" />
-            <element signature="e#9325#9326#0" expanded="true" />
-            <element signature="e#9391#9392#0" expanded="true" />
-            <element signature="e#9455#9456#0" expanded="true" />
-            <element signature="e#9523#9524#0" expanded="true" />
+            <element signature="e#1864#1865#0" expanded="true" />
+            <element signature="e#1914#1915#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/option/BaseDoubleOption.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="819">
+          <caret line="29" column="23" lean-forward="true" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
+          <folding>
+            <element signature="e#643#644#0" expanded="true" />
+            <element signature="e#673#674#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/jri/R.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/option/quotientOption.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="10" column="56" lean-forward="true" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/calculator/utility/Interpolation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="73" column="29" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/calculator/utility/CalculateUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="248" column="33" selection-start-line="248" selection-start-column="33" selection-end-line="248" selection-end-column="33" />
+          <folding>
+            <element signature="method#binormalCDF#0;class#CalculateUtil#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/calculator/derivatives/SingleOptionFiniteDifferenceCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2682">
+          <caret line="58" column="22" lean-forward="true" selection-start-line="58" selection-start-column="22" selection-end-line="58" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/test/CommonTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="26" column="62" selection-start-line="26" selection-start-column="62" selection-end-line="26" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/option/BasketOption.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1604#1605#0" expanded="true" />
+            <element signature="e#1676#1677#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/option/AsianOption.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="13" column="22" lean-forward="true" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/option/BarrierOption.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4759">
+          <caret line="126" column="5" lean-forward="true" selection-start-line="126" selection-start-column="5" selection-end-line="126" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2855#2856#0" expanded="true" />
+            <element signature="e#2906#2907#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/volatility/HistoryPrice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4572">
+          <caret line="324" column="31" selection-start-line="324" selection-start-column="31" selection-end-line="324" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/20180716.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1872" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/portfolio/SingleOptionPosition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1327">
+          <caret line="52" column="37" lean-forward="true" selection-start-line="52" selection-start-column="37" selection-end-line="52" selection-end-column="37" />
+          <folding>
+            <element signature="e#768#769#0" expanded="true" />
+            <element signature="e#805#806#0" expanded="true" />
+            <element signature="e#865#866#0" expanded="true" />
+            <element signature="e#917#918#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -741,6 +1248,18 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="Copyright.UI">
+        <settings>
+          <last-edited>liang</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -811,6 +1330,17 @@
         </settings>
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
         <settings>
           <splitter-proportions>
             <option name="proportions">

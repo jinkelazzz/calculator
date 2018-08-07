@@ -4,7 +4,6 @@ import calculator.utility.CalculateUtil;
 import calculator.utility.MonteCarlo;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 class BarrierCalculator {
     private BarrierOption option;
@@ -77,18 +76,14 @@ class BarrierCalculator {
     }
 
     /**
-     * @return (d1 + e1 < 0 & & call) || (d1 + e1 > 0 && put)
+     * @return (d1 + e1 < 0 && call) || (d1 + e1 > 0 && put)
      */
     private boolean useShortExpression() {
         return (d1() + e1() < 0) == (option.getVanillaOptionParams().isOptionTypeCall());
     }
 
-    public int index() {
-        if (useShortExpression()) {
-            return 1;
-        } else {
-            return 0;
-        }
+    int index() {
+        return useShortExpression() ? 1 : 0;
     }
 
     private double getNewSpotPrice() {
@@ -113,25 +108,25 @@ class BarrierCalculator {
         return CalculateUtil.normalCDF(phi * d) - CalculateUtil.normalCDF(phi * e);
     }
 
-    public double a() {
+    double a() {
         double part1 = getNewSpotPrice() * getNormalCDFMin(d1(), -e1());
         double part2 = getNewStrike() * getNormalCDFMin(d2(), -e2());
         return part1 - part2;
     }
 
-    public double b() {
+    double b() {
         double part1 = getNewSpotPrice() * getNormalCDFMinus(d1(), -e1());
         double part2 = getNewStrike() * getNormalCDFMinus(d2(), -e2());
         return part1 - part2;
     }
 
-    public double c() {
+    double c() {
         double part1 = getNewSpotPrice() * c2() * getNormalCDFMin(d3(), -e3());
         double part2 = getNewStrike() * c1() * getNormalCDFMin(d4(), -e4());
         return part1 - part2;
     }
 
-    public double d() {
+    double d() {
         double part1 = getNewSpotPrice() * c2() * getNormalCDFMinus(d3(), -e3());
         double part2 = getNewStrike() * c1() * getNormalCDFMinus(d4(), -e4());
         return part1 - part2;
