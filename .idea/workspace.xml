@@ -5,12 +5,9 @@
     <option name="ANALYZE_TEST_SOURCES" value="false" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bcfb80fe-6ae6-4210-944d-4af67c5b7482" name="Default" comment=" 将计算初始波动率移到该类下面">
+    <list default="true" id="bcfb80fe-6ae6-4210-944d-4af67c5b7482" name="Default" comment="修改了monteCarlo方法，解决部分内存溢出问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/20180716/src/calculator/derivatives/SingleOptionMonteCarloCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/calculator/derivatives/SingleOptionMonteCarloCalculator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/20180716/src/calculator/utility/MonteCarlo.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/calculator/utility/MonteCarlo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/20180716/src/test/OptionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/20180716/src/test/OptionTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calculator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/calculator.iml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="20180716/src/test/" />
@@ -71,13 +68,14 @@
     <session id="-1200500789">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.20" value="1" />
           <entry key="project.open.time.21" value="1" />
           <entry key="project.open.time.23" value="1" />
-          <entry key="project.open.time.6" value="2" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.open.time.6" value="3" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -87,7 +85,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="13" />
+          <entry key="JAVA" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -98,8 +96,8 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="219" />
-          <entry key="PLAIN_TEXT" value="6" />
+          <entry key="JAVA" value="442" />
+          <entry key="PLAIN_TEXT" value="32" />
         </counts>
       </usages-collector>
     </session>
@@ -107,22 +105,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/20180716/src/option/AmericanOption.java">
+        <entry file="file://$PROJECT_DIR$/20180716/src/test/OptionTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6004">
-              <caret line="344" selection-start-line="344" selection-end-line="344" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/20180716/src/calculator/portfolio/MonteCarloVarCalculator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+            <state relative-caret-position="266">
+              <caret line="93" column="32" selection-start-line="93" selection-start-column="32" selection-end-line="93" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -130,14 +116,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/20180716/src/calculator/derivatives/SingleOptionMonteCarloCalculator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="55" column="43" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
-              <folding>
-                <element signature="e#1179#1180#0" expanded="true" />
-                <element signature="e#1248#1249#0" expanded="true" />
-                <element signature="e#1296#1297#0" expanded="true" />
-                <element signature="e#1364#1365#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-986">
+              <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
             </state>
           </provider>
         </entry>
@@ -145,17 +125,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/20180716/src/calculator/utility/MonteCarlo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+            <state relative-caret-position="401">
+              <caret line="92" column="64" lean-forward="true" selection-start-line="92" selection-start-column="64" selection-end-line="92" selection-end-column="64" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/20180716/src/test/OptionTest.java">
+        <entry file="file://$PROJECT_DIR$/20180716/src/option/BaseSingleOption.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1062">
-              <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+            <state relative-caret-position="247">
+              <caret line="146" column="42" lean-forward="true" selection-start-line="146" selection-start-column="42" selection-end-line="146" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -246,8 +226,8 @@
         <option value="$PROJECT_DIR$/20180716/src/option/AsianOption.java" />
         <option value="$PROJECT_DIR$/20180716/src/option/BarrierOption.java" />
         <option value="$PROJECT_DIR$/20180716/src/calculator/utility/CalculateUtil.java" />
-        <option value="$PROJECT_DIR$/20180716/src/test/OptionTest.java" />
         <option value="$PROJECT_DIR$/20180716/src/calculator/derivatives/SingleOptionMonteCarloCalculator.java" />
+        <option value="$PROJECT_DIR$/20180716/src/test/OptionTest.java" />
         <option value="$PROJECT_DIR$/20180716/src/calculator/utility/MonteCarlo.java" />
       </list>
     </option>
@@ -308,6 +288,17 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="calculator" type="58d84e3e:PackageViewProjectNode" />
+              <item name="20180716" type="616d4139:PackageViewModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -324,22 +315,11 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="calculator" type="58d84e3e:PackageViewProjectNode" />
-              <item name="20180716" type="616d4139:PackageViewModuleNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="forward&#9;PSI&#9;JAVA://volatility.BaseVolatilitySkew#getAtmForward&#10;Ha&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_152/src.zip!/java/util/HashMap.java&#10;moneyness&#9;PSI&#9;JAVA://volatility.VolatilitySurface#moneynessList&#10;k/s&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_152/src.zip!/com/sun/org/apache/xml/internal/security/keys/storage&#10;equals&#9;PSI&#9;JAVA://test.OptionTest#testEquals&#10;hashcode&#9;PSI&#9;JAVA://option.DoubleBarrierOption#hashCode&#10;hashCode&#9;PSI&#9;JAVA://volatility.VolatilitySurface#hashCode" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544405954277" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544428028938" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="create.test.in.the.same.root" value="true" />
@@ -810,19 +790,17 @@
       <option name="project" value="LOCAL" />
       <updated>1542680772526</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="修改了monteCarlo方法，解决部分内存溢出问题">
+      <created>1544406042543</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1544406042543</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="OptionTest_testMonteCarlo - 2018.12.07 at 17h 54m 16s.xml">
-      <configuration name="OptionTest.testMonteCarlo" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="OptionTest_testMonteCarlo - 2018.12.07 at 17h 55m 25s.xml">
-      <configuration name="OptionTest.testMonteCarlo" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="OptionTest_testMonteCarlo - 2018.12.10 at 09h 29m 05s.xml">
-      <configuration name="OptionTest.testMonteCarlo" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="OptionTest_testMonteCarlo - 2018.12.10 at 09h 30m 07s.xml">
       <configuration name="OptionTest.testMonteCarlo" configurationId="JUnit" />
     </history-entry>
@@ -844,6 +822,15 @@
     <history-entry file="OptionTest_testMonteCarlo - 2018.12.10 at 09h 38m 56s.xml">
       <configuration name="OptionTest.testMonteCarlo" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="OptionTest_testMonteCarlo - 2018.12.10 at 09h 39m 32s.xml">
+      <configuration name="OptionTest.testMonteCarlo" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="OptionTest_testMonteCarlo - 2018.12.10 at 15h 38m 22s.xml">
+      <configuration name="OptionTest.testMonteCarlo" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="OptionTest_testMonteCarlo - 2018.12.10 at 15h 38m 37s.xml">
+      <configuration name="OptionTest.testMonteCarlo" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -858,7 +845,7 @@
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" x="771" y="177" width="377" height="686" id="Project" order="0" visible="true" weight="0.2377892" />
+      <window_info active="true" content_ui="combo" x="771" y="177" width="377" height="686" id="Project" order="0" visible="true" weight="0.24421594" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
@@ -868,12 +855,12 @@
       <window_info anchor="bottom" id="Problems" order="0" sideWeight="0.49517167" weight="0.32830626" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.4946352" weight="0.32946634" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.6863753" visible="true" weight="0.38544473" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.68573266" visible="true" weight="0.18867925" />
       <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.60089976" weight="0.39083558" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" sideWeight="0.49248928" weight="0.32714617" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.31362468" side_tool="true" visible="true" weight="0.38544473" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.31426734" side_tool="true" visible="true" weight="0.18867925" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49785408" weight="0.32830626" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4248072" weight="0.31536388" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4967811" weight="0.32830626" />
@@ -894,7 +881,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="优化了heston model" />
     <MESSAGE value="优化了部分注释；修改了随机数的算法（多线程）；新增线程池；新增分位数算法；正态分布可以积分到正负无穷了。" />
     <MESSAGE value="增加了多线程算法 提高计算速度" />
     <MESSAGE value="修改了has method的算法，减少了try catch" />
@@ -919,7 +905,8 @@
     <MESSAGE value="去掉portfolio 新增 position" />
     <MESSAGE value="利用枚举类实现单例" />
     <MESSAGE value="删除jri" />
-    <option name="LAST_COMMIT_MESSAGE" value="删除jri" />
+    <MESSAGE value="修改了monteCarlo方法，解决部分内存溢出问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改了monteCarlo方法，解决部分内存溢出问题" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -1046,13 +1033,6 @@
     <entry file="file://$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/volatility/VolatilitySurface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="196" column="65" lean-forward="true" selection-start-line="196" selection-start-column="65" selection-end-line="196" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/20180716/src/calculator/utility/ConstantNumber.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
@@ -1114,13 +1094,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1911">
           <caret line="24" column="31" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/option/BaseSingleOption.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="941">
-          <caret line="66" column="81" selection-start-line="66" selection-start-column="81" selection-end-line="66" selection-end-column="81" />
         </state>
       </provider>
     </entry>
@@ -1207,9 +1180,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="375" column="55" selection-start-line="375" selection-start-column="55" selection-end-line="375" selection-end-column="55" />
-          <folding>
-            <element signature="method#binormalCDF#0;class#CalculateUtil#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1220,9 +1190,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/calculator/portfolio/MonteCarloVarCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/20180716/src/option/AmericanOption.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6004">
+        <state relative-caret-position="368">
           <caret line="344" selection-start-line="344" selection-end-line="344" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1230,37 +1207,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/calculator/portfolio/MonteCarloVarCalculator.java">
+    <entry file="file://$PROJECT_DIR$/20180716/src/test/OptionTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        <state relative-caret-position="266">
+          <caret line="93" column="32" selection-start-line="93" selection-start-column="32" selection-end-line="93" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/20180716/src/calculator/derivatives/SingleOptionMonteCarloCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="55" column="43" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
-          <folding>
-            <element signature="e#1179#1180#0" expanded="true" />
-            <element signature="e#1248#1249#0" expanded="true" />
-            <element signature="e#1296#1297#0" expanded="true" />
-            <element signature="e#1364#1365#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-986">
+          <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/20180716/src/test/OptionTest.java">
+    <entry file="file://$PROJECT_DIR$/20180716/src/volatility/VolatilitySurface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1062">
-          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+        <state relative-caret-position="200">
+          <caret line="78" column="18" selection-start-line="78" selection-start-column="18" selection-end-line="78" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/20180716/src/option/BaseSingleOption.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="146" column="42" lean-forward="true" selection-start-line="146" selection-start-column="42" selection-end-line="146" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/20180716/src/calculator/utility/MonteCarlo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+        <state relative-caret-position="401">
+          <caret line="92" column="64" lean-forward="true" selection-start-line="92" selection-start-column="64" selection-end-line="92" selection-end-column="64" />
         </state>
       </provider>
     </entry>

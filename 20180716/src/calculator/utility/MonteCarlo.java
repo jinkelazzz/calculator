@@ -71,6 +71,7 @@ public class MonteCarlo {
 
     private double[] generateMonteCarloPath(BaseSingleOption option, double[] randomNums) {
         double s = option.getUnderlying().getSpotPrice();
+        double k = option.getVanillaOptionParams().getStrikePrice();
         double r = option.getUnderlying().getRiskFreeRate();
         double q = option.getUnderlying().getDividendRate();
         double t = option.getVanillaOptionParams().getTimeRemaining();
@@ -80,9 +81,20 @@ public class MonteCarlo {
         pricePath[0] = s;
         //create log normal return using random numbers;
         double rtn;
+        boolean isValidSurface = option.getVolatilitySurface().isValidSurface();
+        double moneyness;
+        double volFromSurface;
         for (int i = 0; i < nodes; i++) {
-            rtn = randomNums[i] * vol * Math.sqrt(deltaT) + ((r - q) - vol * vol / 2) * deltaT;
-            pricePath[i + 1] = pricePath[i] * Math.exp(rtn);
+            if(isValidSurface) {
+                moneyness = pricePath[i] / k;
+                volFromSurface = option.getVolatilitySurface().getVolatility(moneyness, t - deltaT * i);
+                rtn = randomNums[i] * volFromSurface * Math.sqrt(deltaT) +
+                        ((r - q) - volFromSurface * volFromSurface / 2) * deltaT;
+                pricePath[i + 1] = pricePath[i] * Math.exp(rtn);
+            } else {
+                rtn = randomNums[i] * vol * Math.sqrt(deltaT) + ((r - q) - vol * vol / 2) * deltaT;
+                pricePath[i + 1] = pricePath[i] * Math.exp(rtn);
+            }
         }
         return pricePath;
     }
