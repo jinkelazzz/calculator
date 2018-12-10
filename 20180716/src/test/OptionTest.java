@@ -11,6 +11,7 @@ import underlying.gbm.Future;
 import underlying.gbm.Spot;
 
 import static test.CalculatorCase.finiteDifferenceCalculator;
+import static test.CalculatorCase.monteCarloCalculator;
 import static test.SingleOptionCase.americanOption;
 import static test.UnderlyingCase.spot;
 
@@ -82,6 +83,16 @@ public class OptionTest {
         americanOption.setVanillaOptionParams(vanillaOptionParams);
         americanOption.getVanillaOptionParams().setTargetPrice(targetPrice);
         System.out.println(americanOption);
+    }
+
+    @Test
+    public void testMonteCarlo() {
+        SingleOptionCase.europeanOption.setUnderlying(createUnderlyingCase(spot, 100, 0.1, 0.1));
+        createVanillaOptionParams(100, 0.3, 1, BaseOption.OPTION_TYPE_CALL);
+        SingleOptionCase.europeanOption.setVanillaOptionParams(vanillaOptionParams);
+        monteCarloCalculator.setOption(SingleOptionCase.europeanOption);
+        monteCarloCalculator.calculateDelta();
+        System.out.println(monteCarloCalculator.getResult());
     }
 
 }

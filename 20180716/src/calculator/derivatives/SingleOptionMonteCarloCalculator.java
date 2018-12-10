@@ -27,7 +27,7 @@ public class SingleOptionMonteCarloCalculator extends BaseSingleOptionCalculator
     /**
      * 线程池线程数
      */
-    private static final int THREAD_NUMS = 50;
+    private static final int SUB_PATH_SIZE = 5000;
 
     public MonteCarlo getMonteCarloParams() {
         return monteCarloParams;
@@ -42,14 +42,18 @@ public class SingleOptionMonteCarloCalculator extends BaseSingleOptionCalculator
         return option.hasMonteCarloMethod();
     }
 
+    private int getThreadNums() {
+        return monteCarloParams.getPathSize() / SUB_PATH_SIZE;
+    }
+
     private MonteCarlo subMonteCarloParams() {
-        return new MonteCarlo(monteCarloParams.getNodes(), monteCarloParams.getPathSize() / THREAD_NUMS);
+        return new MonteCarlo(monteCarloParams.getNodes(), SUB_PATH_SIZE);
     }
 
     private List<Future<Double>> createTask(Callable<Double> call) {
-        ExecutorService pool = CalculateUtil.createThreadPool(THREAD_NUMS);
-        List<Future<Double>> futureList = new ArrayList<>(THREAD_NUMS);
-        for (int i = 0; i < THREAD_NUMS; i++) {
+        ExecutorService pool = CalculateUtil.createThreadPool(getThreadNums());
+        List<Future<Double>> futureList = new ArrayList<>(getThreadNums());
+        for (int i = 0; i < getThreadNums(); i++) {
             futureList.add(pool.submit(call));
         }
         return futureList;

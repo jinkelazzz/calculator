@@ -16,7 +16,7 @@ public class MonteCarlo {
     /**
      * 蒙特卡洛模拟路径条数
      */
-    private int pathSize = 10000;
+    private int pathSize = 500000;
 
     public MonteCarlo() {
 
