@@ -27,7 +27,7 @@ public class SingleOptionMonteCarloCalculator extends BaseSingleOptionCalculator
     /**
      * 线程池线程数
      */
-    private static final int SUB_PATH_SIZE = 5000;
+    private static final int SUB_PATH_SIZE = 200;
 
     public MonteCarlo getMonteCarloParams() {
         return monteCarloParams;

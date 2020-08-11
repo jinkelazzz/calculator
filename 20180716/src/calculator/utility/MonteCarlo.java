@@ -12,11 +12,11 @@ public class MonteCarlo {
     /**
      * nodes 不包含初始的 s0, 实际上 price path 的长度是 nodes+1;
      */
-    private int nodes = 500;
+    private int nodes = 252;
     /**
      * 蒙特卡洛模拟路径条数
      */
-    private int pathSize = 500000;
+    private int pathSize = 100000;
 
     public MonteCarlo() {
 
